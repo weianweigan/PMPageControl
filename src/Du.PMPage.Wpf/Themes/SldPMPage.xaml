@@ -20,5 +20,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property = "FontFamily" Value= "{DynamicResource {x:Static SystemFonts.CaptionFontFamilyKey}}"/>
     </Style>
 </ResourceDictionary>

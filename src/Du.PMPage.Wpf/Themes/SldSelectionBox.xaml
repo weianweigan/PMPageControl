@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Du.PMPage.Wpf.Themes">
-    
+                    xmlns:local="clr-namespace:Du.PMPage.Wpf">
+    <Style TargetType="{x:Type local:SldSelectionBox}">
+        
+    </Style>
 </ResourceDictionary>

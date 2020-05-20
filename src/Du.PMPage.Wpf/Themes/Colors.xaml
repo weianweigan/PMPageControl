@@ -5,6 +5,8 @@
     <Color x:Key="SldWorksBackgroud">#F7F7F7</Color>
     <Color x:Key="SldTabHeader">#FFD4D4D4</Color>
     <Color x:Key="SldWorksRed">#FFDA291C</Color>
+    <SolidColorBrush x:Key="SldBackground"></SolidColorBrush>
+    <SolidColorBrush x:Key="SldDepthBackgroud" Color="#FFD4D4D4"></SolidColorBrush>
 
     <!--Control colors.-->
     <Color x:Key="WindowColor">#FFE8EDF9</Color>

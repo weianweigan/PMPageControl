@@ -1,4 +1,17 @@
-ï»¿<page:SldPMPage x:Class="PMPageWindow.PageSample"
+# PMPage Control ÕýÔÚ¹¹½¨ÖÐ
+
+![](./resources/demo.png)
+
+## Ò».¼ò½é
+
+Ò»¸öÓÃÀ´¿ìËÙ´´½¨SolidWorks PMPageµÄWPF¿ò¼ÜºÍ¿Ø¼þ¿×
+
+## ¶þ.Ê¹ÓÃ
+
+ÏñWPFÒ»Ñù½öÐèÔÚxamlÖÐ¶¨Òå¿Ø¼þ¼´¿É,¿ªÏä¼´ÓÃ¡£
+
+```xml
+<page:SldPMPage x:Class="PMPageWindow.PageSample"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -12,7 +25,7 @@
     </page:SldPMPage.Resources>
     <StackPanel>
         <TabControl>
-            <TabItem Header="æ¨¡åž‹">
+            <TabItem Header="Ä£ÐÍ">
                 <StackPanel>
                     <ComboBox/>
                     <TextBox/>
@@ -31,3 +44,23 @@
         </TabControl>
     </StackPanel>
 </page:SldPMPage>
+
+```
+
+È»ºóÊµÀý»¯£¬µ÷ÓÃShowPage()
+
+```csharp
+PMPageWindow.PageSample sample = new PMPageWindow.PageSample(SwApp);
+sample.ShowPage();
+```
+
+## Èý.½ÓÏÂÀ´
+
+* 1.SelectionBox
+* 2.SolidWorks ·ç¸ñµÄ¿Ø¼þ
+* 3.taskpane
+* 3.·¢²¼nuget
+
+## Contact me: 
+email: 1831197727@qq.com
+QQÈº: 715259600

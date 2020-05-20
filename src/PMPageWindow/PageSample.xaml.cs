@@ -31,5 +31,10 @@ namespace PMPageWindow
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShowBubbleTooltipAt2("hi", "msg");
+        }
     }
 }

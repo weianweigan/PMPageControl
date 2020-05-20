@@ -1,5 +1,45 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Du.PMPage.Wpf">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="IconButton" TargetType="Button">
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="MinWidth" Value="20"/>
+        <Setter Property="BorderThickness" Value="0.5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SldDepthBackgroud}"/>
+        <Setter Property="MinWidth" Value="25"/>
+    </Style>
     
+    <!--水平几何关系按钮-->
+    <Style x:Key="HroLineIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Path Data="M 0,-12.5 L 25,-12.5" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--竖直几何关系按钮-->
+    <Style x:Key="VecLineIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Path Data="M 12.5,0 L 12.5,-25" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LineSameIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Path Data="M 12.5,0 L 12.5,-25" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

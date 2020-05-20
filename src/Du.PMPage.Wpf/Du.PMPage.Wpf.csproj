@@ -66,10 +66,14 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClosingArg.cs" />
+    <Compile Include="Common\ClosingArg.cs" />
     <Compile Include="Exception\CreatePMPageErrorException.cs" />
     <Compile Include="Common\PropertyManagerPage2Handler9Wrapper.cs" />
+    <Compile Include="IOTextBox.cs" />
+    <Compile Include="SelectionBoxManager.cs" />
+    <Compile Include="SldListBox.cs" />
     <Compile Include="SldPMPage.cs" />
+    <Compile Include="SldSelectionBox.cs" />
     <Page Include="Themes\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,13 +85,37 @@
     <Compile Include="CustomControl1.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\SldButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\SldExpander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\SldHyperLinkButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldIconButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\SldPMPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\SldSelectionBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
