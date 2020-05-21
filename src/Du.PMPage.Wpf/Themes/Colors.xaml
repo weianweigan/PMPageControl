@@ -3,11 +3,16 @@
                     xmlns:local="clr-namespace:Du.PMPage.Wpf">
     <!--SldWoks-->
     <Color x:Key="SldWorksBackgroud">#F7F7F7</Color>
-    <Color x:Key="SldTabHeader">#FFD4D4D4</Color>
+    <Color x:Key="SldDepthBackgroudColor">#FFD4D4D4</Color>
+    <Color x:Key="SldExpanderArrowColor">#FF7F7F7F</Color>
     <Color x:Key="SldWorksRed">#FFDA291C</Color>
+    <Color x:Key="SldLabelColor">#FFDA291C</Color>
     <SolidColorBrush x:Key="SldBackground"></SolidColorBrush>
     <SolidColorBrush x:Key="SldDepthBackgroud" Color="#FFD4D4D4"></SolidColorBrush>
-
+    <SolidColorBrush x:Key="SldExpanderArror" Color="#FF7F7F7F"></SolidColorBrush>
+    <SolidColorBrush x:Key="SldBorder" Color="#FF9B9B9B"></SolidColorBrush>
+    <SolidColorBrush x:Key="SldLabel">#FFFFFF80</SolidColorBrush>
+    
     <!--Control colors.-->
     <Color x:Key="WindowColor">#FFE8EDF9</Color>
     <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>

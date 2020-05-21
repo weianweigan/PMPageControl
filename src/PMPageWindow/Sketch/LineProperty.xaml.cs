@@ -1,6 +1,5 @@
 ﻿using Du.PMPage.Wpf;
 using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swconst;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,28 +18,17 @@ using System.Windows.Shapes;
 namespace PMPageWindow
 {
     /// <summary>
-    /// PageSample.xaml 的交互逻辑
+    /// LineProperty.xaml 的交互逻辑
     /// </summary>
-    public partial class PageSample : SldPMPage
+    public partial class LineProperty : SldPMPage
     {
-        public PageSample():base()
+        public LineProperty()
         {
             InitializeComponent();
         }
 
-        public PageSample(ISldWorks app) : base(app)
+        public LineProperty(ISldWorks app) : base(app)
         {
-            InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ShowBubbleTooltipAt2("hi", "msg");
-        }
-
-        private void SldPMPage_Closed(SolidWorks.Interop.swconst.swPropertyManagerPageCloseReasons_e reason)
-        {
-
         }
     }
 }

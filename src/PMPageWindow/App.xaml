@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:PMPageWindow"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+
     </Application.Resources>
 </Application>

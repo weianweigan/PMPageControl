@@ -264,6 +264,83 @@ namespace Du.PMPage.Wpf
 
         #endregion
 
+        #region DependencyProperty
+
+        public ISldWorks App { get; set; }
+
+        /// <summary>
+        /// <see cref="ISldWorks"/>
+        /// </summary>
+        public static DependencyProperty AppProperty = DependencyProperty.Register(nameof(App), typeof(ISldWorks), typeof(SldPMPage), new PropertyMetadata(default));
+
+        /// <summary>
+        /// PMPage Title
+        /// </summary>
+        public string PageTitle
+        {
+            get => (string)GetValue(PageTitleProperty); set
+            {
+                SetValue(PageTitleProperty, value);
+                if (Page != null)
+                {
+                    Page.Title = value;
+                }
+            }
+        }
+
+        public static readonly DependencyProperty PageTitleProperty = DependencyProperty.Register(nameof(PageTitle), typeof(string), typeof(SldPMPage), new PropertyMetadata(default(string)));
+
+        public bool PageCreatedWhenShow { get; set; } = true;
+
+        /// <summary>
+        /// Created Page When Call <see cref="ShowPage"/>
+        /// </summary>
+        public static readonly DependencyProperty PageCreatedWhenShowProperty = DependencyProperty.Register(nameof(PageCreatedWhenShow), typeof(bool), typeof(SldPMPage), new PropertyMetadata(true));
+
+        /// <summary>
+        /// The height of wpf control in this PMPage
+        /// </summary>
+        public int PageHeight
+        {
+            get { return (int)GetValue(PageHeightProperty); }
+            set { SetValue(PageHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PageHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PageHeightProperty =
+            DependencyProperty.Register("PageHeight", typeof(int), typeof(SldPMPage), new PropertyMetadata(500));
+
+        /// <summary>
+        /// Gets or sets the title of the PropertyManager page.
+        /// </summary>
+        public bool Pinned
+        {
+            get { 
+                var pinned = (bool)GetValue(PinnedProperty);
+                if (Page != null)
+                {
+                    if (pinned != Page.Pinned)
+                    {
+                        SetValue(PinnedProperty, Page.Pinned);
+                        pinned = !pinned;
+                    }
+                }
+                return pinned;
+            }
+            set { SetValue(PinnedProperty, value);
+                if (Page != null)
+                {
+                    Page.Pinned = value;
+                }
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for Pinned.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PinnedProperty =
+            DependencyProperty.Register("Pinned", typeof(bool), typeof(SldPMPage), new PropertyMetadata(false));
+
+        #endregion
+
         #region Event
 
         #region Delegate
@@ -312,45 +389,6 @@ namespace Du.PMPage.Wpf
         /// Fired when user click ok on the page
         /// </summary>
         public event Action OkClicked;
-
-        #endregion
-
-        #region DependencyProperty
-
-        public ISldWorks App { get; set; }
-
-        /// <summary>
-        /// <see cref="ISldWorks"/>
-        /// </summary>
-        public static DependencyProperty AppProperty = DependencyProperty.Register(nameof(App), typeof(ISldWorks), typeof(SldPMPage), new PropertyMetadata(default));
-
-        /// <summary>
-        /// PMPage Title
-        /// </summary>
-        public string PageTitle { get => (string)GetValue(PageTitleProperty); set => SetValue(PageTitleProperty,value); }
-
-        public static readonly DependencyProperty PageTitleProperty = DependencyProperty.Register(nameof(PageTitle), typeof(string), typeof(SldPMPage), new PropertyMetadata(default(string)));
-
-        public bool PageCreatedWhenShow { get; set; } = true;
-
-        /// <summary>
-        /// Created Page When Call <see cref="ShowPage"/>
-        /// </summary>
-        public static readonly DependencyProperty PageCreatedWhenShowProperty = DependencyProperty.Register(nameof(PageCreatedWhenShow), typeof(bool), typeof(SldPMPage), new PropertyMetadata(true));
-
-        /// <summary>
-        /// The height of wpf control in this PMPage
-        /// </summary>
-        public int PageHeight
-        {
-            get { return (int)GetValue(PageHeightProperty); }
-            set { SetValue(PageHeightProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for PageHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PageHeightProperty =
-            DependencyProperty.Register("PageHeight", typeof(int), typeof(SldPMPage), new PropertyMetadata(500));
-
 
         #endregion
 

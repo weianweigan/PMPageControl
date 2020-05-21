@@ -7,5 +7,6 @@
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldPMPage.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldTabControl.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldIconButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldLabelMsg.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

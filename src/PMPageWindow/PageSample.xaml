@@ -5,28 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PMPageWindow"
              xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
+                xmlns:swconst="clr-namespace:SolidWorks.Interop.swconst;assembly=SolidWorks.Interop.swconst"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400" PageTitle="sld">
+             d:DesignHeight="600" d:DesignWidth="200" PageTitle="PMPageDemo" Closed="SldPMPage_Closed">
     <page:SldPMPage.Resources>
-        
+            <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
     </page:SldPMPage.Resources>
     <StackPanel>
-        <TabControl>
-            <TabItem Header="模型">
-                <StackPanel>
-                    <ComboBox/>
-                    <TextBox/>
-                </StackPanel>
+        <TabControl >
+            <TabItem Header="模型" >
+                
             </TabItem>
-            <TabItem Header="gdsfg">
+            <TabItem Header="消息">
                 <StackPanel>
-                    <Expander Header="dsaf">
-                        <TextBox>dsfsd</TextBox>
+                    <Expander Margin="0,10,0,0" Foreground="Black" >
+                        <Expander.Header>
+                            <TextBlock Text="弹出菜单" FontWeight="Black"/>
+                        </Expander.Header>
+                        <Button Click="Button_Click">ShowErrorTips</Button>
                     </Expander>
-                    <Expander Header="dsaf">
-                        <TextBox>dsfsd</TextBox>
+                    <Expander IsExpanded="True" Header="Icon">
+                        <WrapPanel>
+                            <Button Margin="2" Style="{StaticResource HroLineIconButton}"/>
+                            <Button Margin="2" Style="{StaticResource VecLineIconButton}"/>
+                            <Button Margin="2" Style="{StaticResource LineSameIconButton}"/>
+                        </WrapPanel>
                     </Expander>
                 </StackPanel>
+              
             </TabItem>
         </TabControl>
     </StackPanel>

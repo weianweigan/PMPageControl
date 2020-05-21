@@ -71,6 +71,7 @@
     <Compile Include="Common\PropertyManagerPage2Handler9Wrapper.cs" />
     <Compile Include="IOTextBox.cs" />
     <Compile Include="SelectionBoxManager.cs" />
+    <Compile Include="SldLabelMsg.cs" />
     <Compile Include="SldListBox.cs" />
     <Compile Include="SldPMPage.cs" />
     <Compile Include="SldSelectionBox.cs" />
@@ -89,6 +90,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\SldComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\SldExpander.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +105,10 @@
     <Page Include="Themes\SldIconButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldLabelMsg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\SldListBox.xaml">
       <Generator>MSBuild:Compile</Generator>

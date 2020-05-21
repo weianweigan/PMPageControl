@@ -1,0 +1,45 @@
+﻿<page:SldPMPage x:Class="PMPageWindow.InsertLine"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PMPageWindow"
+             xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="220" PageTitle="插入线条">
+    <page:SldPMPage.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
+    </page:SldPMPage.Resources>
+    <StackPanel>
+        <Expander IsExpanded="True" Margin="0,10,0,0">
+            <Expander.Header>
+                <TextBlock FontWeight="Bold">信息</TextBlock>
+            </Expander.Header>
+            <page:SldLabelMsg Margin="-5,0">
+                <TextBlock TextWrapping="Wrap">编辑下一新线条的设定或绘制一新线条.</TextBlock>
+            </page:SldLabelMsg>
+        </Expander>
+        <Expander IsExpanded="True" Margin="0,10,0,0">
+            <Expander.Header>
+                <TextBlock FontWeight="Black">方向(T)</TextBlock>
+            </Expander.Header>
+            <StackPanel Margin="20,0,0,0">
+                <ListBox Height="100" />
+                <RadioButton Margin="0,5,0,2.5">按原样绘制(s)</RadioButton>
+                <RadioButton Margin="0,2.5">水平(H)</RadioButton>
+                <RadioButton>竖直(v)</RadioButton>
+                <RadioButton>角度(A)</RadioButton>
+            </StackPanel>
+        </Expander>
+        <Expander IsExpanded="True" Margin="0,10,0,0">
+            <Expander.Header>
+                <TextBlock FontWeight="Black">选项(o)</TextBlock>
+            </Expander.Header>
+            <StackPanel Margin="20,0,0,0">
+                <CheckBox Margin="0,2.5">作为构造线(C)</CheckBox>
+                <CheckBox Margin="0,2.5">无限长度(I)</CheckBox>
+                <CheckBox Margin="0,2.5">重点线(M)</CheckBox>
+            </StackPanel>
+        </Expander>
+    </StackPanel>
+</page:SldPMPage>

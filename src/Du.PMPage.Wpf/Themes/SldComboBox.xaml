@@ -4,7 +4,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="local:SldLabelMsg">
-        <Setter Property="Background" Value="Yellow"/>
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
+        <Setter Property="Height" Value="24"/>
     </Style>
 </ResourceDictionary>
