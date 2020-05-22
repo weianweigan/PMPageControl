@@ -1,4 +1,5 @@
 ﻿using Du.PMPage.Wpf;
+using GalaSoft.MvvmLight;
 using SolidWorks.Interop.sldworks;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,18 @@ namespace PMPageWindow
         public LineProperty()
         {
             InitializeComponent();
+            DataContext = new LinePropertyViewModel();
         }
 
         public LineProperty(ISldWorks app) : base(app)
         {
         }
+    }
+
+    public class LinePropertyViewModel : ViewModelBase
+    {
+        private double _doubelValue;
+
+        public double DoubleValue { get => _doubelValue; set => Set(ref _doubelValue ,value); }
     }
 }

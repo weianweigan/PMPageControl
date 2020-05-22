@@ -47,6 +47,15 @@
         </Setter>
     </Style>
 
+    <Style x:Key="IconLabel" TargetType="Label">
+        <Setter Property="Width" Value="25"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="MinWidth" Value="20"/>
+        <Setter Property="MinWidth" Value="25"/>
+    </Style>
+    
     <!--水平几何关系按钮-->
     <Style x:Key="HroLineIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
         <Setter Property="Content">
@@ -67,17 +76,135 @@
     </Style>
 
     <!--共线按钮-->
-    <Style x:Key="LineSameIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style x:Key="CollinearIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
         <Setter Property="Content">
             <Setter.Value>
-                <Path Data="M 12.5,0 L 12.5,-25" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+                <Image Margin="2" Source="{DynamicResource CollinearDrawingImage}"/>
             </Setter.Value>
         </Setter>
     </Style>
+    <DrawingImage x:Key="CollinearDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V50 H50 V0 H0 Z">
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M7,43L15,35">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF000000" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M15,35L20,30">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M22.5,27.5L27.5,22.5">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M35,15L30,20">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M35,15L43,7">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF000000" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <!--几何关系-->
+    <Style x:Key="SketchRelationIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Source="{DynamicResource SketchRelationDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SketchRelationIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Margin="2" Source="{DynamicResource SketchRelationDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="SketchRelationDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V6.6145833 H6.6145833 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M3.3072917,295.11255L4.5317806,295.11255 4.5129406,296.33705">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.66193336,296.26946L5.9527192,296.24886">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M3.4030937,291.0476L3.3702397,296.33783">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 
     <!--垂直-->
+    <Style x:Key="VERTICALIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Margin="2" Source="{DynamicResource VERTICALDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="VERTICALDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V6.6145833 H6.6145833 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.66193336,296.26946L5.9527192,296.24886">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.24401009" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M3.4030937,291.0476L3.3702397,296.33783">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.23173393" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 
     <!--平行-->
+    <Style x:Key="PARALLELDIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Margin="2" Source="{DynamicResource PARALLELDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="PARALLELDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V6.6145833 H6.6145833 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M2.071147,0.74822708L5.8663522,4.5434335">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="0.24543275" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.74891059,2.0718151L4.5427563,5.8656794">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="0.24543275" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 
     <!--相等-->
     <Style x:Key="EqualIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
@@ -87,6 +214,40 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--对称-->
+    <Style x:Key="SYMMETRICDIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Margin="2" Source="{DynamicResource SYMMETRICDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="SYMMETRICDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V6.6145835 H6.6145832 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
+                    <GeometryDrawing Brush="#FFFFFFFF">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.26458333" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="2.0841,292.4695,2.4464,2.4464" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M0.71297161,296.28697L5.9016117,291.09841">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.14576016" StartLineCap="Flat" EndLineCap="Flat" DashCap="Flat" LineJoin="Miter">
+                                <Pen.DashStyle>
+                                    <DashStyle Offset="0" Dashes="8.00000027442341 1.00000048024097" />
+                                </Pen.DashStyle>
+                            </Pen>
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 
     <!--固定-->
     <Style x:Key="FixedIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
@@ -112,5 +273,130 @@
         </Setter>
     </Style>
 
+    <!--Info-->
+    <Style x:Key="SWInfoIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Source="{DynamicResource SWInfoDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="SWInfoDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V6.6145834 H6.6145833 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FFF7F7F7" Opacity="0" />
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.13229167" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="2.4805" RadiusY="2.4805" Center="3.3073,293.6927" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145834z M0,0z M3.2573474,295.48557L3.2573474,293.35279">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.9453941" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145833,6.6145834z M0,0z M3.2296047,292.80721L3.2296047,292.23926">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.94474947" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <!--Dimension-->
+    <Style x:Key="DimensionIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Source="{DynamicResource DimensionDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DimensionIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Source="{DynamicResource DimensionDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="DimensionDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V6.6145835 H6.6145832 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
+                    <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M3.6722571,295.98817L1.0102416,294.08088">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF65A6C4" Thickness="0.5129261" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M5.8751845,292.96583L3.3156985,291.10083">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.5291667" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M2.7987934,291.92395L1.5063983,293.45094">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.34395833" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M3.2386451,291.44119L2.3368489,291.63379 3.2351757,292.32019z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.25471511" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M1.2956467,293.85201L2.1974467,293.65941 1.2991167,292.97301z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.25471511" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    
+    <!--角度尺寸-->
+    <Style x:Key="AngleDimensionIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Margin="-2" Source="{DynamicResource AngleDimensionDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AngleDimensionIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Image Source="{DynamicResource AngleDimensionDrawingImage}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DrawingImage x:Key="AngleDimensionDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V13.229167 H13.229166 V0 H0 Z">
+                <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-283.77082">
+                    <GeometryDrawing Geometry="F1 M13.229166,13.229167z M0,0z M2.1047475,285.82144L2.1047475,294.91863 10.827757,294.91863">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF64A6C4" Thickness="0.79374999" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M13.229166,13.229167z M0,0z M3.5057292,287.54113C5.4131985,287.54113 7.3204035,287.54113 8.2738736,288.53856 9.2273437,289.53599 9.2273437,291.53166 9.2273437,293.52733">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="0.79374999" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M13.229166,13.229167z M0,0z M4.9774738,287.47498C4.9774738,287.47498 4.9774738,285.86286 4.9774738,285.86286 4.491302,285.86286 3.0327864,287.47498 2.5466146,287.47498 3.0327864,287.47498 4.491302,289.0871 4.9774738,289.0871 4.9774738,289.0871 4.9774738,287.47498 4.9774738,287.47498z" />
+                    <GeometryDrawing Brush="#FF000000" Geometry="F1 M13.229166,13.229167z M0,0z M9.1611979,291.93983C9.1611979,291.93983 7.5490741,291.93983 7.5490741,291.93983 7.5490741,292.426 9.1611979,293.88452 9.1611979,294.37069 9.1611979,293.88452 10.773322,292.426 10.773322,291.93983 10.773322,291.93983 9.1611979,291.93983 9.1611979,291.93983z" />
+                    <DrawingGroup Opacity="1" Transform="0.94747218,0,0,1.05544,0,0">
+                        <GeometryDrawing Brush="#FF000000" Geometry="F1 M13.229166,13.229167z M0,0z M11.039976,270.91815L12.056738,272.96037 12.056738,274.0032Q12.043708,274.0727 11.965488,274.0727 11.926378,274.0727 11.900308,274.051 11.878588,274.0336 11.878588,273.9771L11.878588,273.07331 10.044938,273.07331 10.044938,274.00317Q10.036238,274.04667 9.997142,274.06397 9.984107,274.07297 9.953691,274.07297 9.91024,274.07297 9.888514,274.05127 9.862443,274.03387 9.862443,273.97737L9.862443,273.92957 9.866793,272.95192 10.8792103,270.91405Q10.8965903,270.88795 10.9487303,270.87055 11.0182503,270.87055 11.0399803,270.91835z M10.101425,272.8865L11.817756,272.8865 10.957418,271.17452z" />
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 
 </ResourceDictionary>

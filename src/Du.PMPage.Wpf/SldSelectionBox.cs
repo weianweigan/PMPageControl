@@ -59,7 +59,7 @@ namespace Du.PMPage.Wpf
         /// </summary>
         public bool SingleEntityOnly { get => (bool)GetValue(SingleEntityOnlyProperty); set => SetValue(SingleEntityOnlyProperty, value); }
 
-        public DependencyProperty SingleEntityOnlyProperty = DependencyProperty.Register(nameof(SingleEntityOnly), typeof(bool), typeof(SldListBox), new PropertyMetadata(false));
+        public DependencyProperty SingleEntityOnlyProperty = DependencyProperty.Register(nameof(SingleEntityOnly), typeof(bool), typeof(SldSelectionBox), new PropertyMetadata(false));
 
         /// <summary>
         /// 可以选择的类型

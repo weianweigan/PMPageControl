@@ -28,7 +28,7 @@
                         <WrapPanel>
                             <Button Margin="2" Style="{StaticResource HroLineIconButton}"/>
                             <Button Margin="2" Style="{StaticResource VecLineIconButton}"/>
-                            <Button Margin="2" Style="{StaticResource LineSameIconButton}"/>
+                            <Button Margin="2" Style="{StaticResource  CollinearIconButton}"/>
                         </WrapPanel>
                     </Expander>
                 </StackPanel>

@@ -67,12 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ClosingArg.cs" />
+    <Compile Include="Common\ReflectionMath.cs" />
     <Compile Include="Exception\CreatePMPageErrorException.cs" />
     <Compile Include="Common\PropertyManagerPage2Handler9Wrapper.cs" />
     <Compile Include="IOTextBox.cs" />
+    <Compile Include="NumberBox.cs" />
     <Compile Include="SelectionBoxManager.cs" />
     <Compile Include="SldLabelMsg.cs" />
-    <Compile Include="SldListBox.cs" />
+    <Compile Include="SldNumberBox.cs" />
     <Compile Include="SldPMPage.cs" />
     <Compile Include="SldSelectionBox.cs" />
     <Page Include="Themes\Colors.xaml">
@@ -113,6 +115,10 @@
     <Page Include="Themes\SldListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldNumberBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\SldPMPage.xaml">
       <SubType>Designer</SubType>
