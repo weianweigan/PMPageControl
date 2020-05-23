@@ -63,6 +63,7 @@
     </Style>
 
     <Style TargetType="TabItem">
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">

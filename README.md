@@ -1,17 +1,41 @@
-# PMPage Control 正在构建中
+# ![](resources/pmpageicon.png) PMPage Control -- Building
 
-![](./resource/InsertLine.png)
+<div align=Left>
+ <img src="resources/FeatureExtrusion.png" width="200"/>
+ <img src="resources/SketchInsertLine.png" width="200"/>
+ <img src="resources/SketchLineProperty.png" width="200"/>
+</div>
 
-## 一.简介
+## 一.Summary
 
-一个用来快速创建SolidWorks PMPage的WPF框架和控件孔
+* A WPF Frameworks and Controls to develop SolidWorks PropertyManagerPage(PMPage) easily
 
-## 二.使用
+* No PMPHandler.cs or other Handler code
 
-像WPF一样仅需在xaml中定义控件即可,开箱即用。
+* Redraw Some SolidWorks style *.svg icons(More icons is coming)
+
+* SolidWorks style controls
+
+## 二.Getting Started
+
+1.Add a WPF usercontrol to your project.
+
+2.Add the xaml namespace for your *.xaml
 
 ```xml
-<page:SldPMPage x:Class="PMPageWindow.PageSample"
+xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
+```
+
+3.Modeify the root(UserControl) as page:SldPMPage 
+
+4.Modeify the *.xaml.cs code to inhert form SldPMPage
+
+5.Add a new ctor for ISldWorks interface
+
+
+
+```xml
+<page:SldPMPage x:Class="PMPageWindow.Dimension"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -47,19 +71,178 @@
 
 ```
 
-然后实例化，调用ShowPage()
+```csharp
+    /// <summary>
+    /// Dimension.xaml 的交互逻辑
+    /// </summary>
+    public partial class Dimension : SldPMPage
+    {
+        public Dimension()
+        {
+            InitializeComponent();
+        }
+
+        public Dimension(ISldWorks app):base(app)
+        {
+
+        }
+    }
+
+```
+
+6.just use it
 
 ```csharp
 PMPageWindow.PageSample sample = new PMPageWindow.PageSample(SwApp);
 sample.ShowPage();
 ```
 
-## 三.接下来
+## 三.Icons and controls
 
-* 1.SelectionBox
-* 2.SolidWorks 风格的控件
-* 3.taskpane
-* 3.发布nuget
+### 1.Icons:
+
+check the icons folder for *.svg file
+
+<div>
+ <img src="icons/Dimension.svg" width="25"/>
+ <img src="icons/AngleDimension.svg" width="25"/>
+ <img src="icons/D1Dimension.svg" width="25"/>
+ <img src="icons/collinear.svg" width="25"/>
+ <img src="icons/BlueArrow.svg" width="25"/>
+ <img src="icons/Draft.svg" width="25"/>
+ <img src="icons/equal.svg" width="25"/>
+ <img src="icons/ReverseDirection.svg" width="25"/>
+ <img src="icons/PARALLEL.svg" width="25"/>
+ <img src="icons/SWInfo.svg" width="25"/>
+ <img src="icons/SketchRegion.svg" width="25"/>
+ <img src="icons/SketchRelation.svg" width="25"/>
+ <img src="icons/SYMMETRIC.svg" width="25"/>
+ <img src="icons/VERTICAL.svg" width="25"/>
+ <img src="icons/anchor.svg" width="25"/>
+</div>
+
+### 2.Controls:
+
+**LabelMsg：**
+
+<div>
+<img src="resources/LabelMsg.png" width="400"/>
+</div>
+
+**Expander:**
+
+<div>
+<img src="resources/Expander.png" width="400"/>
+</div>
+
+**IconButton:**
+
+<div>
+<img src="resources/IconButton.png" width="400"/>
+</div>
+
+**NumberBox And IconLabel:**
+
+<div>
+<img src="resources/NumberBox.png" width="400"/>
+</div>
+
+**SelectionBox**
+
+<div>
+<img src="resources/SelectionBox.png" width="400"/>
+</div>
+
+**ListBox**
+
+<div>
+<img src="resources/ListBox.png" width="400"/>
+</div>
+
+* CheckBox
+
+<div>
+<img src="resources/CheckBox.png" width="400"/>
+</div>
+
+* RadioButton
+
+<div>
+<img src="resources/RadioButton.png" width="400"/>
+</div>
+
+### 3.How to use the control
+
+* LabelMsg
+
+```xml
+<page:SldLabelMsg Margin="-5,0">
+     <TextBlock TextWrapping="Wrap">编辑下一新线条的设定或绘制一新线条.</TextBlock>
+</page:SldLabelMsg>
+```
+
+* Expander:
+
+```xml
+<Expander IsExpanded="True" Margin="0,10,0,0">
+     <Expander.Header>
+          <TextBlock FontWeight="Black">选项(o)</TextBlock>
+     </Expander.Header>
+</Expander>
+```
+
+* IconButton:
+
+```xml
+<Button Style="{StaticResource ReverseDirectionIconButton}">
+     <Image Source="{StaticResource ReverseDirectionDrawingImage}"></Image>
+</Button>
+<ComboBox Background="#FF8AD2ED" Grid.Column="1" SelectedIndex="0">
+      <ComboBoxItem Content="给定深度"/>
+</ComboBox>
+```
+
+* NumberBox And IconLabel:
+
+```xml
+<Label Style="{StaticResource DimensionIconLabel}"/>
+<page:SldNumberBox Value="{Binding DoubleValue}" Grid.Column="1">
+     <page:IOTextBox Height="23" Text="{Binding DoubleValue, StringFormat={}{0:0.00}}" />
+</page:SldNumberBox>
+```
+
+* SelectionBox：
+
+```xml
+<page:SldSelectionBox page:SelectionBoxManager.Join="True" Height="50"  Grid.Column="1"/>
+```
+
+* CheckBox
+
+```xml
+<StackPanel Margin="20,0,0,0">
+     <CheckBox Margin="0,2.5">作为构造线(C)</CheckBox>
+     <CheckBox Margin="0,2.5">无限长度(I)</CheckBox>
+     <CheckBox Margin="0,2.5">中点线(M)</CheckBox>
+</StackPanel>
+```
+
+* RadioButton
+
+```xml
+<StackPanel Margin="20,0,0,0">
+     <RadioButton Margin="0,5,0,2.5">按原样绘制(s)</RadioButton>
+     <RadioButton Margin="0,2.5">水平(H)</RadioButton>
+     <RadioButton>竖直(v)</RadioButton>
+     RadioButton>角度(A)</RadioButton>
+</StackPanel>
+```
+
+## 四.Next
+
+* 1.SelectionBox'detail 
+* 2.taskpane page
+* 3.nuget published
 
 ## Contact me: 
 email: 1831197727@qq.com

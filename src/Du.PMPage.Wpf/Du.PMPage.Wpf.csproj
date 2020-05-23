@@ -88,10 +88,6 @@
     <Compile Include="CustomControl1.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\SldButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Themes\SldComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +123,10 @@
     <Page Include="Themes\SldSelectionBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldStackPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\SldTabControl.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -364,8 +364,8 @@ namespace PMPageAddin
         public void CreateCube()
         {
             //¿Ø¼þ
-            PMPageWindow.PageSample sample = new PMPageWindow.PageSample(SwApp);
-            sample.ShowPage();
+            var page = new PMPageWindow.FeatureExtrusion(SwApp);
+            page.ShowPage();
         }
 
 

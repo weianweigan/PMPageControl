@@ -1,0 +1,113 @@
+﻿<page:SldPMPage x:Class="PMPageWindow.FeatureExtrusion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PMPageWindow"
+             xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="250" PageTitle="凸台拉伸">
+    <page:SldPMPage.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
+    </page:SldPMPage.Resources>
+    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+        <Expander IsExpanded="True">
+            <Expander.Header>
+                <TextBlock FontWeight="Black">从(F)</TextBlock>
+            </Expander.Header>
+            <StackPanel>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="草图基准面"/>
+                </ComboBox>
+            </StackPanel>
+        </Expander>
+        <Expander IsExpanded="True">
+            <Expander.Header>
+                <TextBlock FontWeight="Black">方向1(1)</TextBlock>
+            </Expander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource ReverseDirectionIconButton}">
+                    <Image Source="{StaticResource ReverseDirectionDrawingImage}"></Image>
+                </Button>
+                <ComboBox Background="#FF8AD2ED" Grid.Column="1" SelectedIndex="0">
+                    <ComboBoxItem Content="给定深度"/>
+                </ComboBox>
+                <Label VerticalAlignment="Top" Margin="0,5" Style="{StaticResource BlueArrowIconLabel}" Grid.Row="1"/>
+                <Grid Grid.Row="1" Grid.Column="1" Height="50" Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border DockPanel.Dock="Left" Width="25" BorderThickness="0.5" BorderBrush="Gray" Background="#FF53A9FF"/>
+                    <page:SldSelectionBox page:SelectionBoxManager.Join="True" Grid.Column="1" Margin="2,0,0,0" DockPanel.Dock="Right">
+                    </page:SldSelectionBox>
+                </Grid>
+                <Label  Grid.Row="2" Margin="0,5,0,0">
+                    <Image Source="{StaticResource D1DimensionDrawingImage}">
+                    </Image>
+                </Label>
+                <page:SldNumberBox Height="23" Value="10.00mm" Grid.Row="2" Grid.Column="1">
+                    <TextBox></TextBox>
+                </page:SldNumberBox>
+
+                <Button Style="{StaticResource DraftIconButton}" Grid.Row="3" Margin="0,5,0,0"/>
+                <page:SldNumberBox Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
+                    <TextBox></TextBox>
+                </page:SldNumberBox>
+                <CheckBox Grid.Column="1" Margin="-1,5,0,0" Grid.Row="4" Content="向外拔模"/>
+            </Grid>
+        </Expander>
+        <Expander IsExpanded="True">
+            <Expander.Header>
+                <TextBlock FontWeight="Black">薄壁特征(T)</TextBlock>
+            </Expander.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource ReverseDirectionIconButton}"/>
+                <ComboBox Grid.Column="1" SelectedIndex="0">
+                    <ComboBoxItem Content="单向"/>
+                </ComboBox>
+                <Label Grid.Row="2" Margin="0,5" Style="{StaticResource D1DimensionIconLabel}"/>
+                <page:SldNumberBox Height="23" Value="10.00mm" Grid.Row="2" Grid.Column="1">
+                    <TextBox></TextBox>
+                </page:SldNumberBox>
+                <CheckBox Grid.Column="1" Margin="-1,2,0,0" Grid.Row="4" Content="顶端加盖"/>
+            </Grid>
+        </Expander>
+        <Expander IsExpanded="True">
+            <Expander.Header>
+                <TextBlock FontWeight="Black">所选轮廓(T)</TextBlock>
+            </Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Style="{StaticResource SketchRegionLabel}" VerticalAlignment="Top" Grid.Column="0"/>
+                <page:SldSelectionBox page:SelectionBoxManager.Join="True" Height="50"  Grid.Column="1"/>
+
+            </Grid>
+        </Expander>
+    </StackPanel>
+</page:SldPMPage>

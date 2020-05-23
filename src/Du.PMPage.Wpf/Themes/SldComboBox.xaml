@@ -5,7 +5,7 @@
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="ComboBox">
-        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
-        <Setter Property="Height" Value="24"/>
+        <Setter Property="Background" Value="#FFE5EFF8"/>
+        <Setter Property="Height" Value="23"/>
     </Style>
 </ResourceDictionary>

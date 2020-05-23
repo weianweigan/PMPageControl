@@ -9,5 +9,8 @@
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldIconButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldLabelMsg.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldNumberBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldComboBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldSelectionBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldStackPanel.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

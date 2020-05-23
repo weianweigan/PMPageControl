@@ -54,12 +54,18 @@ namespace Du.PMPage.Wpf
 
         #region Dependecy Properties
 
-        /// <summary>
-        /// 单选框
-        /// </summary>
-        public bool SingleEntityOnly { get => (bool)GetValue(SingleEntityOnlyProperty); set => SetValue(SingleEntityOnlyProperty, value); }
+        ///// <summary>
+        ///// 单选框
+        ///// </summary>
+        public bool SingleEntityOnly
+        {
+            get { return (bool)GetValue(SingleEntityOnlyProperty); }
+            set { SetValue(SingleEntityOnlyProperty, value); }
+        }
 
-        public DependencyProperty SingleEntityOnlyProperty = DependencyProperty.Register(nameof(SingleEntityOnly), typeof(bool), typeof(SldSelectionBox), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for SingleEntityOnly.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SingleEntityOnlyProperty =
+            DependencyProperty.Register("SingleEntityOnly", typeof(bool), typeof(SldSelectionBox), new PropertyMetadata(false));
 
         /// <summary>
         /// 可以选择的类型

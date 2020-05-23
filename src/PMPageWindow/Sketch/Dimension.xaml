@@ -1,0 +1,55 @@
+﻿<page:SldPMPage x:Class="PMPageWindow.Dimension"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PMPageWindow"
+             xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="200">
+    <page:SldPMPage.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
+    </page:SldPMPage.Resources>
+    <TabControl>
+        <TabItem Header="数值">
+            
+        </TabItem>
+        <TabItem Header="引线">
+            
+        </TabItem>
+        <TabItem Header="其它">
+            <StackPanel Margin="0,10,0,0" Background="{StaticResource SldBackground}">
+                <Expander IsExpanded="True">
+                    <Expander.Header>
+                        <TextBlock FontWeight="Black">覆盖单位</TextBlock>
+                    </Expander.Header>
+                    <UniformGrid Columns="2">
+                        <Label HorizontalAlignment="Left">长度单位:</Label>
+                        <ComboBox Height="23" Margin="0,0,5,0">
+                            <ComboBoxItem>毫米</ComboBoxItem>
+                        </ComboBox>
+                    </UniformGrid>
+                </Expander>
+                <Expander IsExpanded="True">
+                    <Expander.Header>
+                        <TextBlock FontWeight="Black">文本字体</TextBlock>
+                    </Expander.Header>
+                    <StackPanel>
+                        <Label Margin="0,0,0,2">尺寸字体:</Label>
+                        <CheckBox Margin="0,2,0,2">使用文档字体</CheckBox>
+                        <Button Height="25" Margin="0,2,0,0" Width="75">字体(F)...</Button>
+                    </StackPanel>
+                </Expander>
+                <Expander IsExpanded="True">
+                    <Expander.Header>
+                        <TextBlock FontWeight="Black">选项</TextBlock>
+                    </Expander.Header>
+                    <StackPanel>
+                        <CheckBox Margin="0,2.5">只读(R)</CheckBox>
+                        <CheckBox Margin="0,2.5">从动(E)</CheckBox>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</page:SldPMPage>

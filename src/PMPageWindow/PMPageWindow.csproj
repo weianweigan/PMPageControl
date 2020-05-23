@@ -90,6 +90,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sketch\Dimension.xaml.cs">
+      <DependentUpon>Dimension.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Feature\FeatureExtrusion.xaml.cs">
+      <DependentUpon>FeatureExtrusion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sketch\LineProperty.xaml.cs">
       <DependentUpon>LineProperty.xaml</DependentUpon>
     </Compile>
@@ -98,9 +104,6 @@
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageSample.xaml.cs">
-      <DependentUpon>PageSample.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -135,6 +138,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Sketch\Dimension.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Feature\FeatureExtrusion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sketch\LineProperty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,10 +155,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageSample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

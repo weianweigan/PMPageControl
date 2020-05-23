@@ -5,40 +5,9 @@
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <!--上下箭头-->
     <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 </Geometry>
-    <Geometry x:Key="UpArrowGeometry">M 0 4 L 3.5 0 L 7 4 </Geometry>
-
-    <LinearGradientBrush x:Key="ButtonNormalBackground" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#F3F3F3" Offset="0"/>
-                <GradientStop Color="#EBEBEB" Offset="0.5"/>
-                <GradientStop Color="#DDDDDD" Offset="0.5"/>
-                <GradientStop Color="#CDCDCD" Offset="1"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="ButtonMouseOverBackground" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFEAF6FD" Offset="0"/>
-                <GradientStop Color="#FFD9F0FC" Offset="0.50"/>
-                <GradientStop Color="#FFBEE6FD" Offset="0.50"/>
-                <GradientStop Color="#FFA7D9F5" Offset="1"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="ButtonPressedBackground" StartPoint="0.5,0" EndPoint="0.5,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#C2E4F6" Offset="0.5"/>
-                <GradientStop Color="#ABDAF3" Offset="0.5"/>
-                <GradientStop Color="#90CBEB" Offset="1"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
+    <Geometry x:Key="UpArrowGeometry">M 0 4 L 3.5 0 L 7 4</Geometry>
 
     <Style x:Key="SpinButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="Background" Value="{StaticResource SldNumberBoxButton}"/>
@@ -75,27 +44,17 @@
         </Setter>
     </Style>
 
-    <LinearGradientBrush x:Key="TextBoxBorder"
-                         StartPoint="0,0"
-                         EndPoint="0,20"
-                         MappingMode="Absolute">
-        <LinearGradientBrush.GradientStops>
-            <GradientStop Color="#ABADB3" Offset="0.05"/>
-            <GradientStop Color="#E2E3EA" Offset="0.07"/>
-            <GradientStop Color="#E3E9EF" Offset="1"/>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-
     <Style TargetType="{x:Type local:SldNumberBox}">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="True" />
-        <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}" />
+        <Setter Property="BorderBrush" Value="{StaticResource SldExpanderArror}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="UpButtonGeometry" Value="{StaticResource UpArrowGeometry}"/>
         <Setter Property="DownButtonGeometry" Value="{StaticResource DownArrowGeometry}"/>
+        <Setter Property="Foreground" Value="{StaticResource SldNumberBoxArrow}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SldNumberBox}">
@@ -121,10 +80,10 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             <RepeatButton x:Name="PART_UP" Grid.Column="1" Style="{StaticResource SpinButtonStyle}" Margin="0" Interval="{TemplateBinding RepeatInterval}">
-                            <Path StrokeThickness="1" Stroke="{StaticResource SldNumberBoxArrow}" Data="{TemplateBinding UpButtonGeometry}"/>
+                            <Path StrokeThickness="1" Stroke="{TemplateBinding Foreground}" Data="{TemplateBinding UpButtonGeometry}"/>
                             </RepeatButton>
                             <RepeatButton x:Name="PART_DOWN" Grid.Column="1" Grid.Row="1" Style="{StaticResource SpinButtonStyle}" Padding="0" Interval="{TemplateBinding RepeatInterval}">
-                            <Path StrokeThickness="1" Stroke="{DynamicResource SldNumberBoxArrow}" Data="{TemplateBinding DownButtonGeometry}"/>
+                            <Path StrokeThickness="1" Stroke="{TemplateBinding Foreground}" Data="{TemplateBinding DownButtonGeometry}"/>
                             </RepeatButton>
                         </Grid>
                     <!--</chrome:ListBoxChrome>-->
@@ -132,9 +91,9 @@
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>
-                        <!--<Trigger TargetName="path" Property="IsMouseOver" Value="True">
-                            <Setter Property="Stroke" Value="{DynamicResource SldNumberBoxArrowMouseOver}"/>
-                        </Trigger>-->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource SldNumberBoxArrowMouseOver}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -194,6 +194,7 @@ namespace Du.PMPage.Wpf
                     var partdoc = _doc as PartDoc;
                     partdoc.UserSelectionPreNotify += UserSelectionPreNotify;
                     partdoc.UserSelectionPostNotify += UserSelectionPostNotify;
+                    partdoc.DeleteSelectionPreNotify += DeleteSelectionPreNotify;
                     break;
                 case swDocumentTypes_e.swDocASSEMBLY:
                     var assDoc = _doc as AssemblyDoc;
@@ -235,14 +236,31 @@ namespace Du.PMPage.Wpf
             }
         }
 
+        #endregion
+
+        #region SolidWorks Selections
+
+        //用户选择后通知--添加到列表中
         private int UserSelectionPostNotify()
         {
 
             return 0;
         }
 
+        //用户添加前判断
         //返回1则取消此对象的选择，默认返回0
         private int UserSelectionPreNotify(int SelType)
+        {
+            var count = _selectionBoxs.Count;
+            foreach (var item in _selectionBoxs)
+            {
+
+            }
+            return 0;
+        }
+
+        //防止用户清除选择
+        private int DeleteSelectionPreNotify()
         {
 
             return 0;

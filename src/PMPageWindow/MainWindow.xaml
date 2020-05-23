@@ -6,15 +6,31 @@
         xmlns:local="clr-namespace:PMPageWindow"
         xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <local:InsertLine Grid.Column="0"/>
-        <local:LineProperty Grid.Column="1"/>
-    </Grid>
+        Title="MainWindow" Height="800" Width="300">
+    <TabControl TabStripPlacement="Left">
+        <TabItem >
+            <TabItem.Header>
+                <TextBlock FontWeight="Black" FontSize="15" Text="插入草图"/>
+            </TabItem.Header>
+            <local:InsertLine/>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <TextBlock FontWeight="Black" FontSize="15" Text="线条属性"/>
+            </TabItem.Header>
+            <local:LineProperty/>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <TextBlock FontWeight="Black" FontSize="15" Text="凸台拉伸"/>
+            </TabItem.Header>
+            <local:FeatureExtrusion/>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <TextBlock FontWeight="Black" FontSize="15" Text="尺寸"/>
+            </TabItem.Header>
+            <local:Dimension/>
+        </TabItem>
+    </TabControl>
 </Window>

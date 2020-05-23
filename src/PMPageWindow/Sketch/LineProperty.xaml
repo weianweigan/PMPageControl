@@ -10,7 +10,7 @@
     <page:SldPMPage.Resources>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
     </page:SldPMPage.Resources>
-    <StackPanel>
+    <StackPanel Margin="0,10,0,0">
         <Expander IsExpanded="True">
             <Expander.Header>
                 <TextBlock FontWeight="Black" Text="现有几何关系"/>

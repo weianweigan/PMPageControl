@@ -38,7 +38,7 @@
             <StackPanel Margin="20,0,0,0">
                 <CheckBox Margin="0,2.5">作为构造线(C)</CheckBox>
                 <CheckBox Margin="0,2.5">无限长度(I)</CheckBox>
-                <CheckBox Margin="0,2.5">重点线(M)</CheckBox>
+                <CheckBox Margin="0,2.5">中点线(M)</CheckBox>
             </StackPanel>
         </Expander>
     </StackPanel>

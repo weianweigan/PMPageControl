@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Du.PMPage.Wpf">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--普通的Stackpanel 背景色设为SldBackgroud即可-->
+    <Style TargetType="StackPanel">
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
+    </Style>
+
+    <!--Page页面顶级Stackpanel 设置距离上方距离为10px-->
+    <Style TargetType="StackPanel" x:Key="PageStackPanel">
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+    </Style>
+    
+</ResourceDictionary>
