@@ -30,7 +30,7 @@ namespace PMPageWindow
 
         public FeatureExtrusion(ISldWorks swApp):base(swApp)
         {
-
+            InitializeComponent();
         }
     }
 }

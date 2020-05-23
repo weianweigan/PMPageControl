@@ -1,10 +1,16 @@
 # ![](resources/pmpageicon.png) PMPage Control -- Building
 
-<div align=Left>
+<div align=center>
  <img src="resources/FeatureExtrusion.png" width="200"/>
  <img src="resources/SketchInsertLine.png" width="200"/>
  <img src="resources/SketchLineProperty.png" width="200"/>
+ <img src="resources/wpfdemo.png" width="200"/>
 </div>
+
+<div align=center>
+     <img src="resources/SolidWorksShow.png" width="800"/>
+</div>
+
 
 ## һ.Summary
 
@@ -84,7 +90,8 @@ xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
 
         public Dimension(ISldWorks app):base(app)
         {
-
+            //Don't forget
+            InitializeComponent();
         }
     }
 

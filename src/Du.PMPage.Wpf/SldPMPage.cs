@@ -104,6 +104,13 @@ namespace Du.PMPage.Wpf
         /// </summary>
         public void ShowPage()
         {
+            _doc = App.IActiveDoc2;
+
+            if (_doc == null)
+            {
+                throw new InvalidOperationException($"No active doc,can not show the pmpage");
+            }
+
             if (Page == null)
             {
                 CreatePage();
@@ -120,7 +127,6 @@ namespace Du.PMPage.Wpf
             {
                 throw new CreatePMPageErrorException($"{nameof(ShowPage)} Error: {result_e.ToString()}");
             }
-            _doc = App.IActiveDoc2;
 
             AttachDocEvent();
         }
