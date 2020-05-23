@@ -26,10 +26,16 @@
 
 1.Add a WPF usercontrol to your project.
 
-2.Add the xaml namespace for your *.xaml
+2.Add the xaml namespace and resourcedictionary for your *.xaml
 
 ```xml
 xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
+```
+
+```xml
+<page:SldPMPage.Resources>
+     <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
+</page:SldPMPage.Resources>
 ```
 
 3.Modeify the root(UserControl) as page:SldPMPage 
@@ -51,7 +57,7 @@ xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400" PageTitle="sld">
     <page:SldPMPage.Resources>
-        
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
     </page:SldPMPage.Resources>
     <StackPanel>
         <TabControl>
@@ -111,21 +117,21 @@ sample.ShowPage();
 check the icons folder for *.svg file
 
 <div>
- <img src="icons/Dimension.svg" width="25"/>
- <img src="icons/AngleDimension.svg" width="25"/>
- <img src="icons/D1Dimension.svg" width="25"/>
- <img src="icons/collinear.svg" width="25"/>
- <img src="icons/BlueArrow.svg" width="25"/>
- <img src="icons/Draft.svg" width="25"/>
- <img src="icons/equal.svg" width="25"/>
- <img src="icons/ReverseDirection.svg" width="25"/>
- <img src="icons/PARALLEL.svg" width="25"/>
- <img src="icons/SWInfo.svg" width="25"/>
- <img src="icons/SketchRegion.svg" width="25"/>
- <img src="icons/SketchRelation.svg" width="25"/>
- <img src="icons/SYMMETRIC.svg" width="25"/>
- <img src="icons/VERTICAL.svg" width="25"/>
- <img src="icons/anchor.svg" width="25"/>
+ <img src="icons/Dimension.svg" width="50"/>
+ <img src="icons/AngleDimension.svg" width="50"/>
+ <img src="icons/D1Dimension.svg" width="50"/>
+ <img src="icons/collinear.svg" width="50"/>
+ <img src="icons/BlueArrow.svg" width="50"/>
+ <img src="icons/Draft.svg" width="50"/>
+ <img src="icons/equal.svg" width="50"/>
+ <img src="icons/ReverseDirection.svg" width="50"/>
+ <img src="icons/PARALLEL.svg" width="50"/>
+ <img src="icons/SWInfo.svg" width="50"/>
+ <img src="icons/SketchRegion.svg" width="50"/>
+ <img src="icons/SketchRelation.svg" width="50"/>
+ <img src="icons/SYMMETRIC.svg" width="50"/>
+ <img src="icons/VERTICAL.svg" width="50"/>
+ <img src="icons/anchor.svg" width="50"/>
 </div>
 
 ### 2.Controls:
