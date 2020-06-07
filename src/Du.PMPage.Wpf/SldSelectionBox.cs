@@ -52,6 +52,11 @@ namespace Du.PMPage.Wpf
            // DefaultStyleKeyProperty.OverrideMetadata(typeof(SldSelectionBox), new FrameworkPropertyMetadata(typeof(SldSelectionBox)));
         }
 
+        public SldSelectionBox()
+        {
+
+        }
+
         #region Dependecy Properties
 
         ///// <summary>
@@ -116,6 +121,16 @@ namespace Du.PMPage.Wpf
 
         public static readonly DependencyProperty AllowSelectInMultipleBoxesProperty =
             DependencyProperty.Register("AllowSelectInMultipleBoxes", typeof(bool), typeof(SldSelectionBox), new PropertyMetadata(false));
+
+        public bool IsActive
+        {
+            get { return (bool)GetValue(IsActiveProperty); }
+            set { SetValue(IsActiveProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(SldSelectionBox), new PropertyMetadata(false));
 
         #endregion
 

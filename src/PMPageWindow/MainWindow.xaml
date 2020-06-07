@@ -32,5 +32,8 @@
             </TabItem.Header>
             <local:Dimension/>
         </TabItem>
+        <TabItem Header="启动窗口">
+            <Button Click="Button_Click">启动窗口</Button>
+        </TabItem>
     </TabControl>
 </Window>

@@ -2,7 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Du.PMPage.Wpf">
     <Style TargetType="{x:Type local:SldSelectionBox}">
-        <Setter Property="Background" Value="#FFCFE4F7"/>
-        <Setter Property="BorderBrush" Value="#FF53A9FF"></Setter>
+        <Setter Property="Focusable" Value="True"/>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem>消除选择</MenuItem>
+                    <MenuItem>删除</MenuItem>
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsActive" Value="True">
+                <Setter Property="Background" Value="#FFCFE4F7"/>
+                <Setter Property="BorderBrush" Value="#FF53A9FF"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

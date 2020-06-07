@@ -4,18 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
-    <Style TargetType="ComboBox">
-        <Setter Property="Background" Value="#FFE5EFF8"/>
-        <Setter Property="Height" Value="23"/>
+    <Style TargetType="local:SldTaskPane">
+        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
     </Style>
-
-    <Style TargetType="TextBox">
-        <Setter Property="Height" Value="23"/>
-    </Style>
-
-    <Style TargetType="TextBlock">
-        <Setter Property="Height" Value="23"/>
-    </Style>
-
 </ResourceDictionary>

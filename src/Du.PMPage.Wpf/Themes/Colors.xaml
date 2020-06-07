@@ -10,7 +10,6 @@
     <Color x:Key="SldBlueColor">#FF64A6C4</Color>
     <Color x:Key="SldNumberBoxButtonPressColor">#FFDADADA</Color>
     <Color x:Key="SldNumberBoxButtonColor">#FFF0F0F0</Color>
-    <SolidColorBrush x:Key="SldBackground"></SolidColorBrush>
     <SolidColorBrush x:Key="SldDepthBackgroud" Color="#FFD4D4D4"></SolidColorBrush>
     <SolidColorBrush x:Key="SldExpanderArror" Color="#FF7F7F7F"></SolidColorBrush>
     <SolidColorBrush x:Key="SldBorder" Color="#FF9B9B9B"></SolidColorBrush>
@@ -20,6 +19,7 @@
     <SolidColorBrush x:Key="SldNumberBoxButton">#FFF0F0F0</SolidColorBrush>
     <SolidColorBrush x:Key="SldNumberBoxArrow" Color="#FF606060"></SolidColorBrush>
     <SolidColorBrush x:Key="SldNumberBoxArrowMouseOver" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="SldRed" Color="{StaticResource SldWorksRed}"/>
 
     <!--Control colors.-->
     <Color x:Key="WindowColor">#FFE8EDF9</Color>

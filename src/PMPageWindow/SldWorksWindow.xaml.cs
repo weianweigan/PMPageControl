@@ -15,19 +15,13 @@ using System.Windows.Shapes;
 namespace PMPageWindow
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// SldWorksWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SldWorksWindow : Window
     {
-        public MainWindow()
+        public SldWorksWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            SplashWindow splashWindow = new SplashWindow();
-            splashWindow.Show();
         }
     }
 }

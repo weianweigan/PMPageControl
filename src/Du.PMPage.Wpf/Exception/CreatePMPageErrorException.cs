@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Du.PMPage.Wpf
 {
     [Serializable]
-    internal class CreatePMPageErrorException : Exception
+    public class CreatePMPageErrorException : Exception
     {
         public CreatePMPageErrorException()
         {

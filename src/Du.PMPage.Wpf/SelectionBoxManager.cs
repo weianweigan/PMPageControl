@@ -1,10 +1,5 @@
 ﻿using SolidWorks.Interop.swconst;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Du.PMPage.Wpf
@@ -25,14 +20,14 @@ namespace Du.PMPage.Wpf
         /// This enables a gobal selection
         /// </summary>
         public static readonly DependencyProperty JoinProperty =
-            DependencyProperty.RegisterAttached("Join", typeof(bool), typeof(SelectionBoxManager), new PropertyMetadata(true,OnStateChanged));
+            DependencyProperty.RegisterAttached("Join", typeof(bool), typeof(SelectionBoxManager), new PropertyMetadata(false,OnStateChanged));
 
         private static void OnStateChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
             if (obj is SldSelectionBox)
             {
                 var selectionBox  = obj as SldSelectionBox;
-
+                SldPMPage.RegisterSelectionBox(selectionBox);
             }
         }
     }

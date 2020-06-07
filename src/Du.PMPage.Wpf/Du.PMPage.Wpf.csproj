@@ -70,6 +70,7 @@
     <Compile Include="Common\ReflectionMath.cs" />
     <Compile Include="Exception\CreatePMPageErrorException.cs" />
     <Compile Include="Common\PropertyManagerPage2Handler9Wrapper.cs" />
+    <Compile Include="Exception\CreateTaskPaneErrorException.cs" />
     <Compile Include="IOTextBox.cs" />
     <Compile Include="NumberBox.cs" />
     <Compile Include="SelectionBoxManager.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="SldNumberBox.cs" />
     <Compile Include="SldPMPage.cs" />
     <Compile Include="SldSelectionBox.cs" />
+    <Compile Include="SldTaskPane.cs" />
     <Page Include="Themes\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,9 +87,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="CustomControl1.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="Themes\SldComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +130,10 @@
     <Page Include="Themes\SldTabControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SldTaskpane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

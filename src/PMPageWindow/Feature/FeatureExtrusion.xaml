@@ -10,7 +10,7 @@
     <page:SldPMPage.Resources>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
     </page:SldPMPage.Resources>
-    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+    <StackPanel Orientation="Vertical" Margin="0,0,0,0">
         <Expander IsExpanded="True">
             <Expander.Header>
                 <TextBlock FontWeight="Black">从(F)</TextBlock>
@@ -51,6 +51,7 @@
                     </Grid.ColumnDefinitions>
                     <Border DockPanel.Dock="Left" Width="25" BorderThickness="0.5" BorderBrush="Gray" Background="#FF53A9FF"/>
                     <page:SldSelectionBox page:SelectionBoxManager.Join="True" Grid.Column="1" Margin="2,0,0,0" DockPanel.Dock="Right">
+
                     </page:SldSelectionBox>
                 </Grid>
                 <Label  Grid.Row="2" Margin="0,5,0,0">
@@ -62,8 +63,8 @@
                 </page:SldNumberBox>
 
                 <Button Style="{StaticResource DraftIconButton}" Grid.Row="3" Margin="0,5,0,0"/>
-                <page:SldNumberBox Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
-                    <TextBox></TextBox>
+                <page:SldNumberBox Height="23" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
+                    <TextBox Height="23"></TextBox>
                 </page:SldNumberBox>
                 <CheckBox Grid.Column="1" Margin="-1,5,0,0" Grid.Row="4" Content="向外拔模"/>
             </Grid>

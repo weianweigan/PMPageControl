@@ -83,6 +83,11 @@ namespace Du.PMPage.Wpf
                 CreatePage();
                 AddUserControl();
             }
+
+            if (_selectionBoxs.Count >= 1)
+            {
+                _selectionBoxs.First().IsActive = true;
+            }
         }
 
         public SldPMPage(ISldWorks app)
@@ -93,6 +98,12 @@ namespace Du.PMPage.Wpf
                 CreatePage();
                 AddUserControl();
             }
+
+            if (_selectionBoxs.Count >= 1)
+            {
+                _selectionBoxs.First().IsActive = true;
+            }
+            
         }
 
         #endregion
@@ -186,7 +197,7 @@ namespace Du.PMPage.Wpf
         }
 
         //向PMPage中注册SelectionBox
-        private static void RegisterSelectionBox(SldSelectionBox selectionBox)
+        public static void RegisterSelectionBox(SldSelectionBox selectionBox)
         {
             _selectionBoxs.Add(selectionBox);
         }

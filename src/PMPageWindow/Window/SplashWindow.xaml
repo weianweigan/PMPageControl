@@ -1,0 +1,54 @@
+﻿<Window x:Class="PMPageWindow.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PMPageWindow"
+        mc:Ignorable="d"
+        Title="SplashWindow" Height="330" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" Width="570" FontSize="15" WindowStyle="None" ResizeMode="NoResize" FontFamily="{StaticResource {x:Static SystemFonts.CaptionFontFamilyKey}}">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent">
+        <Grid Width="500" Height="275" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="46*"/>
+                <RowDefinition Height="146*"/>
+                <RowDefinition Height="33*"/>
+            </Grid.RowDefinitions>
+            <!--图标栏-->
+            <Grid Grid.ColumnSpan="2" Background="{StaticResource SldRed}">
+                <Image HorizontalAlignment="Left" Margin="20,10,0,10" Source="{StaticResource SOLIDWORKS_whiteDrawingImage}"/>
+                <Label ForceCursor="True" MouseLeftButtonUp="Label_MouseLeftButtonUp" FontSize="12" Foreground="White" HorizontalAlignment="Right" Margin="4" FontWeight="Light" VerticalAlignment="Center"
+                        Background="Transparent" BorderThickness="0" Content="取消 X">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+            </Grid>
+            <!--年份-->
+            <Grid Grid.Row="1">
+                <TextBlock Text="2018" FontWeight="Bold" FontSize="15" Margin="15,0,0,0"/>
+            </Grid>
+            <!--记载状态-->
+            <Grid Grid.Row="2" >
+                <TextBlock Text="加载资源..." FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,0,0,0" FontSize="15"/>
+                <Image Source="{StaticResource _3ds_darkDrawingImage}" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,15"/>
+            </Grid>
+            <!--图片来源-->
+            <Grid Grid.Row="3"  Background="#FF97999B">
+                <TextBlock Foreground="White" VerticalAlignment="Center" Height="15" Text="Image courtesy of Trakka Pty Ltd." Margin="10,0,0,0" FontSize="10"/>
+            </Grid>
+            <!--图片-->
+            <Image Grid.Row="1" Grid.RowSpan="3" Margin="150,0,-100,-80" Source="/PMPageWindow;component/Resources/Trakka.png" />
+        </Grid>
+    </Grid>
+    
+</Window>
