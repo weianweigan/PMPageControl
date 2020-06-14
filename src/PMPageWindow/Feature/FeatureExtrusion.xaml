@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PMPageWindow"
              xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="250" PageTitle="凸台拉伸">
+             d:DesignHeight="700" d:DesignWidth="250" PageTitle="凸台拉伸" PageHeight="700" Closed="SldPMPage_Closed" Closing="SldPMPage_Closing">
     <page:SldPMPage.Resources>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Generic.xaml"/>
     </page:SldPMPage.Resources>

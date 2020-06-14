@@ -1,5 +1,11 @@
 # ![](resources/pmpageicon.png) PMPage Control -- Building
 
+[English](https://github.com/weianweigan/PMPageControl) | [ÖÐÎÄ](https://github.com/weianweigan/PMPageControl/blob/master/SolidWorksStyleDesign.md)
+
+<div align="center">
+    <img src="resources/SplashWindow.png" width="600"/>
+</div>
+
 <div align=center>
  <img src="resources/FeatureExtrusion.png" width="200"/>
  <img src="resources/SketchInsertLine.png" width="200"/>
@@ -7,10 +13,9 @@
  <img src="resources/wpfdemo.png" width="200"/>
 </div>
 
-<div align=center>
+<div align="center">
      <img src="resources/SolidWorksShow.png" width="800"/>
 </div>
-
 
 ## Ò».Summary
 

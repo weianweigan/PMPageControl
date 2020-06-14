@@ -16,7 +16,8 @@
                 <TextBlock FontWeight="Bold">信息</TextBlock>
             </Expander.Header>
             <page:SldLabelMsg Margin="-5,0">
-                <TextBlock TextWrapping="Wrap">编辑下一新线条的设定或绘制一新线条.</TextBlock>
+                <TextBlock TextWrapping="WrapWithOverflow">编辑下一新线条的设定或绘制一新线条.
+                    </TextBlock>
             </page:SldLabelMsg>
         </Expander>
         <Expander IsExpanded="True" Margin="0,10,0,0">

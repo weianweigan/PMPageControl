@@ -20,6 +20,7 @@
     <SolidColorBrush x:Key="SldNumberBoxArrow" Color="#FF606060"></SolidColorBrush>
     <SolidColorBrush x:Key="SldNumberBoxArrowMouseOver" Color="Black"></SolidColorBrush>
     <SolidColorBrush x:Key="SldRed" Color="{StaticResource SldWorksRed}"/>
+    <SolidColorBrush x:Key="SldBackground" Color="{StaticResource SldWorksBackgroud}"/>
 
     <!--Control colors.-->
     <Color x:Key="WindowColor">#FFE8EDF9</Color>

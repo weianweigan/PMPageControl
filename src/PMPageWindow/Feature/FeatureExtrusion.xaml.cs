@@ -32,5 +32,17 @@ namespace PMPageWindow
         {
             InitializeComponent();
         }
+
+        private void SldPMPage_Closed(SolidWorks.Interop.swconst.swPropertyManagerPageCloseReasons_e reason)
+        {
+
+        }
+
+        private void SldPMPage_Closing(SolidWorks.Interop.swconst.swPropertyManagerPageCloseReasons_e reason, ClosingArg arg)
+        {
+            arg.Cancel = true;
+            arg.ErrorTitle = "hi";
+            arg.ErrorMessage = "msg";
+        }
     }
 }
