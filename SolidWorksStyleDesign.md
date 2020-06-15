@@ -2,7 +2,7 @@
 
 &emsp;&emsp; 作为一个SolidWorks插件开发人员，在界面设计时通常想让自己的设计像SolidWorks原生的风格一样，以便给用户更好的体验和更低的接受成本。
 
-&emsp;&emsp;下文便以WPF为基础，分析了SolidWork风格UI的一些必要构成元素。并且用一些属性页的设计示例来探讨如何让设计出的SolidWorks风格的用户界面。
+&emsp;&emsp;下文便以WPF为基础，结合已有的[Github项目](https://github.com/weianweigan/PMPageControl)，分析了SolidWork风格UI的一些必要构成元素,封装了属性页面用户控件和一些PMPage风格的控件,然后展现了一些属性页的设计示例。
 
 ## 一.分析SolidWorks的用户界面
 
@@ -453,6 +453,51 @@ private void SldPMPage_Closing(SolidWorks.Interop.swconst.swPropertyManagerPageC
 </svg>
 ```
 
+&emsp;&emsp; 可以将svg文件转换为了xaml,使用svgtoxaml,转换成wpf中的DrawingImage对象.
+DrawingImage对象可以作为资源文件直接插入到Image控件中.这样就不必使用png等类型的位图.DrawingImage作为矢量对象,可以获得更换的显示效果.
+
+* 转换为DrawingImage如下
+
+```xml
+    <DrawingImage x:Key="CollinearDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V50 H50 V0 H0 Z">
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M7,43L15,35">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF000000" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M15,35L20,30">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M22.5,27.5L27.5,22.5">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M35,15L30,20">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M35,15L43,7">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF000000" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+```
+
+* 使用只需要指定Image控件的Source属性
+
+```xml
+<Image Source="{StaticResource CollinearDrawingImage}"></Image>
+```
+
 ## 四.设计界面
 
 * 以下为使用WPF设计的界面，在PMPageWindow项目都里可以找到，希望给SolidWorks二次开发人员参考。
@@ -476,9 +521,11 @@ private void SldPMPage_Closing(SolidWorks.Interop.swconst.swPropertyManagerPageC
 
 ## 五 关于项目PMPageControl
 
-&emsp;&emsp;此仓库还在开发中，所以还有一些特性未开发完全。下面列出来的便是接下来需要支持的一些特性。
-
 * [查看仓库](https://github.com/weianweigan/PMPageControl)
+
+* 参考 SolidWorks2018
+
+&emsp;&emsp;此仓库还在开发中，所以还有一些特性未开发完全。下面列出来的便是接下来需要支持的一些特性。
 
 * 1.SelectionBox的选中响应逻辑。 
 * 2.taskpane page的支持。
