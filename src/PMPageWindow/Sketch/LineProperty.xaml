@@ -68,13 +68,6 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Style="{StaticResource DimensionIconLabel}"/>
-                <page:SldNumberBox Value="{Binding DoubleValue}" Grid.Column="1">
-                    <page:IOTextBox Height="23" Text="{Binding DoubleValue, StringFormat={}{0:0.00}}" />
-                </page:SldNumberBox>
-                <Label Grid.Row="1" Style="{StaticResource AngleDimensionIconLabel}"/>
-                <page:SldNumberBox Height="23" Value="{Binding DoubleValue}" Grid.Row="1" Grid.Column="2">
-                    <page:IOTextBox Text="{Binding DoubleValue, StringFormat={}{0:0.00}}" />
-                </page:SldNumberBox>
             </Grid>
         </Expander>
         <Expander>

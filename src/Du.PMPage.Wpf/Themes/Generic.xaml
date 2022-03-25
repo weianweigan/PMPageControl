@@ -3,14 +3,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Du.PMPage.Wpf">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldExpander.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Taskpane.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldPMPage.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldTabControl.xaml"/>
+        <!--<ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldTabControl.xaml"/>-->
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldIconButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldLabelMsg.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldNumberBox.xaml"/>
+        <!--<ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldNumberBox.xaml"/>-->
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldComboBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldSelectionBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldWpfSelectionList.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldStackPanel.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldGroupBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

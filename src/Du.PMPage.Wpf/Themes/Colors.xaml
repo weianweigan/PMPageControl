@@ -8,6 +8,7 @@
     <Color x:Key="SldWorksRed">#FFDA291C</Color>
     <Color x:Key="SldLabelColor">#FFDA291C</Color>
     <Color x:Key="SldBlueColor">#FF64A6C4</Color>
+    <Color x:Key="SldLableYellow">#FFFFFF80</Color>
     <Color x:Key="SldNumberBoxButtonPressColor">#FFDADADA</Color>
     <Color x:Key="SldNumberBoxButtonColor">#FFF0F0F0</Color>
     <SolidColorBrush x:Key="SldDepthBackgroud" Color="#FFD4D4D4"></SolidColorBrush>

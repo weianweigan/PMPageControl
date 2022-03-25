@@ -22,12 +22,6 @@
         </TabItem>
         <TabItem>
             <TabItem.Header>
-                <TextBlock FontWeight="Black" FontSize="15" Text="凸台拉伸"/>
-            </TabItem.Header>
-            <local:FeatureExtrusion/>
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
                 <TextBlock FontWeight="Black" FontSize="15" Text="尺寸"/>
             </TabItem.Header>
             <local:Dimension/>

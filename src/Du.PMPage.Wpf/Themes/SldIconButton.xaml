@@ -115,6 +115,14 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
+    <DrawingImage x:Key="lineDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M1024,1024z M0,0z M904,476L120,476C116,476,112,480,112,484L112,540C112,544,116,548,120,548L904,548C908,548,912,544,912,540L912,484C912,480,908,476,904,476z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
     <!--几何关系-->
     <Style x:Key="SketchRelationIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
         <Setter Property="Content">

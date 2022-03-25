@@ -187,7 +187,7 @@
                                 <ContentPresenter
                                 Margin="4"
                                 ContentSource="Header" HorizontalAlignment="Left"
-                                RecognizesAccessKey="True" />
+                                RecognizesAccessKey="True"/>
                             </Grid>
                         </Border>
                         <Border x:Name="Content"
