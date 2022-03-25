@@ -1,4 +1,4 @@
-name: CI
+name: NugetPublish
 
 on:
   push:
@@ -36,4 +36,4 @@ jobs:
     # 5. Push  package
     - name: Push generated package to GitHub registry
       run: |
-        .\nuget push .\src\Du.PMPage.Wpf\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols
+        .\nuget push .\Du.PMPage.Wpf\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols

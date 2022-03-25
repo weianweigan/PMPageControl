@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '!master'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    
+    # 1.Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    
+    # 2.runtime environment
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+        
+    # 3.build debug
+    - name: Build Debug
+      run: dotnet build --configuration Debug
+
+    # 3.build release
+    - name: Build Release
+      run: dotnet build --configuration Release
