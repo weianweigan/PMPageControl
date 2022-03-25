@@ -6,8 +6,11 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AssemblyVersion>0.0.1</AssemblyVersion>
-		<FileVersion>0.0.1</FileVersion>
+		<Version>0.0.1</Version>
+		<Authors>dududu</Authors>
+		<RepositoryUrl>https://github.com/weianweigan/PMPageControl.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/weianweigan/PMPageControl</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <NoWarn>1701;1702;1591;0067</NoWarn>
