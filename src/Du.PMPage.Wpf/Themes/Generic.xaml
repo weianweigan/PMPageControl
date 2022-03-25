@@ -5,10 +5,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Taskpane.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldPMPage.xaml"/>
-        <!--<ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldTabControl.xaml"/>-->
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldIconButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldLabelMsg.xaml"/>
-        <!--<ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldNumberBox.xaml"/>-->
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldComboBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldWpfSelectionList.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldStackPanel.xaml"/>
