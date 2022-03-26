@@ -27,5 +27,5 @@ jobs:
       run: msbuild Du.PMPage.Wpf.sln /t:Restore /p:Configuration=Release
 
     # build release
-    - name: Create the app package
+    - name: Build Relase
       run: msbuild Du.PMPage.Wpf.sln /p:Configuration=Release
