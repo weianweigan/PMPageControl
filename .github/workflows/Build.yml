@@ -24,7 +24,7 @@ jobs:
       
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: msbuild Du.PMPage.Wpf.sln /t:Restore /p:Configuration=Release
 
     # build release
     - name: Create the app package
