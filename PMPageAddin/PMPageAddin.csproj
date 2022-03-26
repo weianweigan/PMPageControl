@@ -19,7 +19,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\Du.PMPage.Wpf\Du.PMPage.Wpf.csproj" />
+	  <ProjectReference Include="..\Du.PMPage.Wpf\Du.PMPage.Wpf.csproj"/>
 	</ItemGroup>
 
 </Project>

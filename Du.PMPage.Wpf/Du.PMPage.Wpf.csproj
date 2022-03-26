@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net461</TargetFramework>
+		<SignAssembly>false</SignAssembly>
+		<IncludeSymbols>true</IncludeSymbols>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -14,7 +16,7 @@
 		<EnableComHosting>true</EnableComHosting>
 		<Description>Create SolidWorks PMPage with xaml</Description>
 		<PackageIcon>pmpageicon.png</PackageIcon>
-		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <NoWarn>1701;1702;1591;0067</NoWarn>
