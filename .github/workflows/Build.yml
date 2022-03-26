@@ -16,14 +16,12 @@ jobs:
     steps:
     
     # 1.Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    
-    # 2.runtime environment
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.100
+    - uses: actions/checkout@v2    
 
+    # 2.Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+      
     # 3.build release
-    - name: Build Release
-      run: dotnet build --configuration Release
+    - name: Create the app package
+      run: msbuild Du.PMPage.Wpf.sln /p:Configuration=Release
