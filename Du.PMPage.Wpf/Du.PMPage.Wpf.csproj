@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net452</TargetFramework>
+		<TargetFramework>net472</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
