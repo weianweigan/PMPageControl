@@ -5,11 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Du.PMPage.Wpf", "Du.PMPage.Wpf\Du.PMPage.Wpf.csproj", "{FF37ABB7-8865-4A04-BD8A-D086BAB79E91}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{5C975E3D-519C-466B-A9E9-243181A42596}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{5C975E3D-519C-466B-A9E9-243181A42596}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMPageWindow", "PMPageWindow\PMPageWindow.csproj", "{9B817820-74A1-45B6-A71C-3C965B779149}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMPageAddin", "PMPageAddin\PMPageAddin.csproj", "{216B2191-A704-4BA3-9B4E-3B6C291B339E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMPageAddin", "PMPageAddin\PMPageAddin.csproj", "{216B2191-A704-4BA3-9B4E-3B6C291B339E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{FF37ABB7-8865-4A04-BD8A-D086BAB79E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF37ABB7-8865-4A04-BD8A-D086BAB79E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF37ABB7-8865-4A04-BD8A-D086BAB79E91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B817820-74A1-45B6-A71C-3C965B779149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B817820-74A1-45B6-A71C-3C965B779149}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B817820-74A1-45B6-A71C-3C965B779149}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B817820-74A1-45B6-A71C-3C965B779149}.Release|Any CPU.Build.0 = Release|Any CPU
 		{216B2191-A704-4BA3-9B4E-3B6C291B339E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{216B2191-A704-4BA3-9B4E-3B6C291B339E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{216B2191-A704-4BA3-9B4E-3B6C291B339E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -34,7 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9B817820-74A1-45B6-A71C-3C965B779149} = {5C975E3D-519C-466B-A9E9-243181A42596}
 		{216B2191-A704-4BA3-9B4E-3B6C291B339E} = {5C975E3D-519C-466B-A9E9-243181A42596}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
