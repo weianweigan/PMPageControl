@@ -17,9 +17,5 @@
 		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 		<PackageReference Include="Xarial.XCad.SolidWorks" Version="0.7.12" />
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\Du.PMPage.Wpf\Du.PMPage.Wpf.csproj"/>
-	</ItemGroup>
 
 </Project>

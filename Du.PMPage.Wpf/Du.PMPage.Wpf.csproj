@@ -30,6 +30,11 @@
 	<ItemGroup>
 	  <PackageReference Include="Xarial.XCad.SolidWorks.Interops" Version="0.3.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="solidworks-init.ps1" pack="true" PackagePath="tools\init.ps1" />
+	</ItemGroup>
+
 	<ItemGroup>
 	  <Resource Include="Assets\Images\pmpageicon.png">
 	    <Pack>True</Pack>
