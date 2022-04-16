@@ -1,21 +1,9 @@
-# ![](resources/pmpageicon.png) PMPage Control -- Building
-
-[English](https://github.com/weianweigan/PMPageControl) | [中文](https://github.com/weianweigan/PMPageControl/blob/master/SolidWorksStyleDesign.md)
+# ![](resources/pmpageicon.png) PMPage Control
 
 <div align="center">
     <img src="resources/SplashWindow.png" width="600"/>
 </div>
 
-<div align=center>
- <img src="resources/FeatureExtrusion.png" width="200"/>
- <img src="resources/SketchInsertLine.png" width="200"/>
- <img src="resources/SketchLineProperty.png" width="200"/>
- <img src="resources/wpfdemo.png" width="200"/>
-</div>
-
-<div align="center">
-     <img src="resources/SolidWorksShow.png" width="800"/>
-</div>
 
 ## 一.Summary
 
@@ -23,9 +11,7 @@
 
 * No PMPHandler.cs or other Handler code
 
-* Redraw Some SolidWorks style *.svg icons(More icons is coming)
-
-* SolidWorks style controls
+* Using *.xmal usercontrol to develop pmpage
 
 ## 二.Getting Started
 
@@ -48,8 +34,6 @@ xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
 4.Modeify the *.xaml.cs code to inhert form SldPMPage
 
 5.Add a new ctor for ISldWorks interface
-
-
 
 ```xml
 <page:SldPMPage x:Class="PMPageWindow.Dimension"

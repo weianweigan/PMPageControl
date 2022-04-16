@@ -1,16 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net452</TargetFramework>
+		<TargetFramework>net461</TargetFramework>
+		<SignAssembly>false</SignAssembly>
+		<IncludeSymbols>true</IncludeSymbols>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 		<Authors>dududu</Authors>
 		<RepositoryUrl>https://github.com/weianweigan/PMPageControl.git</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/weianweigan/PMPageControl</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
+		<EnableComHosting>true</EnableComHosting>
+		<Description>Create SolidWorks PMPage with xaml</Description>
+		<PackageIcon>pmpageicon.png</PackageIcon>
+		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <NoWarn>1701;1702;1591;0067</NoWarn>
@@ -19,6 +25,21 @@
 	  <NoWarn>1701;1702;1591;0067</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Xarial.XCad.SolidWorks.Interops" Version="0.3.0" />
+	  <None Remove="Assets\Images\pmpageicon.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Xarial.XCad.SolidWorks.Interops" Version="0.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="solidworks-init.ps1" pack="true" PackagePath="tools\init.ps1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Assets\Images\pmpageicon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 </Project>
