@@ -1,72 +1,49 @@
-﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Du.PMPage.Wpf;
-using GalaSoft.MvvmLight;
 using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swconst;
 
-namespace PMPageAddin
+namespace PMPageAddin;
+
+/// <summary>
+/// SelectionPage using SldContentPage — pure WPF content hosted inside
+/// a SolidWorks PropertyManagerPage via WindowFromHandle.
+/// No SldControl / native SW controls in XAML.
+/// </summary>
+public partial class SelectionPage : SldPMPage
 {
-    /// <summary>
-    /// SelectionPage.xaml 的交互逻辑
-    /// </summary>
-    [ComVisible(true)]
-    public partial class SelectionPage : SldPMPage
+    public SelectionPage() : base()
     {
-        public SelectionPage(ISldWorks sw):base(sw)
-        {
-            ModelDoc2 doc2;
-            InitializeComponent();
-
-            DataContext = new SelectionPageViewModel();
-        }
+        InitializeComponent();
     }
 
-    public class SelectionPageViewModel : ViewModelBase
+    public SelectionPage(ISldWorks sw) : base()
     {
-        private string _msg = "Selection Msg";
-        private ObservableCollection<swSeleTypeObjectPair> _selections = new ObservableCollection<swSeleTypeObjectPair>();
-        private int _count;
+        App = sw;
+        InitializeComponent();
+        DataContext = new SelectionPageViewModel();
+    }
+}
 
-        public string Msg { get => _msg; set => Set(ref _msg, value); }
+public partial class SelectionPageViewModel : ObservableObject
+{
+    private ObservableCollection<SwSeleTypeObjectPair> _selections =
+        new ObservableCollection<SwSeleTypeObjectPair>();
 
-        public List<swSelectType_e> AllowSelectionTypes { get; set; } =
-            new List<swSelectType_e>() { swSelectType_e.swSelFACES };
+    public ObservableCollection<SwSeleTypeObjectPair> Selections
+    {
+        get => _selections;
+        set => SetProperty(ref _selections, value);
+    }
 
-        public ObservableCollection<swSeleTypeObjectPair> Selections { 
-            get => _selections; 
-            set => _selections = value; }
+    [ObservableProperty]
+    private double _num1;
 
-        private CloseCommand _closeCommand;
+    [ObservableProperty]
+    private double _num2;
 
-        public CloseCommand CloseCommand
-        {
-            get
-            {
-                if (_closeCommand == null)
-                {
-                    _closeCommand = new CloseCommand(Close,CanClose);
-                }
-
-                return _closeCommand;
-            }
-        }
-
-        private bool CanClose()
-        {
-            if(_count++ == 0)
-            {
-                CloseCommand.ErrorTitle = "Msg";
-                CloseCommand.BubbleTooltip = "Send msg to user";
-                return false;
-            }
-            return true;
-        }
-
-        private void Close()
-        {
-            
-        }
+    partial void OnNum1Changed(double oldValue, double newValue)
+    {
+        Num2 = Num1 + 10;
     }
 }

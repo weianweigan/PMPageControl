@@ -1,4 +1,4 @@
-﻿namespace Du.PMPage.Wpf
+﻿namespace Du.PMPage.Wpf.Utils
 {
     public static class Information
     {

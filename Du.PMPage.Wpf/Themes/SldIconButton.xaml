@@ -1,45 +1,61 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Du.PMPage.Wpf">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Du.PMPage.Wpf">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="IconButton" TargetType="Button">
-        <Setter Property="Width" Value="25"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
-        <Setter Property="MinHeight" Value="20"/>
-        <Setter Property="MinWidth" Value="20"/>
-        <Setter Property="BorderThickness" Value="0.5"/>
-        <Setter Property="BorderBrush" Value="{StaticResource SldBorder}"/>
-        <Setter Property="MinWidth" Value="25"/>
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Background" Value="{StaticResource SldBackground}" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="MinWidth" Value="20" />
+        <Setter Property="BorderThickness" Value="0.5" />
+        <Setter Property="BorderBrush" Value="{StaticResource SldBorder}" />
+        <Setter Property="MinWidth" Value="25" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True">
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Button.IsDefaulted" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                         </Trigger>
                         <!--<Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="border" Value="#FFBEE6FD"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
                         </Trigger>-->
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#FFC4E5F6"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            <Setter TargetName="border" Property="Background" Value="#FFC4E5F6" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FF2C628B" />
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            <Setter TargetName="border" Property="Background" Value="#FFBCDDEE" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FF245A83" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
-                            <Setter Property="Foreground" Value="#FF838383"/>
+                            <Setter TargetName="border" Property="Background" Value="#FFF4F4F4" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="#FFADB2B5" />
+                            <Setter Property="Foreground" Value="#FF838383" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -48,38 +64,57 @@
     </Style>
 
     <Style x:Key="IconLabel" TargetType="Label">
-        <Setter Property="Width" Value="25"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Background" Value="{StaticResource SldBackground}"/>
-        <Setter Property="MinHeight" Value="20"/>
-        <Setter Property="MinWidth" Value="20"/>
-        <Setter Property="MinWidth" Value="25"/>
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Background" Value="{StaticResource SldBackground}" />
+        <Setter Property="MinHeight" Value="20" />
+        <Setter Property="MinWidth" Value="20" />
+        <Setter Property="MinWidth" Value="25" />
     </Style>
-    
-    <!--水平几何关系按钮-->
-    <Style x:Key="HroLineIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+
+    <!--  水平几何关系按钮  -->
+    <Style
+        x:Key="HroLineIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Path Data="M 0,-12.5 L 25,-12.5" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+                <Path
+                    Data="M 0,-12.5 L 25,-12.5"
+                    Fill="Black"
+                    Stretch="Fill"
+                    Stroke="Black"
+                    StrokeThickness="1" />
             </Setter.Value>
         </Setter>
 
     </Style>
 
-    <!--竖直几何关系按钮-->
-    <Style x:Key="VecLineIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  竖直几何关系按钮  -->
+    <Style
+        x:Key="VecLineIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Path Data="M 12.5,0 L 12.5,-25" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+                <Path
+                    Data="M 12.5,0 L 12.5,-25"
+                    Fill="Black"
+                    Stretch="Fill"
+                    Stroke="Black"
+                    StrokeThickness="1" />
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--共线按钮-->
-    <Style x:Key="CollinearIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  共线按钮  -->
+    <Style
+        x:Key="CollinearIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="2" Source="{DynamicResource CollinearDrawingImage}"/>
+                <Image Margin="2" Source="{DynamicResource CollinearDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -88,27 +123,52 @@
             <DrawingGroup ClipGeometry="M0,0 V50 H50 V0 H0 Z">
                 <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M7,43L15,35">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF000000" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF000000"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="3" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
                 <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M15,35L20,30">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF64A6C4"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="3" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
                 <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M22.5,27.5L27.5,22.5">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF64A6C4"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="3" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
                 <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M35,15L30,20">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF64A6C4" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF64A6C4"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="3" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
                 <GeometryDrawing Brush="#FF000000" Geometry="F1 M50,50z M0,0z M35,15L43,7">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF000000" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF000000"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="3" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
             </DrawingGroup>
@@ -123,18 +183,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--几何关系-->
-    <Style x:Key="SketchRelationIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  几何关系  -->
+    <Style
+        x:Key="SketchRelationIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource SketchRelationDrawingImage}"/>
+                <Image Source="{DynamicResource SketchRelationDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="SketchRelationIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="SketchRelationIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="2" Source="{DynamicResource SketchRelationDrawingImage}"/>
+                <Image Margin="2" Source="{DynamicResource SketchRelationDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -144,17 +210,32 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M3.3072917,295.11255L4.5317806,295.11255 4.5129406,296.33705">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.66193336,296.26946L5.9527192,296.24886">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M3.4030937,291.0476L3.3702397,296.33783">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup>
@@ -162,11 +243,14 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--垂直-->
-    <Style x:Key="VERTICALIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  垂直  -->
+    <Style
+        x:Key="VERTICALIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="2" Source="{DynamicResource VERTICALDrawingImage}"/>
+                <Image Margin="2" Source="{DynamicResource VERTICALDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -176,12 +260,22 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.66193336,296.26946L5.9527192,296.24886">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.24401009" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.24401009" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M3.4030937,291.0476L3.3702397,296.33783">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.23173393" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.23173393" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup>
@@ -189,11 +283,14 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--平行-->
-    <Style x:Key="PARALLELDIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  平行  -->
+    <Style
+        x:Key="PARALLELDIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="2" Source="{DynamicResource PARALLELDrawingImage}"/>
+                <Image Margin="2" Source="{DynamicResource PARALLELDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -202,32 +299,53 @@
             <DrawingGroup ClipGeometry="M0,0 V6.6145833 H6.6145833 V0 H0 Z">
                 <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M2.071147,0.74822708L5.8663522,4.5434335">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF64A6C4" Thickness="0.24543275" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF64A6C4"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="0.24543275" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
                 <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.74891059,2.0718151L4.5427563,5.8656794">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="#FF64A6C4" Thickness="0.24543275" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        <Pen
+                            Brush="#FF64A6C4"
+                            EndLineCap="Flat"
+                            LineJoin="Miter"
+                            StartLineCap="Flat"
+                            Thickness="0.24543275" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--相等-->
-    <Style x:Key="EqualIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  相等  -->
+    <Style
+        x:Key="EqualIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Path Data="F1 M1024,1024z M0,0z M223,406.5L223,355.2 814,355.2 814,406.5 223,406.5z M223,709.3L223,658 814,658 814,709.3 223,709.3z" Fill="Black" Stroke="Black" StrokeThickness="1" Stretch="Fill"></Path>
+                <Path
+                    Data="F1 M1024,1024z M0,0z M223,406.5L223,355.2 814,355.2 814,406.5 223,406.5z M223,709.3L223,658 814,658 814,709.3 223,709.3z"
+                    Fill="Black"
+                    Stretch="Fill"
+                    Stroke="Black"
+                    StrokeThickness="1" />
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--对称-->
-    <Style x:Key="SYMMETRICDIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  对称  -->
+    <Style
+        x:Key="SYMMETRICDIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="2" Source="{DynamicResource SYMMETRICDrawingImage}"/>
+                <Image Margin="2" Source="{DynamicResource SYMMETRICDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -237,17 +355,31 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
                     <GeometryDrawing Brush="#FFFFFFFF">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.26458333" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Round" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Round"
+                                StartLineCap="Flat"
+                                Thickness="0.26458333" />
                         </GeometryDrawing.Pen>
                         <GeometryDrawing.Geometry>
-                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="2.0841,292.4695,2.4464,2.4464" />
+                            <RectangleGeometry
+                                RadiusX="0"
+                                RadiusY="0"
+                                Rect="2.0841,292.4695,2.4464,2.4464" />
                         </GeometryDrawing.Geometry>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M0.71297161,296.28697L5.9016117,291.09841">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.14576016" StartLineCap="Flat" EndLineCap="Flat" DashCap="Flat" LineJoin="Miter">
+                            <Pen
+                                Brush="#FF64A6C4"
+                                DashCap="Flat"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.14576016">
                                 <Pen.DashStyle>
-                                    <DashStyle Offset="0" Dashes="8.00000027442341 1.00000048024097" />
+                                    <DashStyle Dashes="8.00000027442341 1.00000048024097" Offset="0" />
                                 </Pen.DashStyle>
                             </Pen>
                         </GeometryDrawing.Pen>
@@ -257,14 +389,17 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--固定-->
-    <Style x:Key="FixedIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <!--  固定  -->
+    <Style
+        x:Key="FixedIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
                 <Image RenderTransformOrigin="0.5,0.5">
                     <Image.RenderTransform>
                         <TransformGroup>
-                            <RotateTransform Angle="45"/>
+                            <RotateTransform Angle="45" />
                         </TransformGroup>
                     </Image.RenderTransform>
                     <Image.Source>
@@ -281,38 +416,59 @@
         </Setter>
     </Style>
 
-    <!--Info-->
-    <Style x:Key="SWInfoIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  Info  -->
+    <Style
+        x:Key="SWInfoIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource SWInfoDrawingImage}"/>
+                <Image Source="{DynamicResource SWInfoDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <DrawingImage x:Key="SWInfoDrawingImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V6.6145834 H6.6145833 V0 H0 Z">
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
                     <GeometryDrawing>
                         <GeometryDrawing.Brush>
-                            <SolidColorBrush Color="#FFF7F7F7" Opacity="0" />
+                            <SolidColorBrush Opacity="0" Color="#FFF7F7F7" />
                         </GeometryDrawing.Brush>
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.13229167" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Round"
+                                LineJoin="Round"
+                                StartLineCap="Round"
+                                Thickness="0.13229167" />
                         </GeometryDrawing.Pen>
                         <GeometryDrawing.Geometry>
-                            <EllipseGeometry RadiusX="2.4805" RadiusY="2.4805" Center="3.3073,293.6927" />
+                            <EllipseGeometry
+                                Center="3.3073,293.6927"
+                                RadiusX="2.4805"
+                                RadiusY="2.4805" />
                         </GeometryDrawing.Geometry>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145834z M0,0z M3.2573474,295.48557L3.2573474,293.35279">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.9453941" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.9453941" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145834z M0,0z M3.2296047,292.80721L3.2296047,292.23926">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.94474947" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.94474947" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup>
@@ -320,18 +476,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--Dimension-->
-    <Style x:Key="DimensionIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  Dimension  -->
+    <Style
+        x:Key="DimensionIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource DimensionDrawingImage}"/>
+                <Image Source="{DynamicResource DimensionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="DimensionIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="DimensionIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource DimensionDrawingImage}"/>
+                <Image Source="{DynamicResource DimensionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -341,46 +503,77 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M3.6722571,295.98817L1.0102416,294.08088">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF65A6C4" Thickness="0.5129261" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF65A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5129261" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M5.8751845,292.96583L3.3156985,291.10083">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.5291667" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5291667" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M2.7987934,291.92395L1.5063983,293.45094">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.34395833" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.34395833" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M3.2386451,291.44119L2.3368489,291.63379 3.2351757,292.32019z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.25471511" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.25471511" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M1.2956467,293.85201L2.1974467,293.65941 1.2991167,292.97301z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.25471511" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.25471511" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup>
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
-    
-    <!--角度尺寸-->
-    <Style x:Key="AngleDimensionIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+
+    <!--  角度尺寸  -->
+    <Style
+        x:Key="AngleDimensionIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="-2" Source="{DynamicResource AngleDimensionDrawingImage}"/>
+                <Image Margin="-2" Source="{DynamicResource AngleDimensionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="AngleDimensionIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="AngleDimensionIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource AngleDimensionDrawingImage}"/>
+                <Image Source="{DynamicResource AngleDimensionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -390,12 +583,22 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-283.77082">
                     <GeometryDrawing Geometry="F1 M13.229166,13.229167z M0,0z M2.1047475,285.82144L2.1047475,294.91863 10.827757,294.91863">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.79374999" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.79374999" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M13.229166,13.229167z M0,0z M3.5057292,287.54113C5.4131985,287.54113 7.3204035,287.54113 8.2738736,288.53856 9.2273437,289.53599 9.2273437,291.53166 9.2273437,293.52733">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.79374999" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.79374999" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF000000" Geometry="F1 M13.229166,13.229167z M0,0z M4.9774738,287.47498C4.9774738,287.47498 4.9774738,285.86286 4.9774738,285.86286 4.491302,285.86286 3.0327864,287.47498 2.5466146,287.47498 3.0327864,287.47498 4.491302,289.0871 4.9774738,289.0871 4.9774738,289.0871 4.9774738,287.47498 4.9774738,287.47498z" />
@@ -408,18 +611,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--反转方向-->
-    <Style x:Key="ReverseDirectionIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  反转方向  -->
+    <Style
+        x:Key="ReverseDirectionIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="-2" Source="{DynamicResource ReverseDirectionDrawingImage}"/>
+                <Image Margin="-2" Source="{DynamicResource ReverseDirectionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ReverseDirectionIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="ReverseDirectionIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource ReverseDirectionDrawingImage}"/>
+                <Image Source="{DynamicResource ReverseDirectionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -429,22 +638,42 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M3.3139455,291.99241L1.4026232,294.20524">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.50353611" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.50353611" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M3.9728568,291.21L2.7908136,291.46126 3.9683093,292.3567z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.33307922" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.33307922" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FFD4D4D4" Geometry="F1 M6.6145832,6.6145835z M0,0z M2.6715563,295.90053L3.8028614,295.64162 2.6759094,294.71894z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FFD4D4D4" Thickness="0.33077213" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FFD4D4D4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.33077213" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M5.0767191,293.13184L3.2824615,295.10883">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FFD4D4D4" Thickness="0.46114343" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FFD4D4D4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.46114343" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup>
@@ -452,18 +681,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--蓝色箭头-->
-    <Style x:Key="BlueArrowIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  蓝色箭头  -->
+    <Style
+        x:Key="BlueArrowIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="-2" Source="{DynamicResource BlueArrowDrawingImage}"/>
+                <Image Margin="-2" Source="{DynamicResource BlueArrowDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="BlueArrowIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="BlueArrowIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource BlueArrowDrawingImage}"/>
+                <Image Source="{DynamicResource BlueArrowDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -473,12 +708,22 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M3.9227835,292.9139L2.0114612,295.12673">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF2D7396" Thickness="0.50353611" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF2D7396"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.50353611" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF2D7396" Geometry="F1 M6.6145832,6.6145835z M0,0z M4.5816948,292.14794L3.3996516,292.3992 4.5771473,293.29464z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF2D7396" Thickness="0.33307922" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF2D7396"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.33307922" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                 </DrawingGroup>
@@ -486,18 +731,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--D1Dimension-->
-    <Style x:Key="D1DimensionIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  D1Dimension  -->
+    <Style
+        x:Key="D1DimensionIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="-2" Source="{DynamicResource D1DimensionDrawingImage}"/>
+                <Image Margin="-2" Source="{DynamicResource D1DimensionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="D1DimensionIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="D1DimensionIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource D1DimensionDrawingImage}"/>
+                <Image Source="{DynamicResource D1DimensionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -507,27 +758,52 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.3854">
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M3.6722571,295.98817L1.0102416,294.08088">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF65A6C4" Thickness="0.5129261" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF65A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5129261" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M5.8751845,292.96583L3.3156985,291.10083">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF64A6C4" Thickness="0.5291667" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF64A6C4"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.5291667" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145832,6.6145835z M0,0z M2.7987934,291.92395L1.5063983,293.45094">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.34395833" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.34395833" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M3.2386451,291.44119L2.3368489,291.63379 3.2351757,292.32019z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.25471511" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.25471511" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Brush="#FF000000" Geometry="F1 M6.6145832,6.6145835z M0,0z M1.2956467,293.85201L2.1974467,293.65941 1.2991167,292.97301z">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.25471511" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.25471511" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <DrawingGroup Opacity="1" Transform="0.81009055,0,0,1.2344299,0,0">
@@ -539,18 +815,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--拔模-->
-    <Style x:Key="DraftIconLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  拔模  -->
+    <Style
+        x:Key="DraftIconLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="-2" Source="{DynamicResource DraftDrawingImage}"/>
+                <Image Margin="-2" Source="{DynamicResource DraftDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="DraftIconButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="DraftIconButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource DraftDrawingImage}"/>
+                <Image Source="{DynamicResource DraftDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -560,17 +842,32 @@
                 <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-290.38542">
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.58683693,295.7827L0.64992083,292.14225 4.9711437,291.36718 6.1066475,294.20909 6.0120215,295.85316 3.8671812,295.92366 3.8987252,294.6084 6.0751076,294.2561">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.13229167" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.13229167" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.51730446,295.79622L3.8996782,295.93595">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.13160388" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.13160388" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M0.64992083,292.14225L3.8987252,294.6084">
                         <GeometryDrawing.Pen>
-                            <Pen Brush="#FF000000" Thickness="0.13229167" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                            <Pen
+                                Brush="#FF000000"
+                                EndLineCap="Flat"
+                                LineJoin="Miter"
+                                StartLineCap="Flat"
+                                Thickness="0.13229167" />
                         </GeometryDrawing.Pen>
                     </GeometryDrawing>
                     <DrawingGroup Transform="0.26458333,0,0,0.26458333,0,290.38542">
@@ -579,9 +876,9 @@
                     <DrawingGroup Transform="0.26458333,0,0,0.26458333,0,290.38542">
                         <GeometryDrawing Geometry="F1 M6.6145833,6.6145833z M0,0z M8.9907086,11.256606C5.7851952,8.8233386 3.1773652,6.8192432 3.1955307,6.8030605 3.2287183,6.7734955 18.439393,4.0381824 18.563854,4.0393976 18.610304,4.0398512 19.252442,5.5967611 20.694029,9.2041364 21.829055,12.044385 22.752359,14.37358 22.745815,14.380123 22.739315,14.386623 20.986953,14.674089 18.851774,15.018839 16.716595,15.363589 14.935719,15.653548 14.894272,15.663192 14.846882,15.674222 12.656034,14.038911 8.9907086,11.256606z">
                             <GeometryDrawing.Brush>
-                                <LinearGradientBrush StartPoint="3.1954364,9.8513223" EndPoint="22.74585,9.8513223" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1">
-                                    <GradientStop Color="#FF8AD2ED" Offset="0" />
-                                    <GradientStop Color="#008AD2ED" Offset="1" />
+                                <LinearGradientBrush MappingMode="Absolute" Opacity="1" SpreadMethod="Pad" StartPoint="3.1954364,9.8513223" EndPoint="22.74585,9.8513223">
+                                    <GradientStop Offset="0" Color="#FF8AD2ED" />
+                                    <GradientStop Offset="1" Color="#008AD2ED" />
                                 </LinearGradientBrush>
                             </GeometryDrawing.Brush>
                         </GeometryDrawing>
@@ -591,18 +888,24 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--草图轮廓-->
-    <Style x:Key="SketchRegionLabel" TargetType="Label" BasedOn="{StaticResource IconLabel}">
+    <!--  草图轮廓  -->
+    <Style
+        x:Key="SketchRegionLabel"
+        BasedOn="{StaticResource IconLabel}"
+        TargetType="Label">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Margin="-2" Source="{DynamicResource SketchRegionDrawingImage}"/>
+                <Image Margin="-2" Source="{DynamicResource SketchRegionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="SketchRegionButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Style
+        x:Key="SketchRegionButton"
+        BasedOn="{StaticResource IconButton}"
+        TargetType="Button">
         <Setter Property="Content">
             <Setter.Value>
-                <Image Source="{DynamicResource SketchRegionDrawingImage}"/>
+                <Image Source="{DynamicResource SketchRegionDrawingImage}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -616,10 +919,18 @@
                     <DrawingGroup Transform="0.72669616,-0.68695901,0.70984452,0.7043584,0,0">
                         <GeometryDrawing>
                             <GeometryDrawing.Pen>
-                                <Pen Brush="#FF8AD2ED" Thickness="0.30007673" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Round" />
+                                <Pen
+                                    Brush="#FF8AD2ED"
+                                    EndLineCap="Flat"
+                                    LineJoin="Round"
+                                    StartLineCap="Flat"
+                                    Thickness="0.30007673" />
                             </GeometryDrawing.Pen>
                             <GeometryDrawing.Geometry>
-                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="-208.0501,213.6691,3.722,4.0815" />
+                                <RectangleGeometry
+                                    RadiusX="0"
+                                    RadiusY="0"
+                                    Rect="-208.0501,213.6691,3.722,4.0815" />
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingGroup>
@@ -646,7 +957,13 @@
                                     <DrawingGroup Opacity="1" Transform="1,0,0,1,110.117647,11.131602">
                                         <DrawingGroup>
                                             <DrawingGroup.OpacityMask>
-                                                <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486" Viewbox="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486" Stretch="Uniform" TileMode="None">
+                                                <DrawingBrush
+                                                    Stretch="Uniform"
+                                                    TileMode="None"
+                                                    Viewbox="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486"
+                                                    ViewboxUnits="Absolute"
+                                                    Viewport="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486"
+                                                    ViewportUnits="Absolute">
                                                     <DrawingBrush.Drawing>
                                                         <DrawingGroup>
                                                             <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M29.1559,11.3825L29.1559,11.3825 29.1559,0.1387 0.1076,0.1387 0.1076,11.3825 29.1559,11.3825z" />
@@ -656,7 +973,13 @@
                                             </DrawingGroup.OpacityMask>
                                             <DrawingGroup>
                                                 <DrawingGroup.OpacityMask>
-                                                    <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486" Viewbox="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486" Stretch="Uniform" TileMode="None">
+                                                    <DrawingBrush
+                                                        Stretch="Uniform"
+                                                        TileMode="None"
+                                                        Viewbox="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486"
+                                                        ViewboxUnits="Absolute"
+                                                        Viewport="0.107647061347961,0.138716876506805,9.81507003307343,11.2437742352486"
+                                                        ViewportUnits="Absolute">
                                                         <DrawingBrush.Drawing>
                                                             <DrawingGroup>
                                                                 <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M29.1559,11.3825L29.1559,11.3825 29.1559,0.1387 0.1076,0.1387 0.1076,11.3825 29.1559,11.3825z" />
@@ -669,7 +992,13 @@
                                         </DrawingGroup>
                                         <DrawingGroup>
                                             <DrawingGroup.OpacityMask>
-                                                <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486" Viewbox="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486" Stretch="Uniform" TileMode="None">
+                                                <DrawingBrush
+                                                    Stretch="Uniform"
+                                                    TileMode="None"
+                                                    Viewbox="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486"
+                                                    ViewboxUnits="Absolute"
+                                                    Viewport="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486"
+                                                    ViewportUnits="Absolute">
                                                     <DrawingBrush.Drawing>
                                                         <DrawingGroup>
                                                             <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M29.1559,11.3825L29.1559,11.3825 29.1559,0.1387 0.1076,0.1387 0.1076,11.3825 29.1559,11.3825z" />
@@ -679,7 +1008,13 @@
                                             </DrawingGroup.OpacityMask>
                                             <DrawingGroup>
                                                 <DrawingGroup.OpacityMask>
-                                                    <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486" Viewbox="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486" Stretch="Uniform" TileMode="None">
+                                                    <DrawingBrush
+                                                        Stretch="Uniform"
+                                                        TileMode="None"
+                                                        Viewbox="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486"
+                                                        ViewboxUnits="Absolute"
+                                                        Viewport="20.7584114074707,0.138716876506805,8.39760398864746,11.2437742352486"
+                                                        ViewportUnits="Absolute">
                                                         <DrawingBrush.Drawing>
                                                             <DrawingGroup>
                                                                 <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M29.1559,11.3825L29.1559,11.3825 29.1559,0.1387 0.1076,0.1387 0.1076,11.3825 29.1559,11.3825z" />
@@ -704,7 +1039,7 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <!--达索系统图片-->
+    <!--  达索系统图片  -->
     <DrawingImage x:Key="_3ds_darkDrawingImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V33 H108 V0 H0 Z">

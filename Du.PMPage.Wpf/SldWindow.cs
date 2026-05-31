@@ -19,7 +19,7 @@ namespace Du.PMPage.Wpf
         private readonly SelectionMgr _seleMgr;
         private PartDoc _partDoc;
 
-        private List<SldWpfSelectionList> _selectionList;
+        private List<WpfSelectionList> _selectionList;
 
         private const int S_OK = 0x00000000;
         private const int S_FALSE = 0x00000001;
@@ -45,7 +45,7 @@ namespace Du.PMPage.Wpf
 
         public List<swSelectType_e> AllowSelectTypes { get; } = new List<swSelectType_e>();
 
-        public List<SldWpfSelectionList> SelectionList
+        public List<WpfSelectionList> SelectionList
         {
             get => _selectionList; set
             {

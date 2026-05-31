@@ -1,22 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net48</TargetFramework>
 		<!--<XCadRegDll>false</XCadRegDll>-->
 		<OutputType>Library</OutputType>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
 		<EnableComHosting>true</EnableComHosting>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<XCadRegDll>false</XCadRegDll>
+		<LangVersion>latest</LangVersion>
+		<!--<XCadRegDll>false</XCadRegDll>-->
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Du.PMPage.Wpf" Version="0.0.1" />
-		<PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-		<PackageReference Include="Xarial.XCad.SolidWorks" Version="0.7.12" />
+		<!--<PackageReference Include="Du.PMPage.Wpf" Version="0.0.1" />-->
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Du.PMPage.Wpf\Du.PMPage.Wpf.csproj" />
 	</ItemGroup>
 
 </Project>

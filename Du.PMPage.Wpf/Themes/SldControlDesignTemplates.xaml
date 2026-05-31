@@ -1,0 +1,248 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Du.PMPage.Wpf.Controls">
+
+    <!--  SldGroupBox: renders as a SW-style group box border with caption  -->
+    <Style TargetType="{x:Type local:SldGroupBox}">
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Margin" Value="0,4,0,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldGroupBox}">
+                    <Border
+                        BorderBrush="#FF9CA2B9"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Border
+                                Grid.Row="0"
+                                Padding="6,2,6,2"
+                                Background="#FFF0F0F0"
+                                BorderBrush="#FF9CA2B9"
+                                BorderThickness="0,0,0,1">
+                                <TextBlock
+                                    FontSize="13"
+                                    FontWeight="Bold"
+                                    Text="{Binding Caption, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Border>
+                            <ContentPresenter Grid.Row="1" Margin="6,4,6,4" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldSelectionBox: renders as a selection area placeholder  -->
+    <Style TargetType="{x:Type local:SldSelectionBox}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldSelectionBox}">
+                    <Border
+                        Padding="4,2"
+                        Background="#FFFFFF"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Foreground="#888888"
+                                Text="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Border
+                                Grid.Column="1"
+                                MinWidth="20"
+                                MinHeight="16"
+                                Background="#E5F1FB"
+                                BorderBrush="#007ACC"
+                                BorderThickness="1"
+                                CornerRadius="2">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="#007ACC"
+                                    Text="..." />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldCheckBox: renders as a WPF CheckBox  -->
+    <Style TargetType="{x:Type local:SldCheckBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldCheckBox}">
+                    <CheckBox
+                        Margin="2"
+                        Content="{Binding Caption, RelativeSource={RelativeSource TemplatedParent}}"
+                        IsChecked="{Binding Checked, RelativeSource={RelativeSource TemplatedParent}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldNumberBox: renders as a number input  -->
+    <Style TargetType="{x:Type local:SldNumberBox}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldNumberBox}">
+                    <Border
+                        Padding="4,2"
+                        Background="#FFFFFF"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,6,0"
+                                VerticalAlignment="Center"
+                                Text="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TextBox
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{Binding Value, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldLabel: renders as a TextBlock  -->
+    <Style TargetType="{x:Type local:SldLabel}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldLabel}">
+                    <TextBlock
+                        Padding="4,2"
+                        Text="{Binding SldText, RelativeSource={RelativeSource TemplatedParent}}"
+                        TextWrapping="Wrap" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldTextBox: renders as a text input  -->
+    <Style TargetType="{x:Type local:SldTextBox}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldTextBox}">
+                    <Border
+                        Padding="4,2"
+                        Background="#FFFFFF"
+                        BorderBrush="#CCCCCC"
+                        BorderThickness="1"
+                        CornerRadius="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,6,0"
+                                VerticalAlignment="Center"
+                                Text="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TextBox
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldCombobox: renders as a ComboBox  -->
+    <Style TargetType="{x:Type local:SldCombobox}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldCombobox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="0,0,6,0"
+                            VerticalAlignment="Center"
+                            Text="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ComboBox Grid.Column="1" VerticalAlignment="Center">
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldOption: renders as a RadioButton  -->
+    <Style TargetType="{x:Type local:SldOption}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldOption}">
+                    <RadioButton Margin="2" Content="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldButton: renders as a Button  -->
+    <Style TargetType="{x:Type local:SldButton}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="MinWidth" Value="60" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldButton}">
+                    <Button
+                        MinWidth="60"
+                        MinHeight="24"
+                        Margin="2"
+                        Content="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  SldBitmapButton: renders as a Button  -->
+    <Style TargetType="{x:Type local:SldBitmapButton}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="MinWidth" Value="60" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SldBitmapButton}">
+                    <Button
+                        MinWidth="60"
+                        MinHeight="24"
+                        Margin="2"
+                        Content="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

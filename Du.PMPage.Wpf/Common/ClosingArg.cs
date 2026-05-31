@@ -1,7 +1,7 @@
 ﻿namespace Du.PMPage.Wpf
 {
     /// <summary>
-    /// Represents the parameter of <see cref="SldPMPage.Closing"/> notification
+    /// Represents the parameter of <c>Closing</c> event notification
     /// </summary>
     /// <remarks>If <see cref="Cancel"/> parameter is set to true and <see cref="ErrorTitle"/>
     /// and <see cref="ErrorMessage"/> are not empty. Framework will display the error popup box

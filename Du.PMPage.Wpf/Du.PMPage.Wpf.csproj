@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net461</TargetFramework>
+		<TargetFramework>net48</TargetFramework>
+		<LangVersion>latest</LangVersion>
 		<SignAssembly>false</SignAssembly>
 		<IncludeSymbols>true</IncludeSymbols>
 		<UseWPF>true</UseWPF>
@@ -16,19 +17,15 @@
 		<EnableComHosting>true</EnableComHosting>
 		<Description>Create SolidWorks PMPage with xaml</Description>
 		<PackageIcon>pmpageicon.png</PackageIcon>
-		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <NoWarn>1701;1702;1591;0067</NoWarn>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <NoWarn>1701;1702;1591;0067</NoWarn>
+		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+		<XcadRegDll>false</XcadRegDll>
+		<NoWarn>CS1591</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\Images\pmpageicon.png" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Xarial.XCad.SolidWorks.Interops" Version="0.3.0" />
+	  <PackageReference Include="Xarial.XCad.SolidWorks" Version="0.8.3" />
 	</ItemGroup>
 
 	<ItemGroup>
