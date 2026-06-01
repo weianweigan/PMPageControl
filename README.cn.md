@@ -6,6 +6,8 @@
 
 基于 WPF 的 SolidWorks PropertyManagerPage (PMPage) 开发框架。使用 XAML 和数据绑定构建属性页，无需编写 Handler 代码。
 
+[![NuGet](https://img.shields.io/nuget/v/Du.PMPage.Wpf.svg)](https://www.nuget.org/packages/Du.PMPage.Wpf/) [![NuGet Downloads](https://img.shields.io/nuget/dt/Du.PMPage.Wpf.svg)](https://www.nuget.org/packages/Du.PMPage.Wpf/)
+
 [English](README.md) | [English Documentation](docs/en/index.md) | [中文文档](docs/zh/index.md)
 
 ---

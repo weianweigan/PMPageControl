@@ -6,6 +6,8 @@
 
 A WPF framework for developing SolidWorks PropertyManager Pages (PMPage) using XAML and data binding — no handler code required.
 
+[![NuGet](https://img.shields.io/nuget/v/Du.PMPage.Wpf.svg)](https://www.nuget.org/packages/Du.PMPage.Wpf/) [![NuGet Downloads](https://img.shields.io/nuget/dt/Du.PMPage.Wpf.svg)](https://www.nuget.org/packages/Du.PMPage.Wpf/)
+
 [中文文档](README.cn.md) | [English Documentation](docs/en/index.md) | [中文文档](docs/zh/index.md)
 
 ---
@@ -26,6 +28,26 @@ A WPF framework for developing SolidWorks PropertyManager Pages (PMPage) using X
 
 - .NET Framework 4.8
 - SolidWorks 2018+ (`IPropertyManagerPage2Handler9` support)
+
+## Installation
+
+Install the package from [NuGet](https://www.nuget.org/packages/Du.PMPage.Wpf/):
+
+```bash
+dotnet add package Du.PMPage.Wpf
+```
+
+Or via **Package Manager Console**:
+
+```powershell
+Install-Package Du.PMPage.Wpf
+```
+
+Or add the **PackageReference** directly:
+
+```xml
+<PackageReference Include="Du.PMPage.Wpf" Version="0.0.2" />
+```
 
 ## Quick Start
 
