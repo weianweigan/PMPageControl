@@ -10,14 +10,15 @@
 		<LangVersion>latest</LangVersion>
 		<!--<XCadRegDll>false</XCadRegDll>-->
 	</PropertyGroup>
-	
+
 	<ItemGroup>
-		<!--<PackageReference Include="Du.PMPage.Wpf" Version="0.0.1" />-->
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
-	  <ProjectReference Include="..\Du.PMPage.Wpf\Du.PMPage.Wpf.csproj" />
+		<ProjectReference Include="..\Du.PMPage.Wpf\Du.PMPage.Wpf.csproj" />
+
+		<!--<PackageReference Include="Du.PMPage.Wpf" Version="1.0.1-preview" />-->
 	</ItemGroup>
 
 </Project>

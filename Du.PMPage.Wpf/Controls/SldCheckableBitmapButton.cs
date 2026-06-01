@@ -90,7 +90,7 @@ public class SldCheckableBitmapButton : SldBitmapButton
     protected override void SetSldControl()
     {
         base.SetSldControl();
-        SControl.IsCheckable = IsCheckable;
+        // SControl.IsCheckable = IsCheckable;
         SControl.Checked = Checked;
     }
 }

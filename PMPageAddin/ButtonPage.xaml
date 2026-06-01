@@ -43,11 +43,11 @@
 
     <!-- Checkable bitmap button (toggle-style) -->
     <pmp:SldGroupBox Caption="Toggle Buttons">
-        <pmp:SldCheckableBitmapButton
+        <!--<pmp:SldCheckableBitmapButton
             SldCaption="Preview Mode"
             BtnStandardBitmap="swBitmapButtonImage_draft"
             Checked="{Binding IsPreviewMode}"
-            Command="{Binding TogglePreviewCommand}" />
+            Command="{Binding TogglePreviewCommand}" />-->
         <pmp:SldLabel
             SldCaption="Preview"
             SldText="{Binding PreviewStatus}" />
