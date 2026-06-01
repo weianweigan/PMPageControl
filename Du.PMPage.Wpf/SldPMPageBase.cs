@@ -277,8 +277,16 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
     /// </summary>
     public void ShowPage()
     {
-        // Use STA apartment to prevent SolidWorks crashes
-        Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA);
+        // Ensure the current thread is STA for SolidWorks COM interop.
+        if (!Thread.CurrentThread.TrySetApartmentState(ApartmentState.STA))
+        {
+            if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
+            {
+                throw new InvalidOperationException(
+                    "The current thread must be in STA mode to show a SolidWorks PropertyManagerPage. " +
+                    "Ensure the calling thread is an STA thread (e.g., the main WPF UI thread).");
+            }
+        }
 
         _doc = App?.IActiveDoc2;
         if (_doc == null)
@@ -292,18 +300,11 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         }
 
         swPropertyManagerPageStatus_e result;
-        try
-        {
-            Debug.Print("PMPage.Show");
-            BeforeShow();
-            OnShowPagePreview();
-            result = (swPropertyManagerPageStatus_e)_page.Show();
-            Debug.Print("PMPage.Showed");
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        Debug.Print("PMPage.Show");
+        BeforeShow();
+        OnShowPagePreview();
+        result = (swPropertyManagerPageStatus_e)_page.Show();
+        Debug.Print("PMPage.Showed");
 
         if (result != swPropertyManagerPageStatus_e.swPropertyManagerPage_Okay)
             throw new CreatePMPageErrorException($"ShowPage Error: {result}");
@@ -582,8 +583,20 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
                 _page = null;
             }
 
-            _doc = null;
+            if (_doc != null)
+            {
+                Marshal.FinalReleaseComObject(_doc);
+                _doc = null;
+            }
             App = null;
+
+            AfterActivationEvent = null;
+            OkClicked = null;
+            HelpRequested = null;
+            WhatsNewRequested = null;
+            Closing = null;
+            Closed = null;
+
             _disposed = true;
         }
     }

@@ -25,6 +25,10 @@ public class SldPMPage : SldPMPageBase
 {
     #region Fields
 
+    /// <summary>
+    /// Next available control ID. Starts at 2 because ID 1 is reserved
+    /// for internal page use by the SolidWorks PropertyManagerPage API.
+    /// </summary>
     private int _idIndex = 2;
     private List<SldControl> _discoveredControls;
     private readonly List<SldContentHost> _contentHosts = new List<SldContentHost>();
@@ -220,7 +224,76 @@ public class SldPMPage : SldPMPageBase
                 }
             }
         }
+        WireExternalSelectionHandlers();
         _controlsAdded = true;
+    }
+
+    /// <summary>
+    /// Wires <see cref="SldSelectionBox.ExternalSelectionHandler"/> for every discovered
+    /// selection box so that external modifications to the <see cref="SldSelectionBox.Selections"/>
+    /// collection are reflected in the SolidWorks selection manager.
+    /// </summary>
+    private void WireExternalSelectionHandlers()
+    {
+        foreach (var box in _discoveredControls.OfType<SldSelectionBox>())
+        {
+            box.ExternalSelectionHandler = HandleExternalSelection;
+        }
+    }
+
+    /// <summary>
+    /// Translates an external <see cref="SldSelectionBox.Selections"/> collection change
+    /// into a SolidWorks <see cref="ISelectionManager"/> / <see cref="IEntity"/> operation.
+    /// </summary>
+    /// <param name="item">The selection pair to act on, or null for Reset.</param>
+    /// <param name="select">true to select; false to deselect; null to clear all.</param>
+    private void HandleExternalSelection(SwSeleTypeObjectPair item, bool? select)
+    {
+        var selMgr = ActiveDoc?.ISelectionManager;
+        if (selMgr == null)
+            return;
+
+        if (select == null)
+        {
+            // Reset — deselect all items under every known selection box's mark
+            foreach (var box in _discoveredControls.OfType<SldSelectionBox>())
+            {
+                int count = selMgr.GetSelectedObjectCount2(box.Mark);
+                for (int i = count; i >= 1; i--)
+                {
+                    selMgr.DeSelect2(i, box.Mark);
+                }
+            }
+            return;
+        }
+
+        if (item?.SelectedObject == null)
+            return;
+
+        if (select.Value)
+        {
+            // Select via IEntity.Select4 with the selection box's mark
+            if (item.SelectedObject is IEntity entity)
+            {
+                var selectData = selMgr.CreateSelectData();
+                selectData.Mark = item.Mark;
+                entity.Select4(true, selectData);
+            }
+        }
+        else
+        {
+            // Find the item by identity and deselect it
+            int count = selMgr.GetSelectedObjectCount2(item.Mark);
+            for (int i = 1; i <= count; i++)
+            {
+                var candidate = selMgr.GetSelectedObject6(i, item.Mark);
+                if (candidate != null && App.IsSame(candidate, item.SelectedObject) == (int)swObjectEquality.swObjectSame)
+                {
+                    selMgr.DeSelect2(i, item.Mark);
+                    break;
+                }
+            }
+        }
     }
 
     private static IEnumerable<SldControl> EnumerateSldControls(DependencyObject root)
@@ -438,7 +511,7 @@ public class SldPMPage : SldPMPageBase
             var count = selMgr.GetSelectedObjectCount2(seleBoxes[j].Mark);
             if (count > 0)
             {
-                List<SwSeleTypeObjectPair> selections = new List<SwSeleTypeObjectPair>(count);
+                List<SwSeleTypeObjectPair> selections = new(count);
                 for (int k = 1; k < count + 1; k++)
                 {
                     var selection = selMgr.GetSelectedObject6(k, seleBoxes[j].Mark);

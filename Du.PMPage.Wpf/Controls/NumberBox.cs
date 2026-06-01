@@ -106,10 +106,6 @@ public class NumberBox : TextBox
         {
             Value = value;
         }
-        catch (Exception)
-        {
-            throw;
-        }
         finally
         {
             isUpdateValue = false;
@@ -126,10 +122,6 @@ public class NumberBox : TextBox
         try
         {
             Text = text;
-        }
-        catch (Exception)
-        {
-            throw;
         }
         finally
         {

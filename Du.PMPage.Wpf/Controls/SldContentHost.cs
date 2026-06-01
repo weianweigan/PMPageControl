@@ -78,6 +78,8 @@ public class SldContentHost : SldControl<IPropertyManagerPageWindowFromHandle>
 
     #endregion
 
+    public bool UseSystemFont { get; set; } = true;
+
     #region Overrides (SldControl integration)
 
     /// <summary>
@@ -137,8 +139,11 @@ public class SldContentHost : SldControl<IPropertyManagerPageWindowFromHandle>
             ElementHost = new ElementHost
             {
                 Child = ui,
-                Font = System.Drawing.SystemFonts.MessageBoxFont
             };
+            if (UseSystemFont)
+            {
+                ElementHost.Font = System.Drawing.SystemFonts.MessageBoxFont;
+            }
         }
 
         SControl.SetWindowHandlex64(ElementHost.Handle.ToInt64());

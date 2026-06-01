@@ -40,42 +40,20 @@
 
     <!--  SldSelectionBox: renders as a selection area placeholder  -->
     <Style TargetType="{x:Type local:SldSelectionBox}">
-        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Height" Value="24" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SldSelectionBox}">
-                    <Border
-                        Padding="4,2"
-                        Background="#FFFFFF"
-                        BorderBrush="#CCCCCC"
-                        BorderThickness="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Grid.Column="0"
-                                VerticalAlignment="Center"
-                                Foreground="#888888"
-                                Text="{Binding SldCaption, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <Border
-                                Grid.Column="1"
-                                MinWidth="20"
-                                MinHeight="16"
-                                Background="#E5F1FB"
-                                BorderBrush="#007ACC"
-                                BorderThickness="1"
-                                CornerRadius="2">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Foreground="#007ACC"
-                                    Text="..." />
-                            </Border>
-                        </Grid>
-                    </Border>
+                    <ListBox>
+                        <ListBox.Style>
+                            <Style TargetType="ListBox">
+                                <Setter Property="Background" Value="#FFCFE4F7" />
+                                <Setter Property="BorderBrush" Value="#FF53A9FF" />
+                                <Setter Property="BorderThickness" Value="2" />
+                            </Style>
+                        </ListBox.Style>
+                    </ListBox>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

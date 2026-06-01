@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SolidWorks.Interop.sldworks;
+using System.Windows;
 
 namespace Du.PMPage.Wpf.Controls;
 
@@ -74,11 +75,8 @@ public class SldCheckableBitmapButton : SldBitmapButton
 
     protected override void SetSldControl()
     {
+        base.SetSldControl();
         SControl.IsCheckable = IsCheckable;
         SControl.Checked = Checked;
-        if (BtnStandardBitmap != null)
-        {
-            SControl.SetStandardBitmaps((int)BtnStandardBitmap.Value);
-        }
     }
 }

@@ -11,9 +11,9 @@
 
 * No PMPHandler.cs or other Handler code
 
-* Using *.xmal usercontrol to develop pmpage
+* Using *.xaml usercontrol to develop pmpage
 
-## ¶þ.Getting Started
+## ï¿½ï¿½.Getting Started
 
 1.Add a WPF usercontrol to your project.
 
@@ -29,9 +29,9 @@ xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
 </page:SldPMPage.Resources>
 ```
 
-3.Modeify the root(UserControl) as page:SldPMPage 
+3.Modify the root(UserControl) as page:SldPMPage 
 
-4.Modeify the *.xaml.cs code to inhert form SldPMPage
+4.Modify the *.xaml.cs code to inherit from SldPMPage
 
 5.Add a new ctor for ISldWorks interface
 
@@ -50,7 +50,7 @@ xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
     </page:SldPMPage.Resources>
     <StackPanel>
         <TabControl>
-            <TabItem Header="Ä£ÐÍ">
+            <TabItem Header="Ä£ï¿½ï¿½">
                 <StackPanel>
                     <ComboBox/>
                     <TextBox/>
@@ -74,7 +74,7 @@ xmlns:page="clr-namespace:Du.PMPage.Wpf;assembly=Du.PMPage.Wpf"
 
 ```csharp
     /// <summary>
-    /// Dimension.xaml µÄ½»»¥Âß¼­
+    /// Dimension.xaml ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
     /// </summary>
     public partial class Dimension : SldPMPage
     {
@@ -99,7 +99,7 @@ PMPageWindow.PageSample sample = new PMPageWindow.PageSample(SwApp);
 sample.ShowPage();
 ```
 
-## Èý.Icons and controls
+## ï¿½ï¿½.Icons and controls
 
 ### 1.Icons:
 
@@ -125,7 +125,7 @@ check the icons folder for *.svg file
 
 ### 2.Controls:
 
-**LabelMsg£º**
+**LabelMsgï¿½ï¿½**
 
 <div>
 <img src="resources/LabelMsg.png" width="400"/>
@@ -179,7 +179,7 @@ check the icons folder for *.svg file
 
 ```xml
 <page:SldLabelMsg Margin="-5,0">
-     <TextBlock TextWrapping="Wrap">±à¼­ÏÂÒ»ÐÂÏßÌõµÄÉè¶¨»ò»æÖÆÒ»ÐÂÏßÌõ.</TextBlock>
+     <TextBlock TextWrapping="Wrap">ï¿½à¼­ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¶¨ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.</TextBlock>
 </page:SldLabelMsg>
 ```
 
@@ -188,7 +188,7 @@ check the icons folder for *.svg file
 ```xml
 <Expander IsExpanded="True" Margin="0,10,0,0">
      <Expander.Header>
-          <TextBlock FontWeight="Black">Ñ¡Ïî(o)</TextBlock>
+          <TextBlock FontWeight="Black">Ñ¡ï¿½ï¿½(o)</TextBlock>
      </Expander.Header>
 </Expander>
 ```
@@ -200,7 +200,7 @@ check the icons folder for *.svg file
      <Image Source="{StaticResource ReverseDirectionDrawingImage}"></Image>
 </Button>
 <ComboBox Background="#FF8AD2ED" Grid.Column="1" SelectedIndex="0">
-      <ComboBoxItem Content="¸ø¶¨Éî¶È"/>
+      <ComboBoxItem Content="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"/>
 </ComboBox>
 ```
 
@@ -213,7 +213,7 @@ check the icons folder for *.svg file
 </page:SldNumberBox>
 ```
 
-* SelectionBox£º
+* SelectionBoxï¿½ï¿½
 
 ```xml
 <page:SldSelectionBox page:SelectionBoxManager.Join="True" Height="50"  Grid.Column="1"/>
@@ -223,9 +223,9 @@ check the icons folder for *.svg file
 
 ```xml
 <StackPanel Margin="20,0,0,0">
-     <CheckBox Margin="0,2.5">×÷Îª¹¹ÔìÏß(C)</CheckBox>
-     <CheckBox Margin="0,2.5">ÎÞÏÞ³¤¶È(I)</CheckBox>
-     <CheckBox Margin="0,2.5">ÖÐµãÏß(M)</CheckBox>
+     <CheckBox Margin="0,2.5">ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(C)</CheckBox>
+     <CheckBox Margin="0,2.5">ï¿½ï¿½ï¿½Þ³ï¿½ï¿½ï¿½(I)</CheckBox>
+     <CheckBox Margin="0,2.5">ï¿½Ðµï¿½ï¿½ï¿½(M)</CheckBox>
 </StackPanel>
 ```
 
@@ -233,14 +233,14 @@ check the icons folder for *.svg file
 
 ```xml
 <StackPanel Margin="20,0,0,0">
-     <RadioButton Margin="0,5,0,2.5">°´Ô­Ñù»æÖÆ(s)</RadioButton>
+     <RadioButton Margin="0,5,0,2.5">ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(s)</RadioButton>
      <RadioButton Margin="0,2.5">Ë®Æ½(H)</RadioButton>
-     <RadioButton>ÊúÖ±(v)</RadioButton>
-     RadioButton>½Ç¶È(A)</RadioButton>
+     <RadioButton>ï¿½ï¿½Ö±(v)</RadioButton>
+     <RadioButton>Angle(A)</RadioButton>
 </StackPanel>
 ```
 
-## ËÄ.Next
+## ï¿½ï¿½.Next
 
 * 1.SelectionBox'detail 
 * 2.taskpane page

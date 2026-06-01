@@ -29,6 +29,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter Property="Background" Value="Yellow" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

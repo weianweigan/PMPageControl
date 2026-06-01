@@ -14,7 +14,17 @@ public class WpfSelectionList : ListBox
         //DefaultStyleKeyProperty.OverrideMetadata(typeof(SldWpfSelectionList), new FrameworkPropertyMetadata(typeof(SldWpfSelectionList)));
     }
 
-    public event Action<object> Actived;
+    /// <summary>
+    /// Raised when the selection list is activated by a mouse click.
+    /// </summary>
+    public event Action<object> Activated;
+
+    [Obsolete("Use 'Activated' instead. 'Actived' will be removed in a future version.")]
+    public event Action<object> Actived
+    {
+        add { Activated += value; }
+        remove { Activated -= value; }
+    }
 
     public bool IsActive
     {
@@ -41,7 +51,7 @@ public class WpfSelectionList : ListBox
     protected override void OnMouseUp(MouseButtonEventArgs e)
     {
         IsActive = true;
-        Actived?.Invoke(this);
+        Activated?.Invoke(this);
         base.OnMouseUp(e);
     }
 

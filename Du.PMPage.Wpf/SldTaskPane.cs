@@ -1,8 +1,8 @@
 ﻿/*
- 
+
    1.创建于 2020/6/7，用于显示Taskpane页。
    托管了一ElementHost 来显示一个WPF的用户控件
- 
+
  */
 
 
@@ -10,6 +10,7 @@ namespace Du.PMPage.Wpf
 {
     using SolidWorks.Interop.sldworks;
     using System;
+    using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Forms.Integration;
@@ -153,21 +154,23 @@ namespace Du.PMPage.Wpf
         #region Public Methods
 
         /// <summary>
-        /// Hides the application-level tab on the Task Pane. 
+        /// Hides the application-level tab on the Task Pane.
         /// </summary>
         /// <returns>True if the application-level tab is hidden, false if not</returns>
         public bool HideView()
         {
             DeBindToEleHost();
-            return TaskpaneView.HideView();
+            return TaskpaneView?.HideView() ?? false;
         }
 
         /// <summary>
-        /// Activates the application-level tab of the Task Pane view and makes the view visible. 
+        /// Activates the application-level tab of the Task Pane view and makes the view visible.
         /// </summary>
         /// <returns>True if application-level tab of the Task Pane view is visible, false if not</returns>
         public bool ShowView()
         {
+            if (TaskpaneView == null)
+                AddTaskPane();
             if (EleHost.Child == null)
             {
                 AddWPFHostControl();
@@ -193,13 +196,28 @@ namespace Du.PMPage.Wpf
 
         public void Dispose()
         {
-            TaskpaneView?.DeleteView();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-            if (!this.EleHost.IsDisposed)
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                EleHost.Controls.Clear();
-                EleHost.Child = null;
-                EleHost.Dispose();
+                TaskpaneView?.DeleteView();
+
+                if (TaskpaneView != null)
+                {
+                    Marshal.FinalReleaseComObject(TaskpaneView);
+                    TaskpaneView = null;
+                }
+
+                if (!this.EleHost.IsDisposed)
+                {
+                    EleHost.Controls.Clear();
+                    EleHost.Child = null;
+                    EleHost.Dispose();
+                }
             }
         }
 

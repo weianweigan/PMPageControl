@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 
@@ -7,7 +8,7 @@ namespace Du.PMPage.Wpf.Controls;
 /// <summary>
 /// TextBox Used in PMPage
 /// </summary>
-public class IOTextBox:TextBox
+public class IOTextBox : TextBox
 {
     private const uint DLGC_WANTARROWS = 0x0001;
     private const uint DLGC_WANTTAB = 0x0002;
@@ -16,13 +17,21 @@ public class IOTextBox:TextBox
     private const uint DLGC_WANTCHARS = 0x0080;
     private const uint WM_GETDLGCODE = 0x0087;
 
+    private HwndSource _hwndSource;
+    private HwndSourceHook _hook;
+
     public IOTextBox() : base()
     {
-        Loaded += delegate
+        _hook = new HwndSourceHook(ChildHwndSourceHook);
+        Loaded += (s, e) =>
         {
-            HwndSource s = System.Windows.PresentationSource.FromVisual(this) as HwndSource;
-            if (s != null)
-                s.AddHook(new HwndSourceHook(ChildHwndSourceHook));
+            _hwndSource = PresentationSource.FromVisual(this) as HwndSource;
+            _hwndSource?.AddHook(_hook);
+        };
+        Unloaded += (s, e) =>
+        {
+            _hwndSource?.RemoveHook(_hook);
+            _hwndSource = null;
         };
     }
 

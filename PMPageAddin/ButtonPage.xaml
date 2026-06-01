@@ -1,0 +1,67 @@
+<pmp:SldPMPage
+    x:Class="PMPageAddin.ButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PMPageAddin"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    d:DataContext="{d:DesignInstance Type=local:ButtonViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="300"
+    PageHeight="450"
+    PageTitle="Button Controls"
+    mc:Ignorable="d">
+
+    <!-- Standard buttons with commands -->
+    <pmp:SldGroupBox Caption="Standard Buttons">
+        <pmp:SldButton
+            Caption="Create Cube"
+            Command="{Binding CreateCubeCommand}" />
+        <pmp:SldButton
+            Caption="Show Message"
+            Command="{Binding ShowMessageCommand}" />
+    </pmp:SldGroupBox>
+
+    <!-- Status display via Label -->
+    <pmp:SldGroupBox Caption="Status">
+        <pmp:SldLabel SldCaption="Last Action" SldText="{Binding LastAction}" />
+        <pmp:SldLabel SldCaption="Click Count" SldText="{Binding ClickCount}" />
+    </pmp:SldGroupBox>
+
+    <!-- Bitmap button with standard SW icons -->
+    <pmp:SldGroupBox Caption="Bitmap Buttons">
+        <pmp:SldBitmapButton
+            SldCaption="Open File"
+            BtnStandardBitmap="swBitmapButtonImage_stack"
+            Command="{Binding OpenFileCommand}" />
+        <pmp:SldBitmapButton
+            SldCaption="Save File"
+            BtnStandardBitmap="swBitmapButtonImage_favorite_save"
+            Command="{Binding SaveFileCommand}" />
+    </pmp:SldGroupBox>
+
+    <!-- Checkable bitmap button (toggle-style) -->
+    <pmp:SldGroupBox Caption="Toggle Buttons">
+        <pmp:SldCheckableBitmapButton
+            SldCaption="Preview Mode"
+            BtnStandardBitmap="swBitmapButtonImage_draft"
+            Checked="{Binding IsPreviewMode}"
+            Command="{Binding TogglePreviewCommand}" />
+        <pmp:SldLabel
+            SldCaption="Preview"
+            SldText="{Binding PreviewStatus}" />
+    </pmp:SldGroupBox>
+
+    <!-- Enable/disable demo -->
+    <pmp:SldGroupBox Caption="Control State">
+        <pmp:SldCheckBox
+            Caption="Enable Actions"
+            Checked="{Binding ActionsEnabled}" />
+        <pmp:SldButton
+            Caption="Conditional Action"
+            Command="{Binding ConditionalActionCommand}"
+            Enabled="{Binding ActionsEnabled}" />
+    </pmp:SldGroupBox>
+
+</pmp:SldPMPage>

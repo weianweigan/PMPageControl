@@ -1,0 +1,169 @@
+<pmp:SldPMPage
+    x:Class="PMPageAddin.ContentHostPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PMPageAddin"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    d:DataContext="{d:DesignInstance Type=local:ContentHostViewModel}"
+    d:DesignHeight="550"
+    d:DesignWidth="300"
+    PageHeight="550"
+    PageTitle="WPF Content Host"
+    mc:Ignorable="d">
+
+    <!-- Native SW controls above the WPF content -->
+    <pmp:SldGroupBox Caption="Operation Settings">
+        <pmp:SldTextBox
+            SldCaption="New Item"
+            Text="{Binding NewItemText}" />
+        <pmp:SldNumberBox
+            SldCaption="Quantity"
+            Maximum="100"
+            Minimum="1"
+            Value="{Binding NewItemQty}" />
+    </pmp:SldGroupBox>
+
+    <!-- WPF Content Host: custom UI rendered inside SW PMPage -->
+    <pmp:SldContentHost PageHeight="260">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border
+                Grid.Row="0"
+                Background="#FF0078D4"
+                CornerRadius="4,4,0,0"
+                Padding="8,6">
+                <TextBlock
+                    FontSize="13"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="📋 Operation List" />
+            </Border>
+
+            <!-- Items ListBox -->
+            <ListBox
+                x:Name="OperationListBox"
+                Grid.Row="1"
+                MinHeight="120"
+                Background="#FFF5F5F5"
+                BorderBrush="#FFD0D0D0"
+                BorderThickness="1,0,1,0"
+                ItemsSource="{Binding Operations}"
+                Padding="4"
+                SelectedIndex="{Binding SelectedOperationIndex}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="4,3" BorderBrush="#FFE0E0E0" BorderThickness="0,0,0,1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding Name}" />
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="Gray"
+                                        Text="{Binding Detail}" />
+                                </StackPanel>
+                                <Button
+                                    Grid.Column="1"
+                                    Width="24"
+                                    Height="24"
+                                    Padding="0"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Click="RemoveButton_Click"
+                                    Cursor="Hand"
+                                    FontSize="14"
+                                    Foreground="#FFCC0000"
+                                    Tag="{Binding}"
+                                    ToolTip="Remove">
+                                    ✕
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Footer with buttons -->
+            <Border
+                Grid.Row="2"
+                Background="#FFF0F0F0"
+                CornerRadius="0,0,4,4"
+                Padding="6">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button
+                        Width="28"
+                        Height="28"
+                        Click="AddButton_Click"
+                        Content="＋"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        ToolTip="Add Item">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Background="#FF0078D4"
+                                    CornerRadius="4"
+                                    Cursor="Hand">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button
+                        Margin="4,0,0,0"
+                        Width="28"
+                        Height="28"
+                        Click="ClearButton_Click"
+                        Content="🗑"
+                        FontSize="14"
+                        Foreground="White"
+                        ToolTip="Clear All">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Background="#FFCC0000"
+                                    CornerRadius="4"
+                                    Cursor="Hand">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </pmp:SldContentHost>
+
+    <!-- Native SW controls below the WPF content -->
+    <pmp:SldGroupBox Caption="Summary">
+        <pmp:SldLabel SldCaption="Total Items" SldText="{Binding ItemCountText}" />
+        <pmp:SldLabel SldCaption="Total Quantity" SldText="{Binding TotalQtyText}" />
+    </pmp:SldGroupBox>
+
+    <!-- Checkable options -->
+    <pmp:SldGroupBox Caption="Export Options">
+        <pmp:SldCheckBox
+            Caption="Export to BOM"
+            Checked="{Binding ExportToBOM}" />
+        <pmp:SldCheckBox
+            Caption="Export to Cut List"
+            Checked="{Binding ExportToCutList}" />
+    </pmp:SldGroupBox>
+
+</pmp:SldPMPage>

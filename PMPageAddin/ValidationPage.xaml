@@ -1,0 +1,55 @@
+<pmp:SldPMPage
+    x:Class="PMPageAddin.ValidationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PMPageAddin"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    d:DataContext="{d:DesignInstance Type=local:ValidationViewModel}"
+    d:DesignHeight="400"
+    d:DesignWidth="300"
+    PageHeight="400"
+    PageTitle="Validation Demo"
+    CloseCommand="{Binding CloseCmd}"
+    mc:Ignorable="d">
+
+    <!-- Input fields that require validation -->
+    <pmp:SldGroupBox Caption="Required Fields">
+        <pmp:SldTextBox
+            SldCaption="Part Name *"
+            Text="{Binding PartName}" />
+        <pmp:SldTextBox
+            SldCaption="Revision *"
+            Text="{Binding Revision}" />
+        <pmp:SldNumberBox
+            SldCaption="Quantity"
+            Maximum="1000"
+            Minimum="1"
+            Value="{Binding Quantity}" />
+    </pmp:SldGroupBox>
+
+    <!-- Validation rules as a checklist -->
+    <pmp:SldGroupBox Caption="Validation Rules">
+        <pmp:SldCheckBox
+            Caption="Part name is not empty"
+            Checked="{Binding NameValid}"
+            Enabled="False" />
+        <pmp:SldCheckBox
+            Caption="Revision format valid (e.g. A, B, 1.0)"
+            Checked="{Binding RevisionValid}"
+            Enabled="False" />
+        <pmp:SldCheckBox
+            Caption="Quantity in range (1-1000)"
+            Checked="{Binding QuantityValid}"
+            Enabled="False" />
+    </pmp:SldGroupBox>
+
+    <!-- Validation status -->
+    <pmp:SldGroupBox Caption="Status">
+        <pmp:SldLabelMsg
+            SldCaption="Status"
+            SldText="{Binding StatusMessage}" />
+    </pmp:SldGroupBox>
+
+</pmp:SldPMPage>

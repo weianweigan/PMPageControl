@@ -14,11 +14,11 @@ jobs:
     steps:
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
@@ -38,4 +38,4 @@ jobs:
     # 5. Push  package
     - name: Push generated package to GitHub registry
       run: |
-        .\nuget push .\Du.PMPage.Wpf\bin\Release\*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols
+        Get-ChildItem -Path .\Du.PMPage.Wpf\bin\Release\ -Filter *.nupkg -Recurse | ForEach-Object { .\nuget push $_.FullName -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols }

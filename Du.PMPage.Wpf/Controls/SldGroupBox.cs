@@ -22,7 +22,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
         );
     }
 
-    #region Dendpedncy Properties
+    #region Dependency Properties
     /// <summary>
     /// Gets or sets the background color of this PropertyManager group box.
     /// </summary>
@@ -257,7 +257,6 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
                     BackgroundColor.Value.G,
                     BackgroundColor.Value.B
                 );
-                ;
             }
             SControl.Expanded = Expanded;
         }
@@ -278,7 +277,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
 
     internal override int AddToGroup(IPropertyManagerPageGroup group, int id)
     {
-        throw new InvalidOperationException($"无法将Group添加到Group中");
+        throw new InvalidOperationException("Cannot add a GroupBox to another GroupBox. GroupBoxes can only be added to pages or tabs.");
     }
 
     internal override int AddToTab(IPropertyManagerPageTab tab, int id)

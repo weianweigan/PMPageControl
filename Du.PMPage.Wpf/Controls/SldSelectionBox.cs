@@ -18,20 +18,43 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         );
     }
 
-    public delegate bool OnSubmitSelection(
+    /// <summary>
+    /// Handler for validating a selection before it is accepted into the selection box.
+    /// </summary>
+    /// <param name="Id">The control ID of this selection box.</param>
+    /// <param name="Selection">The native SolidWorks object being selected.</param>
+    /// <param name="SelType">The type of the selected entity.</param>
+    /// <param name="ItemText">The display text for the selection. May be modified by the handler.</param>
+    /// <returns>true to accept the selection; false to reject it.</returns>
+    /// <remarks>
+    /// <para><b>Multicast warning:</b> When multiple handlers are attached, only the
+    /// return value and <paramref name="ItemText"/> from the <b>last</b> invoked handler
+    /// are used. For predictable behavior, attach a single handler.</para>
+    /// </remarks>
+    public delegate bool SubmitSelectionEventHandler(
         int Id,
         object Selection,
         int SelType,
         ref string ItemText
     );
 
-    public event OnSubmitSelection OnSubmitSelectionNotify;
+    /// <summary>
+    /// Raised when the user picks a selection, allowing the handler to validate
+    /// or modify the selection before it is accepted.
+    /// </summary>
+    /// <remarks>
+    /// <para><b>Multicast warning:</b> When multiple handlers are attached, only the
+    /// return value and <paramref name="ItemText"/> from the <b>last</b> invoked handler
+    /// are used. For predictable behavior, attach a single handler.</para>
+    /// </remarks>
+    public event SubmitSelectionEventHandler SubmitSelection;
 
-    #region Dependecy Properties
+    #region Dependency Properties
 
-    ///// <summary>
-    ///// 是否单选，默认为false
-    ///// </summary>
+    /// <summary>
+    /// Whether the selection box accepts only a single entity (true) or
+    /// multiple entities (false). Default is false.
+    /// </summary>
     public bool SingleEntityOnly
     {
         get { return (bool)GetValue(SingleEntityOnlyProperty); }
@@ -43,7 +66,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
             "SingleEntityOnly",
             typeof(bool),
             typeof(SldSelectionBox),
-            new PropertyMetadata(false, OnSingleEntityChanged)
+            new FrameworkPropertyMetadata(false, OnSingleEntityChanged)
         );
 
     private static void OnSingleEntityChanged(
@@ -52,7 +75,8 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
     )
     {
         var box = d as SldSelectionBox;
-        box.SingleEntityOnly = (bool)e.NewValue;
+        if (box == null)
+            return;
         box.OnSingleEntityChanged((bool)e.OldValue, (bool)e.NewValue);
     }
 
@@ -65,8 +89,13 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
     }
 
     /// <summary>
-    /// 可以选择的类型
+    /// The types of entities that can be selected in this selection box.
     /// </summary>
+    /// <remarks>
+    /// <para>This is a list reference property. Replacing the entire list triggers the
+    /// change callback; modifying list contents does not. Set the full list before the
+    /// control is displayed.</para>
+    /// </remarks>
     public List<swSelectType_e> SwSelectTypes
     {
         get { return (List<swSelectType_e>)GetValue(SwSelectTypesProperty); }
@@ -77,7 +106,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         "SwSelectTypes",
         typeof(List<swSelectType_e>),
         typeof(SldSelectionBox),
-        new PropertyMetadata(null, OnSwSelectTypesChanged)
+        new FrameworkPropertyMetadata(null, OnSwSelectTypesChanged)
     );
 
     private static void OnSwSelectTypesChanged(
@@ -85,7 +114,8 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         DependencyPropertyChangedEventArgs e
     )
     {
-        var box = d as SldSelectionBox;
+        if (d is not SldSelectionBox box)
+            return;
         box.OnSwSelectTypesChanged(
             (List<swSelectType_e>)e.OldValue,
             (List<swSelectType_e>)e.NewValue
@@ -122,22 +152,22 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         "Mark",
         typeof(int),
         typeof(SldSelectionBox),
-        new PropertyMetadata(-1, OnMarkChanged)
+        new FrameworkPropertyMetadata(1, OnMarkChanged)
     );
 
     private static void OnMarkChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var box = d as SldSelectionBox;
-        box.Mark = (int)e.NewValue;
+        if (d is not SldSelectionBox box)
+            return;
         box.OnMarkChanged((int)e.OldValue, (int)e.NewValue);
     }
 
     private void OnMarkChanged(int oldValue, int newValue)
     {
-        if (newValue != 1 && newValue % 2 != 0)
+        if (newValue <= 0 || (newValue & (newValue - 1)) != 0)
         {
             throw new ArgumentException(
-                $"SelectionBox.Mark Cannot be {newValue},It must be powers of two (for example, 1, 2, 4, 8)."
+                $"SelectionBox.Mark must be a power of two (for example, 1, 2, 4, 8). Current value: {newValue}."
             );
         }
         if (oldValue != newValue && SControl != null)
@@ -155,25 +185,30 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         set { SetValue(AllowMultipleSelectOfSameEntityProperty, value); }
     }
 
+    /// <summary>
+    /// When true, the selection box allows the same entity to be selected multiple times.
+    /// When false, selecting an entity that is already selected in this box replaces the previous selection of that entity.
+    /// Default is false.
+    /// </summary>
     public static readonly DependencyProperty AllowMultipleSelectOfSameEntityProperty =
         DependencyProperty.Register(
             "AllowMultipleSelectOfSameEntity",
             typeof(bool),
             typeof(SldSelectionBox),
-            new PropertyMetadata(false, OnAllowMutipleSelectOfSameEntityPropertyChanged)
+            new FrameworkPropertyMetadata(false, OnAllowMultipleSelectOfSameEntityChanged)
         );
 
-    private static void OnAllowMutipleSelectOfSameEntityPropertyChanged(
+    private static void OnAllowMultipleSelectOfSameEntityChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
     {
-        var box = d as SldSelectionBox;
-        box.AllowMultipleSelectOfSameEntity = (bool)e.NewValue;
-        box.OnAllowMutipleSelectOfSameEntityChanged((bool)e.OldValue, (bool)e.NewValue);
+        if (d is not SldSelectionBox box)
+            return;
+        box.OnAllowMultipleSelectOfSameEntityChanged((bool)e.OldValue, (bool)e.NewValue);
     }
 
-    private void OnAllowMutipleSelectOfSameEntityChanged(bool oldValue, bool newValue)
+    private void OnAllowMultipleSelectOfSameEntityChanged(bool oldValue, bool newValue)
     {
         if (oldValue != newValue && SControl != null)
         {
@@ -199,21 +234,25 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         set { SetValue(AllowSelectInMultipleBoxesProperty, value); }
     }
 
+    /// <summary>
+    /// When true, the selection box allows an entity to be selected even if it is already selected in another selection box.
+    /// </summary>
     public static readonly DependencyProperty AllowSelectInMultipleBoxesProperty =
         DependencyProperty.Register(
             "AllowSelectInMultipleBoxes",
             typeof(bool),
             typeof(SldSelectionBox),
-            new PropertyMetadata(false, OnAllowSelectInMultipleBoxesProperty)
+            new FrameworkPropertyMetadata(false, OnAllowSelectInMultipleBoxesChanged)
         );
 
-    private static void OnAllowSelectInMultipleBoxesProperty(
+    private static void OnAllowSelectInMultipleBoxesChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
     {
         var box = d as SldSelectionBox;
-        box.AllowSelectInMultipleBoxes = (bool)e.NewValue;
+        if (box == null)
+            return;
         box.OnAllowSelectInMultipleBoxes((bool)e.OldValue, (bool)e.NewValue);
     }
 
@@ -221,25 +260,39 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
     {
         if (oldValue != newValue && SControl != null)
         {
-            SControl.AllowSelectInMultipleBoxes = oldValue;
-            throw new InvalidOperationException(
-                $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.AllowSelectInMultipleBoxes)} Cannot be Set after Displayed"
-            );
+            if (SldControlVisibility)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.AllowSelectInMultipleBoxes)} Cannot be Set after Displayed"
+                );
+            }
+            SControl.AllowSelectInMultipleBoxes = newValue;
         }
     }
 
+    /// <summary>
+    /// The collection of selected objects in this selection box.
+    /// Bind to this property with Mode=TwoWay (or rely on the default) to observe
+    /// selection changes driven by SolidWorks.
+    /// </summary>
     public ObservableCollection<SwSeleTypeObjectPair> Selections
     {
         get { return (ObservableCollection<SwSeleTypeObjectPair>)GetValue(SelectionsProperty); }
         set { SetValue(SelectionsProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Selections.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// This is a reference property. Replacing the entire collection triggers the change callback;
+    /// </summary>
     public static readonly DependencyProperty SelectionsProperty = DependencyProperty.Register(
         "Selections",
         typeof(ObservableCollection<SwSeleTypeObjectPair>),
         typeof(SldSelectionBox),
-        new PropertyMetadata(null, OnSelectionsChanged)
+        new FrameworkPropertyMetadata(
+            null,
+            FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+            OnSelectionsChanged
+        )
     );
 
     private static void OnSelectionsChanged(
@@ -247,8 +300,9 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         DependencyPropertyChangedEventArgs e
     )
     {
-        var box = d as SldSelectionBox;
-        box.Selections = e.NewValue as ObservableCollection<SwSeleTypeObjectPair>;
+        if (d is not SldSelectionBox box)
+            return;
+
         box.OnSelectionChanged(
             (ObservableCollection<SwSeleTypeObjectPair>)e.OldValue,
             (ObservableCollection<SwSeleTypeObjectPair>)e.NewValue
@@ -270,38 +324,99 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         }
     }
 
+    /// <summary>
+    /// Callback invoked when the <see cref="Selections"/> collection is externally
+    /// modified. Set by the owning page to translate collection changes into
+    /// SolidWorks selection manager operations.
+    /// </summary>
+    /// <param name="item">
+    /// The affected <see cref="SwSeleTypeObjectPair"/>, or null when all items
+    /// should be deselected (Reset action).
+    /// </param>
+    /// <param name="select">
+    /// true to select the item in SolidWorks; false to deselect it;
+    /// null to deselect all items for this selection box.
+    /// </param>
+    internal Action<SwSeleTypeObjectPair, bool?> ExternalSelectionHandler { get; set; }
+
     private void Selections_CollectionChanged(
         object sender,
         System.Collections.Specialized.NotifyCollectionChangedEventArgs e
     )
     {
-        //内部增加
+        //内部增加 — 由 OnSelectionChanged 驱动，跳过
         if (_innerAddSelection)
         {
             return;
         }
 
-        //TODO: 外部增加选择
+        switch (e.Action)
+        {
+            case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                if (e.NewItems != null)
+                {
+                    foreach (SwSeleTypeObjectPair item in e.NewItems)
+                        ExternalSelectionHandler?.Invoke(item, true);
+                }
+                break;
+
+            case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                if (e.OldItems != null)
+                {
+                    foreach (SwSeleTypeObjectPair item in e.OldItems)
+                        ExternalSelectionHandler?.Invoke(item, false);
+                }
+                break;
+
+            case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                if (e.OldItems != null)
+                {
+                    foreach (SwSeleTypeObjectPair item in e.OldItems)
+                        ExternalSelectionHandler?.Invoke(item, false);
+                }
+                if (e.NewItems != null)
+                {
+                    foreach (SwSeleTypeObjectPair item in e.NewItems)
+                        ExternalSelectionHandler?.Invoke(item, true);
+                }
+                break;
+
+            case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                // Entire collection replaced — deselect all items for this box
+                ExternalSelectionHandler?.Invoke(null, null);
+                break;
+        }
     }
 
+    /// <summary>
+    /// The height of the selection box in dialog units. Default is 14.
+    /// </summary>
+    /// <remarks>
+    /// The value is cast to <see cref="short"/> when applied to the native SolidWorks
+    /// control. Values outside the short range will overflow silently.
+    /// </remarks>
     public int SldHeight
     {
         get { return (int)GetValue(SldHeightProperty); }
         set { SetValue(SldHeightProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldHeight.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// The height of the selection box in dialog units. Default is 14.
+    /// </summary>
     public static readonly DependencyProperty SldHeightProperty = DependencyProperty.Register(
         "SldHeight",
         typeof(int),
         typeof(SldSelectionBox),
-        new PropertyMetadata(14, OnSldHeightChanged)
+        new FrameworkPropertyMetadata(14, OnSldHeightChanged)
     );
 
     private static void OnSldHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        var sldSeletionBox = d as SldSelectionBox;
-        sldSeletionBox.OnHeightChanged((int)e.OldValue, (int)e.NewValue);
+        var box = d as SldSelectionBox;
+        if (box == null)
+            return;
+        box.OnHeightChanged((int)e.OldValue, (int)e.NewValue);
     }
 
     private void OnHeightChanged(int oldValue, int newValue)
@@ -312,6 +427,9 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         }
     }
 
+    /// <summary>
+    /// The index of the currently selected item in this selection box, or -1 if no selection is currently active.
+    /// </summary>
     public int CurrentSelection
     {
         get => SControl?.CurrentSelection ?? -1;
@@ -363,6 +481,9 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
 
     #region Methods
 
+    /// <summary>
+    /// Applies the current property values to the native SolidWorks selection box control.
+    /// </summary>
     protected override void SetSldControl()
     {
         if (SwSelectTypes != null && SwSelectTypes.Any())
@@ -392,43 +513,45 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
             return;
 
         _innerAddSelection = true;
-
-        //重置
-        if (
-            count == 0 /*&& Selections.Count != 0*/
-        )
+        try
         {
-            Selections.Clear();
-        }
-        else
-        {
-            //去除多余的
-            for (int i = 0; i < Selections.Count; i++)
+            //重置
+            if (count == 0)
             {
-                var pair = swSeleTypeObjectPairs.FirstOrDefault(p => p.Name == Selections[i].Name);
-                if (pair == null)
+                Selections.Clear();
+            }
+            else
+            {
+                //去除多余的
+                for (int i = 0; i < Selections.Count; i++)
                 {
-                    Selections.RemoveAt(i);
-                    --i;
+                    var pair = swSeleTypeObjectPairs.FirstOrDefault(p =>
+                        p.Name == Selections[i].Name
+                    );
+                    if (pair == null)
+                    {
+                        Selections.RemoveAt(i);
+                        --i;
+                    }
+                }
+
+                //添加新增加的
+                for (int i = 0; i < swSeleTypeObjectPairs.Count; i++)
+                {
+                    var pair = Selections.FirstOrDefault(p =>
+                        p.Name == swSeleTypeObjectPairs[i].Name
+                    );
+                    if (pair == null)
+                    {
+                        Selections.Add(swSeleTypeObjectPairs[i]);
+                    }
                 }
             }
-
-            //添加新增加的
-            for (int i = 0; i < swSeleTypeObjectPairs.Count; i++)
-            {
-                var pair = Selections.FirstOrDefault(p => p.Name == swSeleTypeObjectPairs[i].Name);
-                if (pair == null)
-                {
-                    Selections.Add(swSeleTypeObjectPairs[i]);
-                }
-            }
-
-            //if(Selections.Count != 0)
-            //    Selections.Clear();
-
-            //swSeleTypeObjectPairs.ForEach(p => Selections.Add(p));
         }
-        _innerAddSelection = false;
+        finally
+        {
+            _innerAddSelection = false;
+        }
     }
 
     internal bool OnSubmitSelectionCallout(
@@ -438,7 +561,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         ref string itemText
     )
     {
-        return OnSubmitSelectionNotify?.Invoke(id, selection, selType, ref itemText) ?? true;
+        return SubmitSelection?.Invoke(id, selection, selType, ref itemText) ?? true;
     }
 
     #endregion

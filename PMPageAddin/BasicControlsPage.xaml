@@ -1,0 +1,98 @@
+<pmp:SldPMPage
+    x:Class="PMPageAddin.BasicControlsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PMPageAddin"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    d:DataContext="{d:DesignInstance Type=local:BasicControlsViewModel}"
+    d:DesignHeight="600"
+    d:DesignWidth="300"
+    PageHeight="600"
+    PageTitle="Basic Controls"
+    mc:Ignorable="d">
+
+    <!-- Labels: static text and warning message -->
+    <pmp:SldGroupBox Caption="Labels">
+        <pmp:SldLabel SldCaption="Title" SldText="Enter part parameters below:" />
+        <pmp:SldLabelMsg SldCaption="Note" SldText="All dimensions are in millimeters." />
+    </pmp:SldGroupBox>
+
+    <!-- TextBox: text input -->
+    <pmp:SldGroupBox Caption="Text Input">
+        <pmp:SldTextBox
+            SldCaption="Part Name"
+            SldStyle="swPropMgrPageTextBoxStyle_NotifyOnlyWhenFocusLost"
+            Text="{Binding PartName}" />
+        <pmp:SldTextBox
+            SldCaption="Description"
+            SldHeight="60"
+            SldStyle="swPropMgrPageTextBoxStyle_NotifyOnlyWhenFocusLost"
+            Text="{Binding Description}" />
+    </pmp:SldGroupBox>
+
+    <!-- NumberBox: numeric input with range limits -->
+    <pmp:SldGroupBox Caption="Dimensions">
+        <pmp:SldNumberBox
+            SldCaption="Length"
+            Maximum="500"
+            Minimum="10"
+            Value="{Binding Length}" />
+        <pmp:SldNumberBox
+            SldCaption="Width"
+            Maximum="500"
+            Minimum="10"
+            Value="{Binding Width}" />
+        <pmp:SldNumberBox
+            SldCaption="Height"
+            Maximum="500"
+            Minimum="1"
+            Value="{Binding Height}" />
+    </pmp:SldGroupBox>
+
+    <!-- CheckBox: toggle options -->
+    <pmp:SldGroupBox Caption="Features">
+        <pmp:SldCheckBox
+            Caption="Enable Fillet"
+            Checked="{Binding EnableFillet}" />
+        <pmp:SldCheckBox
+            Caption="Enable Chamfer"
+            Checked="{Binding EnableChamfer}" />
+        <!-- Checkbox controls visibility of another control -->
+        <pmp:SldNumberBox
+            SldCaption="Fillet Radius"
+            SldVisible="{Binding EnableFillet}"
+            Value="{Binding FilletRadius}" />
+    </pmp:SldGroupBox>
+
+    <!-- Options: radio-style mutually exclusive selection -->
+    <pmp:SldGroupBox Caption="Material">
+        <pmp:SldOption
+            SldCaption="Steel"
+            Checked="{Binding IsSteel}" />
+        <pmp:SldOption
+            SldCaption="Aluminum"
+            Checked="{Binding IsAluminum}" />
+        <pmp:SldOption
+            SldCaption="Titanium"
+            Checked="{Binding IsTitanium}" />
+    </pmp:SldGroupBox>
+
+    <!-- Combobox: dropdown selection -->
+    <pmp:SldGroupBox Caption="Configuration">
+        <pmp:SldCombobox
+            SldCaption="Color"
+            SldHeight="80"
+            CurrentSelection="{Binding SelectedColorIndex}"
+            StartUpItems="Red,Green,Blue,Black,White" />
+        <pmp:SldCombobox
+            SldCaption="Size"
+            SldHeight="80"
+            SldStyle="swPropMgrPageComboBoxStyle_EditableText"
+            CurrentSelection="{Binding SelectedSizeIndex}"
+            EditText="{Binding CustomSize, Mode=TwoWay}"
+            StartUpItems="Small,Medium,Large" />
+    </pmp:SldGroupBox>
+
+</pmp:SldPMPage>

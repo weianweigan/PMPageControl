@@ -1,0 +1,73 @@
+<pmp:SldPMPage
+    x:Class="PMPageAddin.SelectionBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PMPageAddin"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    xmlns:swconst="clr-namespace:SolidWorks.Interop.swconst;assembly=SolidWorks.Interop.swconst"
+    d:DataContext="{d:DesignInstance Type=local:SelectionBoxViewModel}"
+    d:DesignHeight="550"
+    d:DesignWidth="300"
+    PageHeight="550"
+    PageTitle="Selection Boxes"
+    mc:Ignorable="d">
+
+    <!--  Single face selection with filter  -->
+    <pmp:SldGroupBox Caption="Face Selection">
+        <pmp:SldSelectionBox
+            x:Name="FaceSelectionBox"
+            Mark="1"
+            Selections="{Binding Faces}"
+            SingleEntityOnly="True"
+            SldCaption="Select a face"
+            SldHeight="32"
+            SwSelectTypes="{pmp:SwSelectTypes swSelFACES}" />
+        <pmp:SldLabel SldCaption="Selected" SldText="{Binding FaceName}" />
+    </pmp:SldGroupBox>
+
+    <!--  Single edge selection  -->
+    <pmp:SldGroupBox Caption="Edge Selection">
+        <pmp:SldSelectionBox
+            x:Name="EdgeSelectionBox"
+            Mark="2"
+            Selections="{Binding Edges}"
+            SingleEntityOnly="True"
+            SldCaption="Select an edge"
+            SldHeight="32"
+            SwSelectTypes="{pmp:SwSelectTypes swSelEDGES}" />
+        <pmp:SldLabel SldCaption="Selected" SldText="{Binding EdgeName}" />
+    </pmp:SldGroupBox>
+
+    <!--  Multi-entity selection (bodies/components)  -->
+    <pmp:SldGroupBox Caption="Component Selection">
+        <pmp:SldSelectionBox
+            x:Name="ComponentSelectionBox"
+            Mark="4"
+            Selections="{Binding Components}"
+            SldCaption="Select components"
+            SldHeight="48"
+            SwSelectTypes="{pmp:SwSelectTypes swSelCOMPONENTS}" />
+        <pmp:SldLabel SldCaption="Count" SldText="{Binding ComponentCount}" />
+    </pmp:SldGroupBox>
+
+    <!--  Selection box with multiple types allowed  -->
+    <pmp:SldGroupBox Caption="Multi-Type Selection">
+        <pmp:SldSelectionBox
+            x:Name="MultiTypeSelectionBox"
+            Mark="8"
+            Selections="{Binding MultiTypeItems}"
+            SldCaption="Select geometry"
+            SldHeight="48"
+            SwSelectTypes="{pmp:SwSelectTypes swSelEDGES, swSelFACES, swSelVERTICES}" />
+        <pmp:SldLabel SldCaption="Count" SldText="{Binding MultiTypeCount}" />
+    </pmp:SldGroupBox>
+
+    <!--  Selection summary  -->
+    <pmp:SldGroupBox Caption="Summary">
+        <pmp:SldCheckBox Caption="Auto-focus next" Checked="{Binding AutoFocusNext}" />
+        <pmp:SldLabel SldCaption="Total selected" SldText="{Binding TotalSelected}" />
+    </pmp:SldGroupBox>
+
+</pmp:SldPMPage>

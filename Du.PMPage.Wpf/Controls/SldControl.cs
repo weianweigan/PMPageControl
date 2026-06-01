@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using SolidWorks.Interop.sldworks;
@@ -207,8 +208,8 @@ public abstract class SldControl : Control
         }
 
         throw new ArgumentException(
-            $"{nameof(SldEnabled)}:{SldEnabled} ,{nameof(SldVisible)}:{SldVisible}, {nameof(SldSmallGapAbove)}:{SldSmallGapAbove} Error,Cannot not be all false"
-        );
+            $"{nameof(SldEnabled)}:{SldEnabled}, {nameof(SldVisible)}:{SldVisible}, {nameof(SldSmallGapAbove)}:{SldSmallGapAbove} — at least one option must be enabled.",
+            nameof(SldEnabled));
     }
 
     #endregion
@@ -233,7 +234,8 @@ public abstract class SldControl<TControl> : SldControl
     {
         if (SControl != null)
         {
-            throw new InvalidOperationException($"已经创建过{nameof(PropertyManagerPageGroup)},无法再次创建");
+            throw new InvalidOperationException(
+                $"The native {typeof(TControl).Name} control has already been created and cannot be created again.");
         }
     }
 
@@ -254,7 +256,7 @@ public abstract class SldControl<TControl> : SldControl
 
         if (SControl == null)
         {
-            throw new NullReferenceException($"创建{nameof(IPropertyManagerPageSelectionbox)} 错误");
+            throw new NullReferenceException($"Failed to create native control of type {typeof(TControl).Name} on the page.");
         }
 
         SetBaseProperties();
@@ -280,7 +282,7 @@ public abstract class SldControl<TControl> : SldControl
 
         if (SControl == null)
         {
-            throw new NullReferenceException($"创建{nameof(IPropertyManagerPageSelectionbox)} 错误");
+            throw new NullReferenceException($"Failed to create native control of type {typeof(TControl).Name} in the group.");
         }
 
         SetBaseProperties();
@@ -305,7 +307,7 @@ public abstract class SldControl<TControl> : SldControl
 
         if (SControl == null)
         {
-            throw new NullReferenceException($"创建{typeof(TControl).Name} 错误");
+            throw new NullReferenceException($"Failed to create native control of type {typeof(TControl).Name} in the tab.");
         }
 
         SetBaseProperties();
@@ -325,7 +327,11 @@ public abstract class SldControl<TControl> : SldControl
 
     internal override void DestroyNativeControl()
     {
-        SControl = null;
+        if (SControl != null)
+        {
+            Marshal.FinalReleaseComObject(SControl);
+            SControl = null;
+        }
         IsNativeControlCreated = false;
     }
 
@@ -390,6 +396,9 @@ public abstract class SldControl<TControl> : SldControl
 
         switch (typeName)
         {
+            case nameof(IPropertyManagerPageTextbox):
+                controlType = swPropertyManagerPageControlType_e.swControlType_Textbox;
+                break;
             case nameof(IPropertyManagerPageSelectionbox):
                 controlType = swPropertyManagerPageControlType_e.swControlType_Selectionbox;
                 break;
@@ -431,11 +440,15 @@ public abstract class SldControl<TControl> : SldControl
                 break;
             case nameof(IPropertyManagerPageGroup):
                 throw new NotSupportedException(
-                    $"{nameof(IPropertyManagerPageGroup)} Not Support,override the {nameof(AddToPage)} or {nameof(AddToGroup)} Method"
+                    $"{nameof(IPropertyManagerPageGroup)} is not directly supported. Override the {nameof(AddToPage)} or {nameof(AddToGroup)} method instead."
                 );
             case nameof(IPropertyManagerPageWindowFromHandle):
                 controlType = swPropertyManagerPageControlType_e.swControlType_WindowFromHandle;
                 break;
+            case nameof(IPropertyManagerPageTab):
+                throw new NotSupportedException(
+                    $"{nameof(IPropertyManagerPageTab)} is not supported. Override the {nameof(AddToPage)} or {nameof(AddToGroup)} method instead."
+                );
             default:
                 throw new InvalidCastException($"{typeName} is not a propertymanagerpage control");
         }

@@ -8,11 +8,12 @@ using SolidWorks.Interop.swconst;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace Du.PMPage.Wpf
 {
-    public class SldWindow : Window
+    public class SldWindow : Window, IDisposable
     {
         private readonly SldWorks _app;
         protected readonly ModelDoc2 _doc;
@@ -35,6 +36,9 @@ namespace Du.PMPage.Wpf
         {
             _app = (SldWorks)app;
             _doc = _app.IActiveDoc2;
+            if (_doc == null)
+                throw new InvalidOperationException(
+                    "No active document found. A document must be open to create SldWindow.");
             _seleMgr = _doc.ISelectionManager;
 
             AttachEvent();
@@ -55,7 +59,7 @@ namespace Du.PMPage.Wpf
                     foreach (var item in _selectionList)
                     {
                         AllowSelectTypes.AddRange(item.SwSelectTypes);
-                        item.Actived += Item_Actived; ;
+                        item.Actived += Item_Actived;
                     }
                 }
             }
@@ -90,11 +94,6 @@ namespace Du.PMPage.Wpf
                    
                     break;
             }
-        }
-
-        private int _partDoc_NewSelectionNotify()
-        {
-            throw new NotImplementedException();
         }
 
         private int _partDoc_UserSelectionPostNotify()
@@ -145,6 +144,14 @@ namespace Du.PMPage.Wpf
         protected virtual void SldWindow_Closed(object sender, EventArgs e)
         {
             DeAttachEvent();
+        }
+
+        public void Dispose()
+        {
+            DeAttachEvent();
+            if (_partDoc != null) { Marshal.FinalReleaseComObject(_partDoc); _partDoc = null; }
+            if (_seleMgr != null) { Marshal.FinalReleaseComObject(_seleMgr); }
+            if (_doc != null) { Marshal.FinalReleaseComObject(_doc); }
         }
 
         #endregion

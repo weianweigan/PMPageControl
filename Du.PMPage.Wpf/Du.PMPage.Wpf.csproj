@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFramework>net48</TargetFramework>
@@ -15,21 +15,27 @@
 		<PackageProjectUrl>https://github.com/weianweigan/PMPageControl</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<EnableComHosting>true</EnableComHosting>
-		<Description>Create SolidWorks PMPage with xaml</Description>
+		<Description>A WPF-based library for creating SolidWorks PropertyManager Pages (PMPage) using XAML. Provides WPF wrappers for native SolidWorks COM controls including buttons, checkboxes, comboboxes, selection boxes, number boxes, group boxes, tabs, and WindowFromHandle content hosts. Supports two-way data binding, design-time previews, and XAML-based layout.</Description>
 		<PackageIcon>pmpageicon.png</PackageIcon>
 		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
 		<XcadRegDll>false</XcadRegDll>
-		<NoWarn>CS1591</NoWarn>
+		<PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>SolidWorks;PMPage;PropertyManagerPage;WPF;XAML;CAD</PackageTags>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\Images\pmpageicon.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="Xarial.XCad.SolidWorks" Version="0.8.3" />
+	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="solidworks-init.ps1" pack="true" PackagePath="tools\init.ps1" />
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>

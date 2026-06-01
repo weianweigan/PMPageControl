@@ -35,8 +35,12 @@ public class SwAddin : SwAddInEx
 
     public enum PMPageCmds
     {
-        SelectionPage,
-        MultiPage,
+        BasicControls,
+        Buttons,
+        SelectionBox,
+        TabControl,
+        Validation,
+        ContentHost,
     }
 
     public override void OnConnect()
@@ -50,9 +54,23 @@ public class SwAddin : SwAddInEx
         {
             switch (spec)
             {
-                case PMPageCmds.SelectionPage:
-                    var page = new SelectionPage(Application.Sw);
-                    page.ShowPage();
+                case PMPageCmds.BasicControls:
+                    new BasicControlsPage(Application.Sw).ShowPage();
+                    break;
+                case PMPageCmds.Buttons:
+                    new ButtonPage(Application.Sw).ShowPage();
+                    break;
+                case PMPageCmds.SelectionBox:
+                    new SelectionBoxPage(Application.Sw).ShowPage();
+                    break;
+                case PMPageCmds.TabControl:
+                    new TabControlPage(Application.Sw).ShowPage();
+                    break;
+                case PMPageCmds.Validation:
+                    new ValidationPage(Application.Sw).ShowPage();
+                    break;
+                case PMPageCmds.ContentHost:
+                    new ContentHostPage(Application.Sw).ShowPage();
                     break;
                 default:
                     break;

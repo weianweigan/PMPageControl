@@ -1,16 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using SolidWorks.Interop.sldworks;
 using SolidWorks.Interop.swconst;
 
-namespace Du.PMPage.Wpf
-{
+namespace Du.PMPage.Wpf;
+
 
 /// <summary>
-/// 选择类型和选择对象的键值对
+/// Key-value pair combining a selection type and the selected object.
 /// </summary>
-public class SwSeleTypeObjectPair : IEqualityComparer<SwSeleTypeObjectPair>
+public class SwSeleTypeObjectPair : IEquatable<SwSeleTypeObjectPair>
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SwSeleTypeObjectPair"/> class.
+    /// </summary>
+    /// <param name="index">The ordinal position in the selection list.</param>
+    /// <param name="selectType">The type of the selected entity.</param>
+    /// <param name="mark">The SolidWorks selection mark.</param>
+    /// <param name="selectedObject">The native SolidWorks object.</param>
+    /// <param name="name">The display name for the selection list UI.</param>
+    /// <param name="point">The pick point coordinates.</param>
     public SwSeleTypeObjectPair(
         int index,
         swSelectType_e selectType,
@@ -29,50 +37,63 @@ public class SwSeleTypeObjectPair : IEqualityComparer<SwSeleTypeObjectPair>
     }
 
     /// <summary>
-    /// 序号
+    /// The ordinal position of this selection in the selection list.
     /// </summary>
     public int Index { get; private set; }
 
     /// <summary>
-    /// 标记
+    /// The SolidWorks selection mark identifying this selection entry.
     /// </summary>
     public int Mark { get; private set; }
 
     /// <summary>
-    /// 选择类型
+    /// The type of the selected entity (e.g. edge, face, vertex, component).
     /// </summary>
     public swSelectType_e SelectType { get; private set; }
 
     /// <summary>
-    /// 选择对象
+    /// The native SolidWorks object representing the selected entity.
     /// </summary>
     public object SelectedObject { get; private set; }
 
     /// <summary>
-    /// 在列表中显示的名称
+    /// The display name shown in the selection list UI.
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// 用来追踪用的标记
+    /// An arbitrary tag for tracking or user-defined data.
     /// </summary>
     public object Tag { get; set; }
 
     /// <summary>
-    /// 用户选择的点
+    /// The pick point where the user clicked to make the selection.
     /// </summary>
     public double[] Point { get; set; }
 
     /// <summary>
-    /// 用来临时存储PID的属性，默认为null
+    /// Temporary storage for a persist reference ID (Base64-encoded).
+    /// Set this before calling <see cref="ResolveFromPID"/> to restore a
+    /// persisted selection reference.
     /// </summary>
     public string PID { get; set; }
 
-    public swPersistReferencedObjectStates_e ReSolveFormPID(IModelDoc2 doc)
+    /// <summary>
+    /// Resolves the <see cref="PID"/> into a live SolidWorks object and updates
+    /// <see cref="SelectedObject"/>.
+    /// </summary>
+    /// <param name="doc">The model document used to resolve the persist reference.</param>
+    /// <returns>The resolution status code.</returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <see cref="PID"/> is null or empty.
+    /// </exception>
+    public swPersistReferencedObjectStates_e ResolveFromPID(IModelDoc2 doc)
     {
         if (string.IsNullOrEmpty(PID))
         {
-            throw new ArgumentNullException("请先对属性 PID 赋值");
+            throw new ArgumentNullException(
+                nameof(PID),
+                "The PID property must be set before calling ResolveFromPID.");
         }
 
         var byteId = Convert.FromBase64String(PID);
@@ -81,18 +102,11 @@ public class SwSeleTypeObjectPair : IEqualityComparer<SwSeleTypeObjectPair>
         return (swPersistReferencedObjectStates_e)errorCode;
     }
 
-    public bool Equals(SwSeleTypeObjectPair x, SwSeleTypeObjectPair y)
-    {
-        return x?.Name == y?.Name;
-    }
-
-    public int GetHashCode(SwSeleTypeObjectPair obj)
-    {
-        return obj?.Name.GetHashCode() ?? -1;
-    }
-
     /// <summary>
-    /// 在边面顶点的时候，为了保存对象的持久引用，防止引发 <see cref="System.Runtime.InteropServices.COMException"/>被调用的对象已与其客户端断开连接
+    /// For edge, face, or vertex selections, replaces <see cref="SelectedObject"/>
+    /// with a safe (persist-capable) copy of the entity to avoid
+    /// <see cref="System.Runtime.InteropServices.COMException"/>
+    /// ("The called object has been disconnected from its clients").
     /// </summary>
     public void GetSafeEntity()
     {
@@ -103,14 +117,56 @@ public class SwSeleTypeObjectPair : IEqualityComparer<SwSeleTypeObjectPair>
         )
         {
             var entity = SelectedObject as IEntity;
-            if (!entity.IsSafe)
+            if (entity != null && !entity.IsSafe)
                 SelectedObject = entity.GetSafeEntity();
         }
     }
 
+    #region Equality — compared by Name
+
+    /// <inheritdoc />
+    public bool Equals(SwSeleTypeObjectPair other)
+    {
+        if (other is null) return false;
+        return string.Equals(Name, other.Name);
+    }
+
+    /// <inheritdoc />
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as SwSeleTypeObjectPair);
+    }
+
+    /// <inheritdoc />
+    public override int GetHashCode()
+    {
+        return Name?.GetHashCode() ?? 0;
+    }
+
+    /// <summary>
+    /// Returns a value indicating whether two <see cref="SwSeleTypeObjectPair"/>
+    /// instances have the same <see cref="Name"/>.
+    /// </summary>
+    public static bool operator ==(SwSeleTypeObjectPair left, SwSeleTypeObjectPair right)
+    {
+        if (left is null) return right is null;
+        return left.Equals(right);
+    }
+
+    /// <summary>
+    /// Returns a value indicating whether two <see cref="SwSeleTypeObjectPair"/>
+    /// instances have different <see cref="Name"/> values.
+    /// </summary>
+    public static bool operator !=(SwSeleTypeObjectPair left, SwSeleTypeObjectPair right)
+    {
+        return !(left == right);
+    }
+
+    #endregion
+
+    /// <inheritdoc />
     public override string ToString()
     {
         return Name ?? base.ToString();
     }
-}
 }

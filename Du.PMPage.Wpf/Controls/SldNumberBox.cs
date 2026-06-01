@@ -79,10 +79,10 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
     {
         if (oldValue != newValue && SControl != null && newValue != null)
         {
-            if (oldValue != null && newValue.Units != newValue.Units && SldControlVisibility)
+            if (oldValue != null && oldValue.Units != newValue.Units && SldControlVisibility)
             {
                 throw new InvalidOperationException(
-                    $"控件显示后不能更改单位属性：{nameof(NumberBoxRange.Units)}"
+                    $"Cannot change the {nameof(NumberBoxRange.Units)} property after the control has been displayed."
                 );
             }
 
@@ -104,20 +104,20 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
         new FrameworkPropertyMetadata(
             null,
             FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-            OnMaxiumuPropertyChanged
+            OnMaximumPropertyChanged
         )
     );
 
-    private static void OnMaxiumuPropertyChanged(
+    private static void OnMaximumPropertyChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e
     )
     {
         var sld = d as SldNumberBox;
-        sld.OnMaxiumuChanged((double?)e.OldValue, (double?)e.NewValue);
+        sld.OnMaximumChanged((double?)e.OldValue, (double?)e.NewValue);
     }
 
-    private void OnMaxiumuChanged(double? oldValue, double? newValue)
+    private void OnMaximumChanged(double? oldValue, double? newValue)
     {
         if (newValue != null && SControl != null)
         {

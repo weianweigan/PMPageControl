@@ -1,0 +1,94 @@
+<pmp:SldPMPage
+    x:Class="PMPageAddin.TabControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PMPageAddin"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    d:DataContext="{d:DesignInstance Type=local:TabControlViewModel}"
+    d:DesignHeight="1000"
+    d:DesignWidth="300"
+    PageHeight="450"
+    PageTitle="Tab Control Demo"
+    mc:Ignorable="d">
+
+    <pmp:SldTabControl Caption="Dimensions">
+        <pmp:SldGroupBox Caption="Basic Dimensions">
+            <pmp:SldNumberBox
+                SldCaption="Length"
+                Maximum="1000"
+                Minimum="1"
+                Value="{Binding Length}" />
+            <pmp:SldNumberBox
+                SldCaption="Width"
+                Maximum="1000"
+                Minimum="1"
+                Value="{Binding Width}" />
+            <pmp:SldNumberBox
+                SldCaption="Depth"
+                Maximum="1000"
+                Minimum="1"
+                Value="{Binding Depth}" />
+        </pmp:SldGroupBox>
+        <pmp:SldGroupBox Caption="Calculated">
+            <pmp:SldLabel SldCaption="Volume" SldText="{Binding VolumeText}" />
+            <pmp:SldLabel SldCaption="Surface Area" SldText="{Binding SurfaceAreaText}" />
+        </pmp:SldGroupBox>
+    </pmp:SldTabControl>
+
+    <pmp:SldTabControl Caption="Features">
+        <pmp:SldGroupBox Caption="Holes">
+            <pmp:SldCheckBox
+                Caption="Add Center Hole"
+                Checked="{Binding AddCenterHole}" />
+            <pmp:SldNumberBox
+                SldCaption="Hole Diameter"
+                Maximum="100"
+                Minimum="0.5"
+                SldVisible="{Binding AddCenterHole}"
+                Value="{Binding HoleDiameter}" />
+            <pmp:SldNumberBox
+                SldCaption="Hole Depth"
+                Maximum="100"
+                Minimum="0.5"
+                SldVisible="{Binding AddCenterHole}"
+                Value="{Binding HoleDepth}" />
+        </pmp:SldGroupBox>
+        <pmp:SldGroupBox Caption="Pattern">
+            <pmp:SldCombobox
+                SldCaption="Pattern Type"
+                SldHeight="80"
+                CurrentSelection="{Binding PatternTypeIndex}"
+                StartUpItems="None,Linear,Circular,Sketch Driven" />
+            <pmp:SldNumberBox
+                SldCaption="Instances"
+                Maximum="50"
+                Minimum="1"
+                Value="{Binding PatternInstances}" />
+        </pmp:SldGroupBox>
+    </pmp:SldTabControl>
+
+    <pmp:SldTabControl Caption="Options">
+        <pmp:SldGroupBox Caption="Display">
+            <pmp:SldCheckBox
+                Caption="Show Dimensions"
+                Checked="{Binding ShowDimensions}" />
+            <pmp:SldCheckBox
+                Caption="Show Annotations"
+                Checked="{Binding ShowAnnotations}" />
+            <pmp:SldCheckBox
+                Caption="Wireframe Mode"
+                Checked="{Binding WireframeMode}" />
+        </pmp:SldGroupBox>
+        <pmp:SldGroupBox Caption="Units">
+            <pmp:SldOption
+                SldCaption="Millimeters"
+                Checked="{Binding UseMillimeters}" />
+            <pmp:SldOption
+                SldCaption="Inches"
+                Checked="{Binding UseInches}" />
+        </pmp:SldGroupBox>
+    </pmp:SldTabControl>
+
+</pmp:SldPMPage>
