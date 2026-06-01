@@ -13,83 +13,71 @@
     PageTitle="Basic Controls"
     mc:Ignorable="d">
 
-    <!-- Labels: static text and warning message -->
+    <!--  Labels: static text and warning message  -->
     <pmp:SldGroupBox Caption="Labels">
         <pmp:SldLabel SldCaption="Title" SldText="Enter part parameters below:" />
         <pmp:SldLabelMsg SldCaption="Note" SldText="All dimensions are in millimeters." />
     </pmp:SldGroupBox>
 
-    <!-- TextBox: text input -->
+    <!--  TextBox: text input  -->
     <pmp:SldGroupBox Caption="Text Input">
-        <pmp:SldTextBox
-            SldCaption="Part Name"
-            Text="{Binding PartName}" />
+        <pmp:SldTextBox SldCaption="Part Name" Text="{Binding PartName}" />
         <pmp:SldTextBox
             SldCaption="Description"
             SldHeight="60"
             Text="{Binding Description}" />
     </pmp:SldGroupBox>
 
-    <!-- NumberBox: numeric input with range limits -->
+    <!--  NumberBox: numeric input with range limits  -->
     <pmp:SldGroupBox Caption="Dimensions">
         <pmp:SldNumberBox
-            SldCaption="Length"
             Maximum="500"
             Minimum="10"
+            SldCaption="Length"
             Value="{Binding Length}" />
         <pmp:SldNumberBox
-            SldCaption="Width"
             Maximum="500"
             Minimum="10"
+            SldCaption="Width"
             Value="{Binding Width}" />
         <pmp:SldNumberBox
-            SldCaption="Height"
             Maximum="500"
             Minimum="1"
+            SldCaption="Height"
             Value="{Binding Height}" />
     </pmp:SldGroupBox>
 
-    <!-- CheckBox: toggle options -->
+    <!--  CheckBox: toggle options  -->
     <pmp:SldGroupBox Caption="Features">
-        <pmp:SldCheckBox
-            Caption="Enable Fillet"
-            Checked="{Binding EnableFillet}" />
-        <pmp:SldCheckBox
-            Caption="Enable Chamfer"
-            Checked="{Binding EnableChamfer}" />
-        <!-- Checkbox controls visibility of another control -->
+        <pmp:SldCheckBox Caption="Enable Fillet" Checked="{Binding EnableFillet}" />
+        <pmp:SldCheckBox Caption="Enable Chamfer" Checked="{Binding EnableChamfer}" />
+        <!--  Checkbox controls visibility of another control  -->
         <pmp:SldNumberBox
             SldCaption="Fillet Radius"
             SldVisible="{Binding EnableFillet}"
             Value="{Binding FilletRadius}" />
     </pmp:SldGroupBox>
 
-    <!-- Options: radio-style mutually exclusive selection -->
+    <!--  Options: radio-style mutually exclusive selection  -->
     <pmp:SldGroupBox Caption="Material">
-        <pmp:SldOption
-            SldCaption="Steel"
-            Checked="{Binding IsSteel}" />
-        <pmp:SldOption
-            SldCaption="Aluminum"
-            Checked="{Binding IsAluminum}" />
-        <pmp:SldOption
-            SldCaption="Titanium"
-            Checked="{Binding IsTitanium}" />
+        <pmp:SldOption Checked="{Binding IsSteel}" SldCaption="Steel" />
+        <pmp:SldOption Checked="{Binding IsAluminum}" SldCaption="Aluminum" />
+        <pmp:SldOption Checked="{Binding IsTitanium}" SldCaption="Titanium" />
     </pmp:SldGroupBox>
 
-    <!-- Combobox: dropdown selection -->
+    <!--  Combobox: dropdown selection  -->
     <pmp:SldGroupBox Caption="Configuration">
         <pmp:SldCombobox
+            CurrentSelection="{Binding SelectedColorIndex}"
             SldCaption="Color"
             SldHeight="80"
-            CurrentSelection="{Binding SelectedColorIndex}"
             StartUpItems="Red,Green,Blue,Black,White" />
         <pmp:SldCombobox
+            CurrentSelection="{Binding SelectedSizeIndex}"
+            EditText="{Binding CustomSize, Mode=TwoWay}"
             SldCaption="Size"
             SldHeight="80"
             SldStyle="swPropMgrPageComboBoxStyle_EditableText"
-            CurrentSelection="{Binding SelectedSizeIndex}"
-            EditText="{Binding CustomSize, Mode=TwoWay}"
             StartUpItems="Small,Medium,Large" />
     </pmp:SldGroupBox>
 

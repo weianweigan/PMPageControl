@@ -30,18 +30,18 @@ jobs:
       run: dotnet restore Du.PMPage.Wpf.sln
 
     - name: Build
-      run: dotnet build Du.PMPage.Wpf.sln --configuration Release --no-restore
-
-    - name: Pack (Tag)
-      if: startsWith(github.ref, 'refs/tags/v')
       run: |
         $version = "${{ github.ref_name }}" -replace '^v', ''
-        dotnet pack Du.PMPage.Wpf/Du.PMPage.Wpf.csproj --configuration Release --no-build -p:Version=$version -o ./artifacts
+        if ("${{ github.ref }}" -like 'refs/tags/v*') {
+          dotnet build Du.PMPage.Wpf.sln --configuration Release --no-restore -p:Version=$version
+        } else {
+          dotnet build Du.PMPage.Wpf.sln --configuration Release --no-restore
+        }
 
     - name: Upload artifacts (Tag)
       if: startsWith(github.ref, 'refs/tags/v')
       uses: actions/upload-artifact@v4
       with:
         name: nuget-packages
-        path: ./artifacts/*.nupkg
+        path: Du.PMPage.Wpf/bin/Release/*.nupkg
         retention-days: 7

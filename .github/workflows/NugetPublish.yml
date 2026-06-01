@@ -34,17 +34,22 @@ jobs:
     - name: Restore
       run: dotnet restore Du.PMPage.Wpf.sln
 
-    - name: Build
-      run: dotnet build Du.PMPage.Wpf.sln --configuration Release --no-restore
-
-    - name: Pack
-      run: dotnet pack Du.PMPage.Wpf/Du.PMPage.Wpf.csproj --configuration Release --no-build -p:Version=$env:PACKAGE_VERSION -o ./artifacts
+    - name: Build & Pack
+      run: dotnet build Du.PMPage.Wpf.sln --configuration Release --no-restore -p:Version=$env:PACKAGE_VERSION
 
     - name: Push to NuGet.org
-      run: dotnet nuget push ./artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NugetKey }} --skip-duplicate
+      run: |
+        $nupkg = Get-ChildItem -Path Du.PMPage.Wpf/bin/Release -Filter *.nupkg | Where-Object { $_.Name -notmatch '\.symbols\.' } | Select-Object -First 1
+        if (-not $nupkg) {
+          Write-Error "No .nupkg found"
+          Get-ChildItem Du.PMPage.Wpf/bin/Release -Recurse
+          exit 1
+        }
+        Write-Host "Pushing $($nupkg.Name)"
+        dotnet nuget push $nupkg.FullName --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NugetKey }} --skip-duplicate
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: nuget-packages
-        path: ./artifacts/*.nupkg
+        path: Du.PMPage.Wpf/bin/Release/*.nupkg

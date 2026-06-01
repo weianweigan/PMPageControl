@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Instructions -->
+        <!--  Instructions  -->
         <TextBlock
             Grid.Row="0"
             Margin="0,0,0,10"
@@ -24,7 +24,7 @@
             Text="Click a selection list below, then pick geometry in the SolidWorks graphics area."
             TextWrapping="Wrap" />
 
-        <!-- Selection Lists (the "selection boxes") -->
+        <!--  Selection Lists (the "selection boxes")  -->
         <GroupBox Grid.Row="1" Header="Selection Lists">
             <Grid>
                 <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Face Selection List -->
+                <!--  Face Selection List  -->
                 <TextBlock
                     Grid.Row="0"
                     Margin="0,4,0,2"
@@ -51,7 +51,7 @@
                     SingleEntityOnly="True"
                     SwSelectTypes="{pmp:SwSelectTypes swSelFACES}" />
 
-                <!-- Edge Selection List -->
+                <!--  Edge Selection List  -->
                 <TextBlock
                     Grid.Row="2"
                     Margin="0,8,0,2"
@@ -65,7 +65,7 @@
                     SingleEntityOnly="True"
                     SwSelectTypes="{pmp:SwSelectTypes swSelEDGES}" />
 
-                <!-- Multi-Type Selection List -->
+                <!--  Multi-Type Selection List  -->
                 <TextBlock
                     Grid.Row="4"
                     Margin="0,8,0,2"
@@ -82,12 +82,15 @@
             </Grid>
         </GroupBox>
 
-        <!-- Status bar -->
+        <!--  Status bar  -->
         <StatusBar Grid.Row="2" Margin="0,8,0,0">
             <StatusBarItem>
                 <TextBlock>
                     <Run Text="Active: " />
-                    <Run x:Name="ActiveListName" Text="(none)" FontWeight="Bold" />
+                    <Run
+                        x:Name="ActiveListName"
+                        FontWeight="Bold"
+                        Text="(none)" />
                     <Run Text=" | Total selections: " />
                     <Run x:Name="TotalCount" Text="0" />
                 </TextBlock>
