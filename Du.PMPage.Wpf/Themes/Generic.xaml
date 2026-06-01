@@ -5,14 +5,17 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/Taskpane.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldPMPage.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldIconButton.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldLabelMsg.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldComboBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldWpfSelectionList.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldStackPanel.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldGroupBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/IconButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/LabelMsg.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/WpfSelectionList.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/StackPanel.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/GroupBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldTabControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldContentHost.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Du.PMPage.Wpf;component/Themes/SldControlDesignTemplates.xaml" />
+        <ResourceDictionary Source="/Du.PMPage.Wpf;component/Themes/Expander.xaml" />
+        <ResourceDictionary Source="/Du.PMPage.Wpf;component/Themes/ListBox.xaml" />
+        <ResourceDictionary Source="/Du.PMPage.Wpf;component/Themes/SldTaskpane.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

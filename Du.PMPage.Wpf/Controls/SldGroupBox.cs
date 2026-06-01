@@ -11,6 +11,12 @@ using SolidWorks.Interop.swconst;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// A WPF wrapper for the SolidWorks <see cref="IPropertyManagerPageGroup"/> control.
+/// Represents a collapsible group box that can contain child <see cref="SldControl"/> elements.
+/// Supports background color, caption, checked state, expand/collapse, visibility,
+/// and an optional checkbox via <see cref="HasCheckBox"/>.
+/// </summary>
 [ContentProperty("Children")]
 public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
 {
@@ -33,7 +39,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
     }
 
     /// <summary>
-    /// 用来表示 <see cref="BackgroundColor"/> 的依赖属性
+    /// Identifies the <see cref="BackgroundColor"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty BackgroundColorProperty = DependencyProperty.Register(
         "BackgroundColor",
@@ -52,7 +58,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
     }
 
     /// <summary>
-    /// 用来标识 <see cref="Caption"/> 的依赖属性
+    /// Identifies the <see cref="Caption"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(
         "Caption",
@@ -61,13 +67,18 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
         new PropertyMetadata("Expander", OnCaptionChanged)
     );
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the group box checkbox is checked.
+    /// </summary>
     public bool Checked
     {
         get { return (bool)GetValue(CheckedProperty); }
         set { SetValue(CheckedProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Checked.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Checked"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty CheckedProperty = DependencyProperty.Register(
         "Checked",
         typeof(bool),
@@ -75,13 +86,19 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
         new PropertyMetadata(false, OnCheckedChanged)
     );
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the group box is expanded.
+    /// The default is <c>true</c>.
+    /// </summary>
     public bool Expanded
     {
         get { return (bool)GetValue(ExpandedProperty); }
         set { SetValue(ExpandedProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Expanded.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Expanded"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty ExpandedProperty = DependencyProperty.Register(
         "Expanded",
         typeof(bool),
@@ -89,13 +106,19 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
         new PropertyMetadata(true, OnExpandedChanged)
     );
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the group box is visible.
+    /// The default is <c>true</c>.
+    /// </summary>
     public bool Visible
     {
         get { return (bool)GetValue(VisibleProperty); }
         set { SetValue(VisibleProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Visible.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Visible"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty VisibleProperty = DependencyProperty.Register(
         "Visible",
         typeof(bool),
@@ -103,13 +126,19 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
         new PropertyMetadata(true, OnVisibleChanged)
     );
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the group box displays a checkbox.
+    /// This property cannot be changed after the native control has been created.
+    /// </summary>
     public bool HasCheckBox
     {
         get { return (bool)GetValue(HasCheckBoxProperty); }
         set { SetValue(HasCheckBoxProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for HasCheckBox.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="HasCheckBox"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty HasCheckBoxProperty = DependencyProperty.Register(
         "HasCheckBox",
         typeof(bool),
@@ -127,12 +156,15 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
     {
         if (oldValue != newValue && SControl != null)
         {
-            throw new InvalidOperationException($"创建后不能修改值:{nameof(HasCheckBox)}");
+            throw new InvalidOperationException($"Cannot change {nameof(HasCheckBox)} after the native control has been created.");
         }
     }
 
     #endregion
 
+    /// <summary>
+    /// Gets the collection of child <see cref="SldControl"/> elements contained within this group box.
+    /// </summary>
     public List<SldControl> Children { get; } = new List<SldControl>();
 
     #region Private Static Methods
@@ -175,7 +207,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
     #region Private Methods
 
     /// <summary>
-    /// 修改 背景色
+    /// Applies the background color change to the native group box control.
     /// </summary>
     private void OnBackgroundColorChanged(Color? oldValue, Color? newValue)
     {
@@ -242,7 +274,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
 
         if (SControl == null)
         {
-            throw new NullReferenceException($"添加GroupBox错误:{Caption}");
+            throw new NullReferenceException($"Failed to add GroupBox: {Caption}");
         }
         else
         {
@@ -261,7 +293,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
             SControl.Expanded = Expanded;
         }
 
-        //添加子控件
+        // Add child controls.
         foreach (var child in Children)
         {
             // SldContentHost will be parented to an ElementHost at runtime,
@@ -297,7 +329,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
 
         if (SControl == null)
         {
-            throw new NullReferenceException($"添加GroupBox错误:{Caption}");
+            throw new NullReferenceException($"Failed to add GroupBox: {Caption}");
         }
         else
         {
@@ -316,7 +348,7 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
             SControl.Expanded = Expanded;
         }
 
-        //添加子控件
+        // Add child controls.
         foreach (var child in Children)
         {
             if (child is not SldContentHost)
@@ -327,13 +359,25 @@ public class SldGroupBox : SldControl<IPropertyManagerPageGroup>
         return ++id;
     }
 
+    /// <summary>
+    /// Sets the visibility of all child controls to <c>true</c>
+    /// when the native group box becomes visible.
+    /// </summary>
+    /// <param name="value">The new visibility state.</param>
     protected override void OnSldControlChanged(bool value)
     {
         Children.ForEach(p => p.SldControlVisibility = true);
     }
 
+    /// <summary>
+    /// No-op. The group box has no standard control properties to initialize.
+    /// </summary>
     protected override void SetSldControl() { }
 
+    /// <summary>
+    /// Applies the control template and populates design-time content
+    /// from the <see cref="Children"/> collection when in a designer.
+    /// </summary>
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();

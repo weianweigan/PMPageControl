@@ -9,27 +9,23 @@
     d:DataContext="{d:DesignInstance Type=local:ValidationViewModel}"
     d:DesignHeight="400"
     d:DesignWidth="300"
+    CloseCommand="{Binding CloseCmd}"
     PageHeight="400"
     PageTitle="Validation Demo"
-    CloseCommand="{Binding CloseCmd}"
     mc:Ignorable="d">
 
-    <!-- Input fields that require validation -->
+    <!--  Input fields that require validation  -->
     <pmp:SldGroupBox Caption="Required Fields">
-        <pmp:SldTextBox
-            SldCaption="Part Name *"
-            Text="{Binding PartName}" />
-        <pmp:SldTextBox
-            SldCaption="Revision *"
-            Text="{Binding Revision}" />
+        <pmp:SldTextBox SldCaption="Part Name *" Text="{Binding PartName}" />
+        <pmp:SldTextBox SldCaption="Revision *" Text="{Binding Revision}" />
         <pmp:SldNumberBox
-            SldCaption="Quantity"
             Maximum="1000"
             Minimum="1"
+            SldCaption="Quantity"
             Value="{Binding Quantity}" />
     </pmp:SldGroupBox>
 
-    <!-- Validation rules as a checklist -->
+    <!--  Validation rules as a checklist  -->
     <pmp:SldGroupBox Caption="Validation Rules">
         <pmp:SldCheckBox
             Caption="Part name is not empty"
@@ -45,11 +41,9 @@
             Enabled="False" />
     </pmp:SldGroupBox>
 
-    <!-- Validation status -->
+    <!--  Validation status  -->
     <pmp:SldGroupBox Caption="Status">
-        <pmp:SldLabelMsg
-            SldCaption="Status"
-            SldText="{Binding StatusMessage}" />
+        <pmp:SldLabelMsg SldCaption="Status" SldText="{Binding StatusMessage}" />
     </pmp:SldGroupBox>
 
 </pmp:SldPMPage>

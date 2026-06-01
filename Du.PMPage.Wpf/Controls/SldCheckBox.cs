@@ -16,13 +16,18 @@ public class SldCheckBox : SldControl<IPropertyManagerPageCheckbox>
         );
     }
 
+    /// <summary>
+    /// Gets or sets the text displayed next to the check box.
+    /// </summary>
     public string Caption
     {
         get { return (string)GetValue(CaptionProperty); }
         set { SetValue(CaptionProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Caption.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="Caption"/>.
+    /// </summary>
     public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(
         "Caption",
         typeof(string),
@@ -47,13 +52,19 @@ public class SldCheckBox : SldControl<IPropertyManagerPageCheckbox>
         }
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the check box is checked.
+    /// Binds two-way by default to reflect changes from the native SolidWorks control.
+    /// </summary>
     public bool Checked
     {
         get { return (bool)GetValue(CheckedProperty); }
         set { SetValue(CheckedProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Checked.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="Checked"/>.
+    /// </summary>
     public static readonly DependencyProperty CheckedProperty = DependencyProperty.Register(
         "Checked",
         typeof(bool),
@@ -82,6 +93,10 @@ public class SldCheckBox : SldControl<IPropertyManagerPageCheckbox>
         }
     }
 
+    /// <summary>
+    /// Synchronizes the managed properties to the native SolidWorks check box control
+    /// after the native control has been created.
+    /// </summary>
     protected override void SetSldControl()
     {
         SControl.Caption = Caption;

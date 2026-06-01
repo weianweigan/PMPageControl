@@ -134,6 +134,7 @@ public class SldPMPage : SldPMPageBase
         set { SetValue(FocusSldControlProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="FocusSldControl"/> dependency property.</summary>
     public static readonly DependencyProperty FocusSldControlProperty = DependencyProperty.Register(
         nameof(FocusSldControl),
         typeof(SldControl),
@@ -151,6 +152,7 @@ public class SldPMPage : SldPMPageBase
         set { SetValue(PageOptionsProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="PageOptions"/> dependency property.</summary>
     public static readonly DependencyProperty PageOptionsProperty = DependencyProperty.Register(
         nameof(PageOptions),
         typeof(swPropertyManagerPageOptions_e[]),
@@ -243,7 +245,7 @@ public class SldPMPage : SldPMPageBase
 
     /// <summary>
     /// Translates an external <see cref="SldSelectionBox.Selections"/> collection change
-    /// into a SolidWorks <see cref="ISelectionManager"/> / <see cref="IEntity"/> operation.
+    /// into a SolidWorks <c>ISelectionManager</c> / <see cref="IEntity"/> operation.
     /// </summary>
     /// <param name="item">The selection pair to act on, or null for Reset.</param>
     /// <param name="select">true to select; false to deselect; null to clear all.</param>
@@ -432,6 +434,12 @@ public class SldPMPage : SldPMPageBase
         ProcessPreSelect();
     }
 
+    /// <summary>
+    /// Called before the native SW page is created. Processes any pre-existing
+    /// selection set on the active document and assigns marks for discovered
+    /// <see cref="SldSelectionBox"/> instances, deferring full pre-selection
+    /// processing to <see cref="ProcessPreSelect"/>.
+    /// </summary>
     protected override void OnCreatePagePreview()
     {
         var doc = ActiveDoc;
@@ -477,6 +485,12 @@ public class SldPMPage : SldPMPageBase
             selMgr.DeSelect(l);
     }
 
+    /// <summary>
+    /// Combines <see cref="PageOptions"/> into a bitmask for the native
+    /// SolidWorks PropertyManagerPage creation call.
+    /// If <see cref="PageOptions"/> is null or empty, defaults to
+    /// <c>OkayButton | CancelButton</c>.
+    /// </summary>
     protected override int GetOptions()
     {
         var options = PageOptions;
@@ -586,12 +600,14 @@ public class SldPMPage : SldPMPageBase
             swHandleWindowFromHandleCreationFailure_e.swHandleWindowFromHandleCreationFailure_Retry;
     }
 
+    /// <inheritdoc/>
     public override void OnCheckboxCheck(int Id, bool Checked)
     {
         var sldCheckBox = GetControlById<SldCheckBox>(Id);
         sldCheckBox?.OnUserCheckChanged(Checked);
     }
 
+    /// <inheritdoc/>
     public override void OnOptionCheck(int Id)
     {
         var sldOption = GetControlById<SldOption>(Id);
@@ -605,6 +621,7 @@ public class SldPMPage : SldPMPageBase
         }
     }
 
+    /// <inheritdoc/>
     public override void OnButtonPress(int Id)
     {
         var sldBtn =
@@ -613,6 +630,7 @@ public class SldPMPage : SldPMPageBase
         sldBtn?.Command?.Execute(null);
     }
 
+    /// <inheritdoc/>
     public override void OnTextboxChanged(int Id, string Text)
     {
         var control = GetControlById<SldTextBox>(Id);
@@ -620,6 +638,7 @@ public class SldPMPage : SldPMPageBase
             control.Text = Text;
     }
 
+    /// <inheritdoc/>
     public override void OnNumberboxChanged(int Id, double Value)
     {
         var sldNumberBox = GetControlById<SldNumberBox>(Id);
@@ -627,6 +646,7 @@ public class SldPMPage : SldPMPageBase
             sldNumberBox.OnValueUpdate(Value);
     }
 
+    /// <inheritdoc/>
     public override void OnNumberBoxTrackingCompleted(int Id, double Value)
     {
         var sldNumberBox = GetControlById<SldNumberBox>(Id);
@@ -634,6 +654,7 @@ public class SldPMPage : SldPMPageBase
             sldNumberBox.OnValueUpdate(Value);
     }
 
+    /// <inheritdoc/>
     public override void OnComboboxEditChanged(int Id, string Text)
     {
         var control = GetControlById<SldCombobox>(Id);
@@ -641,12 +662,14 @@ public class SldPMPage : SldPMPageBase
             control.OnEditTextUpdate(Text);
     }
 
+    /// <inheritdoc/>
     public override void OnComboboxSelectionChanged(int Id, int Item)
     {
         var sControl = GetControlById<SldCombobox>(Id);
         sControl?.OnItemSelected(Item);
     }
 
+    /// <inheritdoc/>
     public override void OnSelectionboxListChanged(int Id, int Count)
     {
         SldSelectionBox sldSelectionBox = GetSelectionBoxById(Id);
@@ -719,6 +742,7 @@ public class SldPMPage : SldPMPageBase
         }
     }
 
+    /// <inheritdoc/>
     public override bool OnSubmitSelection(
         int Id,
         object Selection,
@@ -730,6 +754,7 @@ public class SldPMPage : SldPMPageBase
         return sldSeleBox?.OnSubmitSelectionCallout(Id, Selection, SelType, ref ItemText) ?? true;
     }
 
+    /// <inheritdoc/>
     public override void OnGainedFocus(int Id)
     {
         var control = GetControlById(Id);
@@ -741,6 +766,7 @@ public class SldPMPage : SldPMPageBase
 
     #region IDisposable
 
+    /// <inheritdoc/>
     protected override void Dispose(bool disposing)
     {
         if (!_disposed)

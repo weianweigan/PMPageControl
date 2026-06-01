@@ -5,6 +5,10 @@ using SolidWorks.Interop.swconst;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// A WPF control that wraps a native SolidWorks <see cref="IPropertyManagerPageTextbox"/>.
+/// Supports configurable height, text content with two-way binding, and text box style selection.
+/// </summary>
 public class SldTextBox : SldControl<IPropertyManagerPageTextbox>
 {
     static SldTextBox()
@@ -15,13 +19,19 @@ public class SldTextBox : SldControl<IPropertyManagerPageTextbox>
         );
     }
 
+    /// <summary>
+    /// Gets or sets the height of the native SolidWorks text box in pixels.
+    /// When <c>null</c>, the default height is used.
+    /// </summary>
     public int? SldHeight
     {
         get { return (int?)GetValue(SldHeightProperty); }
         set { SetValue(SldHeightProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldHeight.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="SldHeight"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty SldHeightProperty = DependencyProperty.Register(
         "SldHeight",
         typeof(int?),
@@ -50,13 +60,19 @@ public class SldTextBox : SldControl<IPropertyManagerPageTextbox>
         }
     }
 
+    /// <summary>
+    /// Gets or sets the text content of the native SolidWorks text box.
+    /// Binds two-way by default to the native <see cref="IPropertyManagerPageTextbox.Text"/> property.
+    /// </summary>
     public string Text
     {
         get { return (string)GetValue(TextProperty); }
         set { SetValue(TextProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Text"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
         "Text",
         typeof(string),
@@ -79,25 +95,41 @@ public class SldTextBox : SldControl<IPropertyManagerPageTextbox>
 
     private void OnTextChanged(string oldValue, string newValue)
     {
-        if (SControl != null && oldValue != newValue)
+        if (SControl == null)
         {
-            SControl.Text = newValue;
+            return;
         }
+        if (oldValue == newValue)
+        {
+            return;
+        }
+        if (SControl.Text == newValue)
+        {
+            return;
+        }
+
+        SControl.Text = newValue;
     }
 
+    /// <summary>
+    /// Gets or sets the style of the native SolidWorks text box.
+    /// Defaults to <see cref="swPropMgrPageTextBoxStyle_e.swPropMgrPageTextBoxStyle_NoBorder"/>.
+    /// </summary>
     public swPropMgrPageTextBoxStyle_e SldStyle
     {
         get { return (swPropMgrPageTextBoxStyle_e)GetValue(SldStyleProperty); }
         set { SetValue(SldStyleProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldStyle.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="SldStyle"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty SldStyleProperty = DependencyProperty.Register(
         "SldStyle",
         typeof(swPropMgrPageTextBoxStyle_e),
         typeof(SldTextBox),
         new PropertyMetadata(
-            swPropMgrPageTextBoxStyle_e.swPropMgrPageTextBoxStyle_NotifyOnlyWhenFocusLost,
+            swPropMgrPageTextBoxStyle_e.swPropMgrPageTextBoxStyle_NoBorder,
             OnStylePropertyCallback
         )
     );

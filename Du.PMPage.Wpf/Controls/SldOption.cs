@@ -4,6 +4,10 @@ using SolidWorks.Interop.sldworks;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// A WPF control that wraps a native SolidWorks <see cref="IPropertyManagerPageOption"/> (radio button).
+/// Supports two-way binding for the <see cref="Checked"/> state.
+/// </summary>
 public class SldOption : SldControl<IPropertyManagerPageOption>
 {
     static SldOption()
@@ -14,13 +18,19 @@ public class SldOption : SldControl<IPropertyManagerPageOption>
         );
     }
 
+    /// <summary>
+    /// Gets or sets whether this option is checked (selected).
+    /// Binds two-way by default to the native <see cref="IPropertyManagerPageOption.Checked"/> property.
+    /// </summary>
     public bool Checked
     {
         get { return (bool)GetValue(CheckedProperty); }
         set { SetValue(CheckedProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Checked.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Checked"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty CheckedProperty = DependencyProperty.Register(
         "Checked",
         typeof(bool),
@@ -49,6 +59,7 @@ public class SldOption : SldControl<IPropertyManagerPageOption>
         }
     }
 
+    /// <inheritdoc/>
     protected override void SetSldControl()
     {
         SControl.Caption = SldCaption;

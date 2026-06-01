@@ -13,6 +13,8 @@ namespace PMPageAddin;
 [Title("PMPageDemo")]
 public class SwAddin : SwAddInEx
 {
+    private TaskPanePage _taskPane;
+
     public SwAddin()
     {
         AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
@@ -41,6 +43,8 @@ public class SwAddin : SwAddInEx
         TabControl,
         Validation,
         ContentHost,
+        SldWindowTest,
+        TaskPane,
     }
 
     public override void OnConnect()
@@ -71,6 +75,13 @@ public class SwAddin : SwAddInEx
                     break;
                 case PMPageCmds.ContentHost:
                     new ContentHostPage(Application.Sw).ShowPage();
+                    break;
+                case PMPageCmds.SldWindowTest:
+                    new Du.PMPage.Wpf.SldSelectionTestWindow(Application.Sw).Show();
+                    break;
+                case PMPageCmds.TaskPane:
+                    _taskPane ??= new TaskPanePage(Application.Sw);
+                    _taskPane.ShowView();
                     break;
                 default:
                     break;

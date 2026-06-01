@@ -4,6 +4,11 @@ using SolidWorks.Interop.sldworks;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// A WPF wrapper for the SolidWorks <see cref="IPropertyManagerPageNumberbox"/> control.
+/// Provides a numeric input box with configurable range, units, and increment settings
+/// via the <see cref="NumberBoxRange"/> property.
+/// </summary>
 public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
 {
     static SldNumberBox()
@@ -15,7 +20,7 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
     }
 
     /// <summary>
-    /// 数字输入框中的值
+    /// Gets or sets the numeric value displayed in this number box.
     /// </summary>
     public double Value
     {
@@ -23,7 +28,9 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
         set { SetValue(ValueProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Value"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         "Value",
         typeof(double),
@@ -52,13 +59,19 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
         }
     }
 
+    /// <summary>
+    /// Gets or sets the range configuration for this number box,
+    /// including units, minimum, maximum, increment, and fast/slow increment values.
+    /// </summary>
     public NumberBoxRange NumberBoxRange
     {
         get { return (NumberBoxRange)GetValue(NumberBoxRangeProperty); }
         set { SetValue(NumberBoxRangeProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for NumberBoxRange.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="NumberBoxRange"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty NumberBoxRangeProperty = DependencyProperty.Register(
         "NumberBoxRange",
         typeof(NumberBoxRange),
@@ -90,13 +103,19 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
         }
     }
 
+    /// <summary>
+    /// Gets or sets the maximum allowed value for this number box.
+    /// Requires <see cref="NumberBoxRange"/> to be set first.
+    /// </summary>
     public double? Maximum
     {
         get { return (double)GetValue(MaximumProperty); }
         set { SetValue(MaximumProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Maximum.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Maximum"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
         "Maximum",
         typeof(double?),
@@ -137,13 +156,19 @@ public class SldNumberBox : SldControl<IPropertyManagerPageNumberbox>
         }
     }
 
+    /// <summary>
+    /// Gets or sets the minimum allowed value for this number box.
+    /// Requires <see cref="NumberBoxRange"/> to be set first.
+    /// </summary>
     public double? Minimum
     {
         get { return (double?)GetValue(MinimumProperty); }
         set { SetValue(MinimumProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Minimum.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="Minimum"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
         "Minimum",
         typeof(double?),

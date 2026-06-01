@@ -5,7 +5,8 @@ using SolidWorks.Interop.sldworks;
 namespace Du.PMPage.Wpf.Controls;
 
 /// <summary>
-/// 属性页按钮
+/// WPF wrapper for a SolidWorks Property Manager Page button control
+/// (<see cref="IPropertyManagerPageButton"/>).
 /// </summary>
 public class SldButton : SldControl<IPropertyManagerPageButton>, ISldBtnCommand
 {
@@ -17,6 +18,9 @@ public class SldButton : SldControl<IPropertyManagerPageButton>, ISldBtnCommand
         );
     }
 
+    /// <summary>
+    /// Gets or sets the text displayed on the button.
+    /// </summary>
     public string Caption
     {
         get { return (string)GetValue(CaptionProperty); }
@@ -24,7 +28,7 @@ public class SldButton : SldControl<IPropertyManagerPageButton>, ISldBtnCommand
     }
 
     /// <summary>
-    /// 命令接口
+    /// Gets or sets the command to invoke when the button is clicked.
     /// </summary>
     public ICommand Command
     {
@@ -32,7 +36,9 @@ public class SldButton : SldControl<IPropertyManagerPageButton>, ISldBtnCommand
         set { SetValue(CommandProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Command.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="Command"/>.
+    /// </summary>
     public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
         "Command",
         typeof(ICommand),
@@ -40,7 +46,9 @@ public class SldButton : SldControl<IPropertyManagerPageButton>, ISldBtnCommand
         new PropertyMetadata(null)
     );
 
-    // Using a DependencyProperty as the backing store for Caption.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="Caption"/>.
+    /// </summary>
     public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(
         "Caption",
         typeof(string),
@@ -62,6 +70,10 @@ public class SldButton : SldControl<IPropertyManagerPageButton>, ISldBtnCommand
         }
     }
 
+    /// <summary>
+    /// Synchronizes the managed properties to the native SolidWorks button control
+    /// after the native control has been created.
+    /// </summary>
     protected override void SetSldControl()
     {
         if (SControl != null && !string.IsNullOrWhiteSpace(Caption))

@@ -16,19 +16,19 @@
     <pmp:SldTabControl Caption="Dimensions">
         <pmp:SldGroupBox Caption="Basic Dimensions">
             <pmp:SldNumberBox
-                SldCaption="Length"
                 Maximum="1000"
                 Minimum="1"
+                SldCaption="Length"
                 Value="{Binding Length}" />
             <pmp:SldNumberBox
-                SldCaption="Width"
                 Maximum="1000"
                 Minimum="1"
+                SldCaption="Width"
                 Value="{Binding Width}" />
             <pmp:SldNumberBox
-                SldCaption="Depth"
                 Maximum="1000"
                 Minimum="1"
+                SldCaption="Depth"
                 Value="{Binding Depth}" />
         </pmp:SldGroupBox>
         <pmp:SldGroupBox Caption="Calculated">
@@ -39,55 +39,43 @@
 
     <pmp:SldTabControl Caption="Features">
         <pmp:SldGroupBox Caption="Holes">
-            <pmp:SldCheckBox
-                Caption="Add Center Hole"
-                Checked="{Binding AddCenterHole}" />
+            <pmp:SldCheckBox Caption="Add Center Hole" Checked="{Binding AddCenterHole}" />
             <pmp:SldNumberBox
-                SldCaption="Hole Diameter"
                 Maximum="100"
                 Minimum="0.5"
+                SldCaption="Hole Diameter"
                 SldVisible="{Binding AddCenterHole}"
                 Value="{Binding HoleDiameter}" />
             <pmp:SldNumberBox
-                SldCaption="Hole Depth"
                 Maximum="100"
                 Minimum="0.5"
+                SldCaption="Hole Depth"
                 SldVisible="{Binding AddCenterHole}"
                 Value="{Binding HoleDepth}" />
         </pmp:SldGroupBox>
         <pmp:SldGroupBox Caption="Pattern">
             <pmp:SldCombobox
+                CurrentSelection="{Binding PatternTypeIndex}"
                 SldCaption="Pattern Type"
                 SldHeight="80"
-                CurrentSelection="{Binding PatternTypeIndex}"
                 StartUpItems="None,Linear,Circular,Sketch Driven" />
             <pmp:SldNumberBox
-                SldCaption="Instances"
                 Maximum="50"
                 Minimum="1"
+                SldCaption="Instances"
                 Value="{Binding PatternInstances}" />
         </pmp:SldGroupBox>
     </pmp:SldTabControl>
 
     <pmp:SldTabControl Caption="Options">
         <pmp:SldGroupBox Caption="Display">
-            <pmp:SldCheckBox
-                Caption="Show Dimensions"
-                Checked="{Binding ShowDimensions}" />
-            <pmp:SldCheckBox
-                Caption="Show Annotations"
-                Checked="{Binding ShowAnnotations}" />
-            <pmp:SldCheckBox
-                Caption="Wireframe Mode"
-                Checked="{Binding WireframeMode}" />
+            <pmp:SldCheckBox Caption="Show Dimensions" Checked="{Binding ShowDimensions}" />
+            <pmp:SldCheckBox Caption="Show Annotations" Checked="{Binding ShowAnnotations}" />
+            <pmp:SldCheckBox Caption="Wireframe Mode" Checked="{Binding WireframeMode}" />
         </pmp:SldGroupBox>
         <pmp:SldGroupBox Caption="Units">
-            <pmp:SldOption
-                SldCaption="Millimeters"
-                Checked="{Binding UseMillimeters}" />
-            <pmp:SldOption
-                SldCaption="Inches"
-                Checked="{Binding UseInches}" />
+            <pmp:SldOption Checked="{Binding UseMillimeters}" SldCaption="Millimeters" />
+            <pmp:SldOption Checked="{Binding UseInches}" SldCaption="Inches" />
         </pmp:SldGroupBox>
     </pmp:SldTabControl>
 

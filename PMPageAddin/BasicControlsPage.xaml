@@ -23,12 +23,10 @@
     <pmp:SldGroupBox Caption="Text Input">
         <pmp:SldTextBox
             SldCaption="Part Name"
-            SldStyle="swPropMgrPageTextBoxStyle_NotifyOnlyWhenFocusLost"
             Text="{Binding PartName}" />
         <pmp:SldTextBox
             SldCaption="Description"
             SldHeight="60"
-            SldStyle="swPropMgrPageTextBoxStyle_NotifyOnlyWhenFocusLost"
             Text="{Binding Description}" />
     </pmp:SldGroupBox>
 

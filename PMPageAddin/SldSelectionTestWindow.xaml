@@ -1,0 +1,97 @@
+<pmp:SldWindow
+    x:Class="Du.PMPage.Wpf.SldSelectionTestWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:pmp="https://github.com/weianweigan/PMPageControl/wpf"
+    xmlns:swconst="clr-namespace:SolidWorks.Interop.swconst;assembly=SolidWorks.Interop.swconst"
+    Title="SldWindow — SelectionBox Demo"
+    Width="500"
+    Height="500"
+    WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Instructions -->
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,0,0,10"
+            FontWeight="Bold"
+            Text="Click a selection list below, then pick geometry in the SolidWorks graphics area."
+            TextWrapping="Wrap" />
+
+        <!-- Selection Lists (the "selection boxes") -->
+        <GroupBox Grid.Row="1" Header="Selection Lists">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Face Selection List -->
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="0,4,0,2"
+                    Text="Face Selection (click to activate):" />
+                <pmp:WpfSelectionList
+                    x:Name="FaceList"
+                    Grid.Row="1"
+                    Height="80"
+                    DisplayMemberPath="Name"
+                    Mark="1"
+                    SingleEntityOnly="True"
+                    SwSelectTypes="{pmp:SwSelectTypes swSelFACES}" />
+
+                <!-- Edge Selection List -->
+                <TextBlock
+                    Grid.Row="2"
+                    Margin="0,8,0,2"
+                    Text="Edge Selection (click to activate):" />
+                <pmp:WpfSelectionList
+                    x:Name="EdgeList"
+                    Grid.Row="3"
+                    Height="80"
+                    DisplayMemberPath="Name"
+                    Mark="2"
+                    SingleEntityOnly="True"
+                    SwSelectTypes="{pmp:SwSelectTypes swSelEDGES}" />
+
+                <!-- Multi-Type Selection List -->
+                <TextBlock
+                    Grid.Row="4"
+                    Margin="0,8,0,2"
+                    Text="Multi-Type Selection — Edges, Faces, Vertices (click to activate):" />
+                <pmp:WpfSelectionList
+                    x:Name="MultiTypeList"
+                    Grid.Row="5"
+                    Height="120"
+                    DisplayMemberPath="Name"
+                    Mark="4"
+                    SwSelectTypes="{pmp:SwSelectTypes swSelEDGES,
+                                                      swSelFACES,
+                                                      swSelVERTICES}" />
+            </Grid>
+        </GroupBox>
+
+        <!-- Status bar -->
+        <StatusBar Grid.Row="2" Margin="0,8,0,0">
+            <StatusBarItem>
+                <TextBlock>
+                    <Run Text="Active: " />
+                    <Run x:Name="ActiveListName" Text="(none)" FontWeight="Bold" />
+                    <Run Text=" | Total selections: " />
+                    <Run x:Name="TotalCount" Text="0" />
+                </TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</pmp:SldWindow>

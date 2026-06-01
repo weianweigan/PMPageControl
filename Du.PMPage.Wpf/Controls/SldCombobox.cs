@@ -8,6 +8,12 @@ using SolidWorks.Interop.swconst;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// WPF wrapper for a SolidWorks Property Manager Page combo box control
+/// (<see cref="IPropertyManagerPageCombobox"/>). Supports items binding via
+/// <see cref="SldItems"/>, current selection tracking, editable text, and
+/// style/height configuration.
+/// </summary>
 public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
 {
     static SldCombobox()
@@ -19,19 +25,28 @@ public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
     }
 
     /// <summary>
-    /// 初始选项，使用,号分割
+    /// Gets or sets the initial items for the combo box as a comma-separated string.
+    /// These items are used to populate <see cref="SldItems"/> on first creation
+    /// when <see cref="SldItems"/> has not been explicitly set.
     /// </summary>
     public string StartUpItems { get; set; }
 
     #region Dependency Properties
 
+    /// <summary>
+    /// Gets or sets the collection of items displayed in the combo box.
+    /// Changes to the collection are automatically synchronized to the native
+    /// SolidWorks combo box control.
+    /// </summary>
     public ObservableCollection<string> SldItems
     {
         get { return (ObservableCollection<string>)GetValue(SldItemsProperty); }
         set { SetValue(SldItemsProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldItems.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="SldItems"/>.
+    /// </summary>
     public static readonly DependencyProperty SldItemsProperty = DependencyProperty.Register(
         "SldItems",
         typeof(ObservableCollection<string>),
@@ -100,7 +115,9 @@ public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
         set { SetValue(CurrentSelectionProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for CurrentSelection.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="CurrentSelection"/>.
+    /// </summary>
     public static readonly DependencyProperty CurrentSelectionProperty =
         DependencyProperty.Register(
             "CurrentSelection",
@@ -122,7 +139,9 @@ public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
         set { SetValue(SldStyleProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldStyle.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="SldStyle"/>.
+    /// </summary>
     public static readonly DependencyProperty SldStyleProperty = DependencyProperty.Register(
         "SldStyle",
         typeof(swPropMgrPageComboBoxStyle_e),
@@ -144,7 +163,9 @@ public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
         set { SetValue(EditTextProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for EditText.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="EditText"/>.
+    /// </summary>
     public static readonly DependencyProperty EditTextProperty = DependencyProperty.Register(
         "EditText",
         typeof(string),
@@ -164,7 +185,9 @@ public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
         set { SetValue(SldHeightProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldHeight.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="SldHeight"/>.
+    /// </summary>
     public static readonly DependencyProperty SldHeightProperty = DependencyProperty.Register(
         "SldHeight",
         typeof(int),
@@ -262,6 +285,10 @@ public class SldCombobox : SldControl<IPropertyManagerPageCombobox>
 
     #region Methods
 
+    /// <summary>
+    /// Synchronizes the managed properties to the native SolidWorks combo box control
+    /// after the native control has been created.
+    /// </summary>
     protected override void SetSldControl()
     {
         SControl.Height = (short)SldHeight;

@@ -98,6 +98,9 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         set { SetValue(AppProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="App"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty AppProperty = DependencyProperty.Register(
         nameof(App),
         typeof(ISldWorks),
@@ -114,6 +117,9 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         set { SetValue(PageTitleProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="PageTitle"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty PageTitleProperty = DependencyProperty.Register(
         nameof(PageTitle),
         typeof(string),
@@ -130,6 +136,9 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         set { SetValue(PageHeightProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="PageHeight"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty PageHeightProperty = DependencyProperty.Register(
         nameof(PageHeight),
         typeof(int),
@@ -164,6 +173,9 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="Pinned"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty PinnedProperty = DependencyProperty.Register(
         nameof(Pinned),
         typeof(bool),
@@ -181,6 +193,9 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         set { SetValue(CloseCommandProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="CloseCommand"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty CloseCommandProperty = DependencyProperty.Register(
         "CloseCommand",
         typeof(ICommand),
@@ -198,6 +213,9 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         set { SetValue(PageCreatedWhenShowProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="PageCreatedWhenShow"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty PageCreatedWhenShowProperty =
         DependencyProperty.Register(
             nameof(PageCreatedWhenShow),
@@ -259,9 +277,26 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
 
     #region Delegates
 
+    /// <summary>
+    /// Delegate for the <see cref="Closed"/> event. Raised after the
+    /// PropertyManagerPage has been closed.
+    /// </summary>
+    /// <param name="reason">The reason the page was closed.</param>
     public delegate void PropertyManagerPageClosedDelegate(
         swPropertyManagerPageCloseReasons_e reason
     );
+
+    /// <summary>
+    /// Delegate for the <see cref="Closing"/> event. Raised when the
+    /// PropertyManagerPage is about to close. Set
+    /// <see cref="ClosingArg.Cancel"/> to <see langword="true"/> to prevent
+    /// the page from closing, and optionally provide an error title and
+    /// message via <see cref="ClosingArg.ErrorTitle"/> and
+    /// <see cref="ClosingArg.ErrorMessage"/>.
+    /// </summary>
+    /// <param name="reason">The reason the page is closing.</param>
+    /// <param name="arg">The closing argument; set <see cref="ClosingArg.Cancel"/>
+    /// to <see langword="true"/> to block the close.</param>
     public delegate void PropertyManagerPageClosingDelegate(
         swPropertyManagerPageCloseReasons_e reason,
         ClosingArg arg
@@ -341,12 +376,12 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
     protected virtual void BeforeShow() { }
 
     /// <summary>
-    /// Called just before <see cref="Page.Show()"/>.
+    /// Called just before <c>Page.Show()</c>.
     /// </summary>
     protected virtual void OnShowPagePreview() { }
 
     /// <summary>
-    /// Called just after successful <see cref="Page.Show()"/>.
+    /// Called just after successful <c>Page.Show()</c>.
     /// </summary>
     protected virtual void OnShowPagePost() { }
 
@@ -421,16 +456,39 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
 
     #region IPropertyManagerPage2Handler9
 
+    /// <summary>
+    /// Called by SolidWorks after the PropertyManagerPage is activated.
+    /// Fires the <see cref="AfterActivationEvent"/>.
+    /// </summary>
     public void AfterActivation()
     {
         AfterActivationEvent?.Invoke();
     }
 
+    /// <summary>
+    /// Called by SolidWorks when the "What's New" button is clicked.
+    /// Fires the <see cref="WhatsNewRequested"/> event.
+    /// </summary>
     public void OnWhatsNew()
     {
         WhatsNewRequested?.Invoke();
     }
 
+    /// <summary>
+    /// Called by SolidWorks when the PropertyManagerPage is closing.
+    /// Raises the <see cref="Closing"/> event; if cancellation is requested
+    /// via <see cref="ClosingArg.Cancel"/>, throws a COM exception to
+    /// prevent the page from closing. Also validates
+    /// <see cref="CloseCommand"/> before allowing an OK close.
+    /// </summary>
+    /// <param name="Reason">
+    /// The close reason from SolidWorks, cast to
+    /// <see cref="swPropertyManagerPageCloseReasons_e"/>.
+    /// </param>
+    /// <exception cref="COMException">
+    /// Thrown with <c>S_FALSE</c> when closing is cancelled by the handler
+    /// or the close command cannot execute.
+    /// </exception>
     public void OnClose(int Reason)
     {
         CloseReason = (swPropertyManagerPageCloseReasons_e)Reason;
@@ -462,6 +520,13 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         }
     }
 
+    /// <summary>
+    /// Called by SolidWorks after the PropertyManagerPage has closed.
+    /// On OK, fires <see cref="OkClicked"/> and executes
+    /// <see cref="CloseCommand"/> with <see langword="null"/>; otherwise
+    /// passes <c>-1</c>. Then fires <see cref="Closed"/> and calls
+    /// <see cref="Dispose()"/>.
+    /// </summary>
     public void AfterClose()
     {
         if (CloseReason == swPropertyManagerPageCloseReasons_e.swPropertyManagerPageClose_Okay)
@@ -477,58 +542,181 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         Dispose();
     }
 
+    /// <summary>
+    /// Called by SolidWorks when the Help button is clicked.
+    /// Fires the <see cref="HelpRequested"/> event.
+    /// </summary>
+    /// <returns>Always returns <see langword="true"/>.</returns>
     public virtual bool OnHelp()
     {
         HelpRequested?.Invoke();
         return true;
     }
 
+    /// <summary>
+    /// Called by SolidWorks when navigating to the previous page in a
+    /// multi-page PropertyManagerPage. Override to handle page switching.
+    /// </summary>
+    /// <returns>
+    /// <see langword="true"/> to allow the navigation;
+    /// <see langword="false"/> to block it.
+    /// </returns>
     public virtual bool OnPreviousPage()
     {
         return true;
     }
 
+    /// <summary>
+    /// Called by SolidWorks when navigating to the next page in a
+    /// multi-page PropertyManagerPage. Override to handle page switching.
+    /// </summary>
+    /// <returns>
+    /// <see langword="true"/> to allow the navigation;
+    /// <see langword="false"/> to block it.
+    /// </returns>
     public virtual bool OnNextPage()
     {
         return true;
     }
 
+    /// <summary>
+    /// Called by SolidWorks when the PropertyManagerPage is previewed.
+    /// </summary>
+    /// <returns>Always returns <see langword="true"/>.</returns>
     public bool OnPreview() => true;
 
+    /// <summary>
+    /// Called by SolidWorks when the user triggers Undo.
+    /// </summary>
     public void OnUndo() { }
 
+    /// <summary>
+    /// Called by SolidWorks when the user triggers Redo.
+    /// </summary>
     public void OnRedo() { }
 
+    /// <summary>
+    /// Called by SolidWorks when a tab is clicked.
+    /// </summary>
+    /// <param name="Id">The native control ID of the tab.</param>
+    /// <returns>Always returns <see langword="true"/>.</returns>
     public bool OnTabClicked(int Id) => true;
 
+    /// <summary>
+    /// Called by SolidWorks when a group is expanded or collapsed.
+    /// </summary>
+    /// <param name="Id">The native control ID of the group.</param>
+    /// <param name="Expanded"><see langword="true"/> if expanded, <see langword="false"/> if collapsed.</param>
     public void OnGroupExpand(int Id, bool Expanded) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a group check state changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the group.</param>
+    /// <param name="Checked">The new check state.</param>
     public void OnGroupCheck(int Id, bool Checked) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a checkbox is toggled. Override to handle
+    /// check state changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the checkbox.</param>
+    /// <param name="Checked">The new check state.</param>
     public virtual void OnCheckboxCheck(int Id, bool Checked) { }
 
+    /// <summary>
+    /// Called by SolidWorks when an option button is selected. Override to
+    /// handle option changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the option button.</param>
     public virtual void OnOptionCheck(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a button is pressed. Override to handle
+    /// button clicks.
+    /// </summary>
+    /// <param name="Id">The native control ID of the button.</param>
     public virtual void OnButtonPress(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when text in a text box changes. Override to
+    /// react to text changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the text box.</param>
+    /// <param name="Text">The current text content.</param>
     public virtual void OnTextboxChanged(int Id, string Text) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a number box value changes. Override to
+    /// react to value changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the number box.</param>
+    /// <param name="Value">The current numeric value.</param>
     public virtual void OnNumberboxChanged(int Id, double Value) { }
 
+    /// <summary>
+    /// Called by SolidWorks when the text in a combo box edit field changes.
+    /// Override to handle text input.
+    /// </summary>
+    /// <param name="Id">The native control ID of the combo box.</param>
+    /// <param name="Text">The current edit text.</param>
     public virtual void OnComboboxEditChanged(int Id, string Text) { }
 
+    /// <summary>
+    /// Called by SolidWorks when the selection in a combo box changes.
+    /// Override to handle selection changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the combo box.</param>
+    /// <param name="Item">The index of the newly selected item.</param>
     public virtual void OnComboboxSelectionChanged(int Id, int Item) { }
 
+    /// <summary>
+    /// Called by SolidWorks when the selection in a list box changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the list box.</param>
+    /// <param name="Item">The index of the newly selected item.</param>
     public void OnListboxSelectionChanged(int Id, int Item) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a selection box gains or loses focus.
+    /// </summary>
+    /// <param name="Id">The native control ID of the selection box.</param>
     public void OnSelectionboxFocusChanged(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when the selection list in a selection box
+    /// changes. Override to react to selection count changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the selection box.</param>
+    /// <param name="Count">The number of items in the selection list.</param>
     public virtual void OnSelectionboxListChanged(int Id, int Count) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a selection box callout is created.
+    /// </summary>
+    /// <param name="Id">The native control ID of the selection box.</param>
     public void OnSelectionboxCalloutCreated(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a selection box callout is destroyed.
+    /// </summary>
+    /// <param name="Id">The native control ID of the selection box.</param>
     public void OnSelectionboxCalloutDestroyed(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when the user submits a selection. Override to
+    /// validate or transform the selection.
+    /// </summary>
+    /// <param name="Id">The native control ID of the selection box.</param>
+    /// <param name="Selection">The selected object.</param>
+    /// <param name="SelType">The type of the selection.</param>
+    /// <param name="ItemText">
+    /// The display text for the selection item; modify to change the label.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> to accept the selection;
+    /// <see langword="false"/> to reject it.
+    /// </returns>
     public virtual bool OnSubmitSelection(
         int Id,
         object Selection,
@@ -539,38 +727,120 @@ public abstract class SldPMPageBase : ItemsControl, IPropertyManagerPage2Handler
         return true;
     }
 
+    /// <summary>
+    /// Called by SolidWorks when an ActiveX control is created.
+    /// </summary>
+    /// <param name="Id">The native control ID.</param>
+    /// <param name="Status">Creation status from SolidWorks.</param>
+    /// <returns>Always returns 1 (S_OK).</returns>
     public int OnActiveXControlCreated(int Id, bool Status) => 1;
 
+    /// <summary>
+    /// Called by SolidWorks when a slider position changes.
+    /// </summary>
+    /// <param name="Id">The native control ID of the slider.</param>
+    /// <param name="Value">The current slider value.</param>
     public void OnSliderPositionChanged(int Id, double Value) { }
 
+    /// <summary>
+    /// Called by SolidWorks when slider tracking is completed.
+    /// </summary>
+    /// <param name="Id">The native control ID of the slider.</param>
+    /// <param name="Value">The final slider value.</param>
     public void OnSliderTrackingCompleted(int Id, double Value) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a keystroke occurs in the
+    /// PropertyManagerPage. Override to handle or intercept keyboard input.
+    /// </summary>
+    /// <param name="Wparam">The wParam of the keystroke message.</param>
+    /// <param name="Message">The message identifier.</param>
+    /// <param name="Lparam">The lParam of the keystroke message.</param>
+    /// <param name="Id">The native control ID that received the keystroke.</param>
+    /// <returns>
+    /// <see langword="true"/> to allow the keystroke;
+    /// <see langword="false"/> to suppress it.
+    /// </returns>
     public bool OnKeystroke(int Wparam, int Message, int Lparam, int Id) => true;
 
+    /// <summary>
+    /// Called by SolidWorks when a popup menu item is selected.
+    /// </summary>
+    /// <param name="Id">The native control ID associated with the popup.</param>
     public void OnPopupMenuItem(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a popup menu item needs to update its state.
+    /// </summary>
+    /// <param name="Id">The native control ID associated with the popup.</param>
+    /// <param name="retval">Reference to the return value to set.</param>
     public void OnPopupMenuItemUpdate(int Id, ref int retval) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a control gains focus. Override to
+    /// perform actions on focus gain.
+    /// </summary>
+    /// <param name="Id">The native control ID that gained focus.</param>
     public virtual void OnGainedFocus(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a control loses focus.
+    /// </summary>
+    /// <param name="Id">The native control ID that lost focus.</param>
     public void OnLostFocus(int Id) { }
 
+    /// <summary>
+    /// Called by SolidWorks when a WindowFromHandle control is created.
+    /// Override to return the Win32 window handle for WPF interop.
+    /// </summary>
+    /// <param name="Id">The native control ID.</param>
+    /// <param name="Status">Creation status from SolidWorks.</param>
+    /// <returns>
+    /// The Win32 window handle (as <see cref="int"/>) to host WPF content,
+    /// or -1 on failure.
+    /// </returns>
     public virtual int OnWindowFromHandleControlCreated(int Id, bool Status) => -1;
 
+    /// <summary>
+    /// Called by SolidWorks when the right mouse button is released over a
+    /// list box.
+    /// </summary>
+    /// <param name="Id">The native control ID of the list box.</param>
+    /// <param name="PosX">The X coordinate of the mouse.</param>
+    /// <param name="PosY">The Y coordinate of the mouse.</param>
     public void OnListboxRMBUp(int Id, int PosX, int PosY) { }
 
+    /// <summary>
+    /// Called by SolidWorks when number box tracking is completed
+    /// (slider drag finished).
+    /// </summary>
+    /// <param name="Id">The native control ID of the number box.</param>
+    /// <param name="Value">The final numeric value.</param>
     public virtual void OnNumberBoxTrackingCompleted(int Id, double Value) { }
 
     #endregion
 
     #region IDisposable
 
+    /// <summary>
+    /// Releases all resources used by the <see cref="SldPMPageBase"/>.
+    /// Releases COM references, clears events, and suppresses finalization.
+    /// </summary>
     public void Dispose()
     {
         Dispose(true);
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>
+    /// Releases the unmanaged resources used by the
+    /// <see cref="SldPMPageBase"/> and optionally releases the managed
+    /// resources.
+    /// </summary>
+    /// <param name="disposing">
+    /// <see langword="true"/> to release both managed and unmanaged resources;
+    /// <see langword="false"/> to release only unmanaged resources.
+    /// </param>
     protected virtual void Dispose(bool disposing)
     {
         if (!_disposed)

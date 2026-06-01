@@ -59,6 +59,7 @@ public class SldContentHost : SldControl<IPropertyManagerPageWindowFromHandle>
         set { SetValue(PageHeightProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="PageHeight"/> dependency property.</summary>
     public static readonly DependencyProperty PageHeightProperty = DependencyProperty.Register(
         nameof(PageHeight),
         typeof(int),
@@ -78,6 +79,10 @@ public class SldContentHost : SldControl<IPropertyManagerPageWindowFromHandle>
 
     #endregion
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the embedded <see cref="ElementHost"/>
+    /// should use the system message-box font. The default is <c>true</c>.
+    /// </summary>
     public bool UseSystemFont { get; set; } = true;
 
     #region Overrides (SldControl integration)

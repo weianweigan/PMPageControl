@@ -3,6 +3,11 @@ using System.Windows;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// WPF wrapper for a SolidWorks Property Manager Page checkable bitmap button control.
+/// Extends <see cref="SldBitmapButton"/> with toggle/check behavior via
+/// <see cref="IsCheckable"/> and <see cref="Checked"/> properties.
+/// </summary>
 public class SldCheckableBitmapButton : SldBitmapButton
 {
     /// <summary>
@@ -14,7 +19,9 @@ public class SldCheckableBitmapButton : SldBitmapButton
         set { SetValue(IsCheckableProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for IsCheckable.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="IsCheckable"/>.
+    /// </summary>
     public static readonly DependencyProperty IsCheckableProperty = DependencyProperty.Register(
         "IsCheckable",
         typeof(bool),
@@ -23,7 +30,8 @@ public class SldCheckableBitmapButton : SldBitmapButton
     );
 
     /// <summary>
-    /// 是否选中
+    /// Gets or sets a value indicating whether the button is in the checked (pressed) state.
+    /// Only meaningful when <see cref="IsCheckable"/> is <c>true</c>.
     /// </summary>
     public bool Checked
     {
@@ -31,7 +39,9 @@ public class SldCheckableBitmapButton : SldBitmapButton
         set { SetValue(CheckedProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Checked.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Dependency property for <see cref="Checked"/>.
+    /// </summary>
     public static readonly DependencyProperty CheckedProperty = DependencyProperty.Register(
         "Checked",
         typeof(bool),
@@ -73,6 +83,10 @@ public class SldCheckableBitmapButton : SldBitmapButton
         }
     }
 
+    /// <summary>
+    /// Synchronizes the managed properties to the native SolidWorks checkable bitmap button
+    /// control after the native control has been created.
+    /// </summary>
     protected override void SetSldControl()
     {
         base.SetSldControl();

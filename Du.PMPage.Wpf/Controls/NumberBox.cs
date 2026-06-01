@@ -1,34 +1,51 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// A numeric input <see cref="TextBox"/> that restricts text input to valid number characters.
+/// Provides a <see cref="Value"/> property (double) that stays in sync with the displayed text,
+/// support for decimal or integer-only input, and a configurable format string.
+/// </summary>
 public class NumberBox : TextBox
 {
     static NumberBox()
     {
-        //NumberBox基本不需要额外的样式，用Textbox的就够了
-        //DefaultStyleKeyProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(typeof(NumberBox)));
+        // NumberBox uses the default TextBox styling; no additional control template is needed.
+        // DefaultStyleKeyProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(typeof(NumberBox)));
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="NumberBox"/> class.
+    /// Disables IME input, centers content vertically, and sets the initial text to "0".
+    /// </summary>
     public NumberBox()
     {
-        InputMethod.SetIsInputMethodEnabled(this, false); // 禁用文本框的输入法
+        InputMethod.SetIsInputMethodEnabled(this, false); // Disable IME for this text box.
         VerticalContentAlignment = VerticalAlignment.Center;
         Text = "0";
     }
 
+    /// <summary>
+    /// Called when the control loses focus. Validates the current text:
+    /// if it is a valid number, updates <see cref="Value"/>; otherwise,
+    /// replaces the text with the current <see cref="Value"/> formatted using <see cref="FormatString"/>.
+    /// </summary>
+    /// <param name="e">The event data.</param>
     protected override void OnLostFocus(RoutedEventArgs e)
     {
         base.OnLostFocus(e);
         if (double.TryParse(Text, out double value))
-        { //如果是有效的数字则替换当前值
+        {
+            // Valid number: update the backing value.
             updateValue(value);
         }
         else
-        { //失去焦点时如果不是有效的数字则用当前值替换用户的输入
+        {
+            // Invalid: restore text from the current numeric value.
             updateText(Value.ToString(FormatString));
         }
     }
@@ -36,6 +53,11 @@ public class NumberBox : TextBox
     private bool isUpdateValue = false,
         isUpdateText = false;
 
+    /// <summary>
+    /// Filters text input to allow only digits, a single decimal point, and a single minus sign.
+    /// When <see cref="AllowDecimals"/> is false, the decimal point is also rejected.
+    /// </summary>
+    /// <param name="e">The text composition event data.</param>
     protected override void OnTextInput(TextCompositionEventArgs e)
     {
         var txt = e.Text;
@@ -51,12 +73,14 @@ public class NumberBox : TextBox
                 else
                 {
                     if (!AllowDecimals && item == '.')
-                    { //不允许输入小数
+                    {
+                        // Decimals are not allowed.
                         e.Handled = true;
                         break;
                     }
                     if (item == '.' || item == '-')
-                    { //小数点和负号只能出现一次
+                    {
+                        // Decimal point and minus sign can appear at most once.
                         if (contains(item))
                         {
                             e.Handled = true;
@@ -75,10 +99,10 @@ public class NumberBox : TextBox
     }
 
     /// <summary>
-    /// 当前文本中是否包含指定的字符
+    /// Returns whether the current text already contains the specified character.
     /// </summary>
-    /// <param name="c"></param>
-    /// <returns></returns>
+    /// <param name="c">The character to check for.</param>
+    /// <returns>True if the character is present in <see cref="TextBox.Text"/>; otherwise false.</returns>
     private bool contains(char c)
     {
         if (Text == null)
@@ -96,9 +120,10 @@ public class NumberBox : TextBox
     }
 
     /// <summary>
-    /// 静默更新值
+    /// Silently updates <see cref="Value"/> without triggering the text-to-value
+    /// synchronization loop.
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="value">The new numeric value.</param>
     protected void updateValue(double value)
     {
         isUpdateValue = true;
@@ -113,9 +138,10 @@ public class NumberBox : TextBox
     }
 
     /// <summary>
-    /// 静默更新文本
+    /// Silently updates <see cref="TextBox.Text"/> without triggering the value-from-text
+    /// synchronization loop.
     /// </summary>
-    /// <param name="text"></param>
+    /// <param name="text">The new text value.</param>
     protected void updateText(string text)
     {
         isUpdateText = true;
@@ -130,7 +156,7 @@ public class NumberBox : TextBox
     }
 
     /// <summary>
-    /// 当前值
+    /// Gets or sets the current numeric value.
     /// </summary>
     public double Value
     {
@@ -138,6 +164,9 @@ public class NumberBox : TextBox
         set { SetValue(ValueProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="Value"/> dependency property. Default is 0.
+    /// </summary>
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
         "Value",
         typeof(double),
@@ -146,7 +175,8 @@ public class NumberBox : TextBox
     );
 
     /// <summary>
-    /// 数值的格式化字符串,默认最多保留小数点后6位。
+    /// Gets or sets the numeric format string used when converting <see cref="Value"/> to text.
+    /// Default is "0.######" (up to 6 decimal places).
     /// </summary>
     public string FormatString
     {
@@ -154,6 +184,9 @@ public class NumberBox : TextBox
         set { SetValue(FormatStringProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="FormatString"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty FormatStringProperty = DependencyProperty.Register(
         "FormatString",
         typeof(string),
@@ -162,7 +195,9 @@ public class NumberBox : TextBox
     );
 
     /// <summary>
-    /// 是否允许输入小数
+    /// Gets or sets whether decimal input is allowed. When false, the decimal point
+    /// character is rejected and <see cref="Value"/> is coerced to an integer on text change.
+    /// Default is true.
     /// </summary>
     public bool AllowDecimals
     {
@@ -170,6 +205,9 @@ public class NumberBox : TextBox
         set { SetValue(AllowDecimalsProperty, value); }
     }
 
+    /// <summary>
+    /// Identifies the <see cref="AllowDecimals"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty AllowDecimalsProperty = DependencyProperty.Register(
         "AllowDecimals",
         typeof(bool),
@@ -177,6 +215,12 @@ public class NumberBox : TextBox
         new PropertyMetadata(true)
     );
 
+    /// <summary>
+    /// Called when a dependency property value changes. Triggers <see cref="OnValueChanged"/>
+    /// when <see cref="Value"/> changes, and updates the displayed text when
+    /// <see cref="FormatString"/> changes.
+    /// </summary>
+    /// <param name="e">The event data.</param>
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -191,10 +235,14 @@ public class NumberBox : TextBox
     }
 
     /// <summary>
-    /// 在当前值改变后触发
+    /// Occurs when the <see cref="Value"/> property has changed.
     /// </summary>
     public event EventHandler ValueChanged;
 
+    /// <summary>
+    /// Raises the <see cref="ValueChanged"/> event and updates the displayed text
+    /// to reflect the new value (unless the change originated from the text box itself).
+    /// </summary>
     protected virtual void OnValueChanged()
     {
         if (!isUpdateValue)
@@ -204,13 +252,19 @@ public class NumberBox : TextBox
         ValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Called when the text content changes. Parses the new text and updates
+    /// <see cref="Value"/> accordingly, truncating to an integer when
+    /// <see cref="AllowDecimals"/> is false.
+    /// </summary>
+    /// <param name="e">The text changed event data.</param>
     protected override void OnTextChanged(TextChangedEventArgs e)
     {
         if (!isUpdateText)
         {
             if (double.TryParse(Text, out double value))
             {
-                updateValue(AllowDecimals ? value : Convert.ToInt32(value)); //不允许小数则将值强行取整
+                updateValue(AllowDecimals ? value : Convert.ToInt32(value)); // Force integer when decimals are not allowed.
             }
         }
         base.OnTextChanged(e);

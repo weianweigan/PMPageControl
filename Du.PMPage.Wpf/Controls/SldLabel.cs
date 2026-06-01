@@ -25,7 +25,9 @@ public class SldLabel : SldControl<IPropertyManagerPageLabel>
         set { SetValue(SldTextProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for SldText.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// Identifies the <see cref="SldText"/> dependency property.
+    /// </summary>
     public static readonly DependencyProperty SldTextProperty = DependencyProperty.Register(
         "SldText",
         typeof(string),
@@ -50,6 +52,10 @@ public class SldLabel : SldControl<IPropertyManagerPageLabel>
         }
     }
 
+    /// <summary>
+    /// Initializes the native label control by setting its caption to the current
+    /// <see cref="SldText"/> value.
+    /// </summary>
     protected override void SetSldControl()
     {
         SControl.Caption = SldText;

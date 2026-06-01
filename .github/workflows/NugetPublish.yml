@@ -2,40 +2,49 @@ name: NugetPublish
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - 'v*'
 
 jobs:
-  build:
+  publish:
     runs-on: windows-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v4
-    
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.x'
+
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: msbuild Du.PMPage.Wpf.sln /t:Restore /p:Configuration=Release
+    - name: Parse version from tag
+      run: |
+        $version = "${{ github.ref_name }}" -replace '^v', ''
+        # Validate semver-ish format
+        if ($version -notmatch '^\d+\.\d+\.\d+') {
+          Write-Error "Tag '${{ github.ref_name }}' does not yield a valid version (got '$version'). Expected pattern: vX.Y.Z"
+          exit 1
+        }
+        echo "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
 
-    # build release
-    - name: Build Relase
-      run: msbuild Du.PMPage.Wpf.sln /p:Configuration=Release
-      
-    # 4.Install Nuget
-    - name: Install Nuget
-      run: |
-        $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-        $targetNugetExe = "nuget.exe"
-        Invoke-WebRequest $sourceNugetExe -OutFile $targetNugetExe
-        
-    # 5. Push  package
-    - name: Push generated package to GitHub registry
-      run: |
-        Get-ChildItem -Path .\Du.PMPage.Wpf\bin\Release\ -Filter *.nupkg -Recurse | ForEach-Object { .\nuget push $_.FullName -Source https://api.nuget.org/v3/index.json -SkipDuplicate -ApiKey ${{ secrets.NugetKey }} -NoSymbols }
+    - name: Restore
+      run: dotnet restore Du.PMPage.Wpf.sln
+
+    - name: Build
+      run: dotnet build Du.PMPage.Wpf.sln --configuration Release --no-restore
+
+    - name: Pack
+      run: dotnet pack Du.PMPage.Wpf/Du.PMPage.Wpf.csproj --configuration Release --no-build -p:Version=$env:PACKAGE_VERSION -o ./artifacts
+
+    - name: Push to NuGet.org
+      run: dotnet nuget push ./artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NugetKey }} --skip-duplicate
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-packages
+        path: ./artifacts/*.nupkg

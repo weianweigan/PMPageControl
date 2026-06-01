@@ -42,6 +42,7 @@ public class SldTabControl : SldControl<IPropertyManagerPageTab>
         set { SetValue(CaptionProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="Caption"/> dependency property.</summary>
     public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register(
         nameof(Caption),
         typeof(string),
@@ -87,7 +88,7 @@ public class SldTabControl : SldControl<IPropertyManagerPageTab>
 
         if (SControl == null)
         {
-            throw new NullReferenceException($"添加Tab错误:{Caption}");
+            throw new NullReferenceException($"Failed to create native tab: {Caption}");
         }
 
         id++;
@@ -109,20 +110,25 @@ public class SldTabControl : SldControl<IPropertyManagerPageTab>
 
     internal override int AddToGroup(IPropertyManagerPageGroup group, int id)
     {
-        throw new InvalidOperationException("无法将Tab添加到Group中");
+        throw new InvalidOperationException("Cannot add a tab to a group.");
     }
 
     internal override int AddToTab(IPropertyManagerPageTab tab, int id)
     {
-        throw new InvalidOperationException("无法将Tab添加到Tab中");
+        throw new InvalidOperationException("Cannot nest a tab inside another tab.");
     }
 
     #endregion
 
     #region Overrides
 
+    /// <inheritdoc/>
     protected override void SetSldControl() { }
 
+    /// <summary>
+    /// Propagates the visibility change to all child controls of this tab.
+    /// </summary>
+    /// <param name="value">The new visibility state.</param>
     protected override void OnSldControlChanged(bool value)
     {
         Children.ForEach(p => p.SldControlVisibility = value);
@@ -132,6 +138,10 @@ public class SldTabControl : SldControl<IPropertyManagerPageTab>
 
     #region Design-Time
 
+    /// <summary>
+    /// Builds the visual tree. In design mode, ensures placeholder content is generated
+    /// from the <see cref="Children"/> collection.
+    /// </summary>
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();

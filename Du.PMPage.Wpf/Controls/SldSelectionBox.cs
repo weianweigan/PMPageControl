@@ -8,6 +8,10 @@ using SolidWorks.Interop.swconst;
 
 namespace Du.PMPage.Wpf.Controls;
 
+/// <summary>
+/// A WPF control that wraps a native SolidWorks <see cref="IPropertyManagerPageSelectionbox"/>,
+/// providing selection filtering, marking, and a bindable <see cref="Selections"/> collection.
+/// </summary>
 public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
 {
     static SldSelectionBox()
@@ -28,7 +32,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
     /// <returns>true to accept the selection; false to reject it.</returns>
     /// <remarks>
     /// <para><b>Multicast warning:</b> When multiple handlers are attached, only the
-    /// return value and <paramref name="ItemText"/> from the <b>last</b> invoked handler
+    /// return value and <c>ItemText</c> from the <b>last</b> invoked handler
     /// are used. For predictable behavior, attach a single handler.</para>
     /// </remarks>
     public delegate bool SubmitSelectionEventHandler(
@@ -44,7 +48,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
     /// </summary>
     /// <remarks>
     /// <para><b>Multicast warning:</b> When multiple handlers are attached, only the
-    /// return value and <paramref name="ItemText"/> from the <b>last</b> invoked handler
+    /// return value and <c>ItemText</c> from the <b>last</b> invoked handler
     /// are used. For predictable behavior, attach a single handler.</para>
     /// </remarks>
     public event SubmitSelectionEventHandler SubmitSelection;
@@ -61,6 +65,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         set { SetValue(SingleEntityOnlyProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="SingleEntityOnly"/> dependency property.</summary>
     public static readonly DependencyProperty SingleEntityOnlyProperty =
         DependencyProperty.Register(
             "SingleEntityOnly",
@@ -102,6 +107,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         set { SetValue(SwSelectTypesProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="SwSelectTypes"/> dependency property.</summary>
     public static readonly DependencyProperty SwSelectTypesProperty = DependencyProperty.Register(
         "SwSelectTypes",
         typeof(List<swSelectType_e>),
@@ -148,6 +154,7 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         set { SetValue(MarkProperty, value); }
     }
 
+    /// <summary>Identifies the <see cref="Mark"/> dependency property.</summary>
     public static readonly DependencyProperty MarkProperty = DependencyProperty.Register(
         "Mark",
         typeof(int),
@@ -329,14 +336,13 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
     /// modified. Set by the owning page to translate collection changes into
     /// SolidWorks selection manager operations.
     /// </summary>
-    /// <param name="item">
-    /// The affected <see cref="SwSeleTypeObjectPair"/>, or null when all items
-    /// should be deselected (Reset action).
-    /// </param>
-    /// <param name="select">
-    /// true to select the item in SolidWorks; false to deselect it;
-    /// null to deselect all items for this selection box.
-    /// </param>
+    /// <remarks>
+    /// The delegate receives:
+    /// <list type="bullet">
+    /// <item><description>The affected <see cref="SwSeleTypeObjectPair"/>, or <see langword="null"/> when all items should be deselected (Reset action).</description></item>
+    /// <item><description><see langword="true"/> to select the item in SolidWorks; <see langword="false"/> to deselect it; <see langword="null"/> to deselect all items for this selection box.</description></item>
+    /// </list>
+    /// </remarks>
     internal Action<SwSeleTypeObjectPair, bool?> ExternalSelectionHandler { get; set; }
 
     private void Selections_CollectionChanged(

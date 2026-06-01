@@ -5,10 +5,16 @@ using SolidWorks.Interop.sldworks;
 namespace Du.PMPage.Wpf.Controls;
 
 /// <summary>
-/// the wpf wrapper of <see cref="IPropertyManagerPageLabel"/> 背景为黄色的消息文字
+/// A WPF wrapper for <see cref="IPropertyManagerPageLabel"/> that renders a message label
+/// with a yellow background. Inherits from <see cref="SldLabel"/> and overrides
+/// <see cref="SldLabel.SetSldControl"/> to apply the yellow background color automatically.
 /// </summary>
 public class SldLabelMsg : SldLabel
 {
+    /// <summary>
+    /// Applies the <see cref="SldLabel.SldText"/> to the native control caption
+    /// and sets the background color to yellow.
+    /// </summary>
     protected override void SetSldControl()
     {
         SControl.Caption = SldText;

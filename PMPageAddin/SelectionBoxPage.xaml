@@ -60,7 +60,9 @@
             Selections="{Binding MultiTypeItems}"
             SldCaption="Select geometry"
             SldHeight="48"
-            SwSelectTypes="{pmp:SwSelectTypes swSelEDGES, swSelFACES, swSelVERTICES}" />
+            SwSelectTypes="{pmp:SwSelectTypes swSelEDGES,
+                                              swSelFACES,
+                                              swSelVERTICES}" />
         <pmp:SldLabel SldCaption="Count" SldText="{Binding MultiTypeCount}" />
     </pmp:SldGroupBox>
 

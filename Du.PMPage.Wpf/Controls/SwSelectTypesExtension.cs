@@ -16,7 +16,7 @@ namespace Du.PMPage.Wpf.Controls;
 /// SwSelectTypes="{controls:SwSelectTypes swSelEDGES, swSelFACES, swSelVERTICES}"
 /// ]]></code>
 /// <para>
-/// Using a markup extension rather than a string-based <see cref="TypeConverter"/>
+/// Using a markup extension rather than a string-based <see cref="System.ComponentModel.TypeConverter"/>
 /// preserves IntelliSense / auto-completion for each <see cref="swSelectType_e"/> value
 /// in the XAML editor.
 /// </para>
