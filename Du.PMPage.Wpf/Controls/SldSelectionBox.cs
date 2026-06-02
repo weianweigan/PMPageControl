@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using SolidWorks.Interop.sldworks;
@@ -137,9 +138,10 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         {
             if (SldControlVisibility)
             {
-                throw new InvalidOperationException(
-                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.SetSelectionFilters)} Cannot be Set after Displayed"
-                );
+                string msg =
+                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.SetSelectionFilters)} Cannot be Set after Displayed";
+                Debug.Print(msg);
+                throw new InvalidOperationException(msg);
             }
             SControl.SetSelectionFilters(newValue.ToArray());
         }
@@ -221,9 +223,10 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         {
             if (SldControlVisibility)
             {
-                throw new InvalidOperationException(
-                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.AllowMultipleSelectOfSameEntity)} Cannot be Set after Displayed"
-                );
+                string msg =
+                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.AllowMultipleSelectOfSameEntity)} Cannot be Set after Displayed";
+                Debug.Print(msg);
+                throw new InvalidOperationException(msg);
             }
             else
             {
@@ -269,9 +272,10 @@ public class SldSelectionBox : SldControl<IPropertyManagerPageSelectionbox>
         {
             if (SldControlVisibility)
             {
-                throw new InvalidOperationException(
-                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.AllowSelectInMultipleBoxes)} Cannot be Set after Displayed"
-                );
+                string msg =
+                    $"{nameof(PropertyManagerPageSelectionbox)}.{nameof(PropertyManagerPageSelectionbox.AllowSelectInMultipleBoxes)} Cannot be Set after Displayed";
+                Debug.Print(msg);
+                throw new InvalidOperationException(msg);
             }
             SControl.AllowSelectInMultipleBoxes = newValue;
         }

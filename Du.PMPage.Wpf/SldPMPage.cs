@@ -11,6 +11,8 @@ using SolidWorks.Interop.swconst;
 
 namespace Du.PMPage.Wpf;
 
+public delegate void SelectionBoxItemsChanged(SldSelectionBox selectionBox);
+
 /// <summary>
 /// A WPF ContentControl that creates a SolidWorks PropertyManagerPage populated with
 /// native SolidWorks controls. <see cref="SldControl"/> children declared in XAML
@@ -23,6 +25,11 @@ namespace Du.PMPage.Wpf;
 [ComVisible(true)]
 public class SldPMPage : SldPMPageBase
 {
+    /// <summary>
+    /// Event raised when the items in a <see cref="SldSelectionBox"/> have changed, either via user interaction or programmatic updates.
+    /// </summary>
+    public event SelectionBoxItemsChanged OnSelectionBoxItemsChanged;
+
     #region Fields
 
     /// <summary>
@@ -740,6 +747,8 @@ public class SldPMPage : SldPMPageBase
                 next.SControl.SetSelectionFocus();
             }
         }
+
+        OnSelectionBoxItemsChanged?.Invoke(sldSelectionBox);
     }
 
     /// <inheritdoc/>
